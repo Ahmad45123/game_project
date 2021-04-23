@@ -20,6 +20,7 @@ public abstract class Unit {
 		return this.level;
 	}
 	
+	
 	public int getMaxSoldierCount() {
 		return this.maxSoldierCount;
 	}
