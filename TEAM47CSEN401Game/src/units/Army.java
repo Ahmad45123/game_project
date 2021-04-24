@@ -15,6 +15,7 @@ public class Army {
 		distancetoTarget = -1;
 		target = "";
 		this.currentLocation = currentLocation;
+		this.units = new ArrayList<Unit>();
 		maxToHold = 10;
 
 	}
