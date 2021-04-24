@@ -5,7 +5,7 @@ public class MaxRecruitedException extends BuildingException {
         super();
     }
 
-    MaxRecruitedException(String s) {
+    public MaxRecruitedException(String s) {
         super(s);
     }
 }

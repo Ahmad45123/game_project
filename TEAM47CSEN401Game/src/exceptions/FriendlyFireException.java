@@ -1,11 +1,11 @@
 package exceptions;
 
 public class FriendlyFireException extends ArmyException {
-    FriendlyFireException() {
+    public FriendlyFireException() {
         super();
     }
 
-    FriendlyFireException(String s) {
+    public FriendlyFireException(String s) {
         super(s);
     }
 }

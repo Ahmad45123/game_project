@@ -5,7 +5,7 @@ abstract public class ArmyException extends EmpireException {
         super();
     }
 
-    ArmyException(String s) {
+    public ArmyException(String s) {
         super(s);
     }
 }

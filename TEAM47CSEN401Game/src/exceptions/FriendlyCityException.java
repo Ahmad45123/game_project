@@ -5,7 +5,7 @@ public class FriendlyCityException extends ArmyException {
         super();
     }
 
-    FriendlyCityException(String s) {
+    public FriendlyCityException(String s) {
         super(s);
     }
 }
