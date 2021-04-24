@@ -1,11 +1,11 @@
 package exceptions;
 
 public class FriendlyCityException extends ArmyException {
-    FriendlyCityException() {
+    public FriendlyCityException() {
         super();
     }
 
-    FriendlyCityException(String s) {
+    public FriendlyCityException(String s) {
         super(s);
     }
 }

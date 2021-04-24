@@ -14,7 +14,7 @@ public class Building {
 	}
 	
 	public int getCost() {
-		return this.getCost();
+		return this.cost;
 	}
 	
 	public int getLevel() {

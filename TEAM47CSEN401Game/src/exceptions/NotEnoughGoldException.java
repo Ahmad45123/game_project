@@ -1,11 +1,11 @@
 package exceptions;
 
 public class NotEnoughGoldException extends BuildingException {
-    NotEnoughGoldException() {
+    public NotEnoughGoldException() {
         super();
     }
 
-    NotEnoughGoldException(String s) {
+    public NotEnoughGoldException(String s) {
         super(s);
     }
 }
