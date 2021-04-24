@@ -133,6 +133,10 @@ public class Game {
         // Load Cities And Distances
         loadCitiesAndDistances();
         
+        for(City c : availableCities) {
+        	if(c.getName().contentEquals(playerCity))this.player.addControlledCity(c);
+        }
+        
         //LoadArmies for non Player Armies
         for(City c : availableCities) {
         	if(!c.getName().equals(playerCity)) loadArmy(c.getName(),c.getName().toLowerCase()+"_army.csv");
