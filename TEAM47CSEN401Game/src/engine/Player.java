@@ -1,4 +1,5 @@
 package engine;
+
 import java.util.ArrayList;
 import units.Army;
 
@@ -8,9 +9,11 @@ public class Player {
 	ArrayList<Army> controlledArmies;
 	double treasury;
 	double food;
-	
+
 	public Player(String name) {
 		this.name = name;
+		this.controlledCities = new ArrayList<City>();
+		this.controlledArmies = new ArrayList<Army>();
 	}
 
 	public double getTreasury() {

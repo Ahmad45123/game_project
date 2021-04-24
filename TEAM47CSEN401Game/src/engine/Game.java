@@ -75,7 +75,7 @@ public class Game {
     					Cavalry currentCavalry;
     					int currentCavalryLevel = Integer.parseInt(currentUnitLine[1]);
     					if(currentCavalryLevel==1)         currentCavalry = new Cavalry(currentCavalryLevel,40,0.6,0.7,0.75);
-    					else if(currentCavalryLevel==2)    currentCavalry = new Cavalry(currentCavalryLevel,40,0.6,0.6,0.75);
+    					else if(currentCavalryLevel==2)    currentCavalry = new Cavalry(currentCavalryLevel,40,0.6,0.7,0.75);
     					else                               currentCavalry = new Cavalry(currentCavalryLevel,60,0.7,0.8,0.9);
     					armyUnits.add(currentCavalry);
     					break;
