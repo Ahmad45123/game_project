@@ -8,7 +8,7 @@ public class Army {
 	int distancetoTarget;
 	String target;
 	String currentLocation;
-	final int maxToHold;
+	private final int maxToHold;
 
 	public Army(String currentLocation) {
 		currentStatus = Status.IDLE;

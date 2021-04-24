@@ -1,6 +1,6 @@
 package buildings;
 
-public class Building {
+abstract public class Building {
 	private int cost;
 	private int level;
 	private int upgradeCost;

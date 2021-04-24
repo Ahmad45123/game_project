@@ -1,6 +1,6 @@
 package exceptions;
 
-public class BuildingException extends EmpireException {
+abstract public class BuildingException extends EmpireException {
     public BuildingException() {
         super();
     }
