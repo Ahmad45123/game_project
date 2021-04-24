@@ -1,6 +1,6 @@
 package exceptions;
 
-public class ArmyException extends EmpireException {
+abstract public class ArmyException extends EmpireException {
     ArmyException() {
         super();
     }
