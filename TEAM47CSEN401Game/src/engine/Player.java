@@ -43,12 +43,4 @@ public class Player {
 	public ArrayList<Army> getControlledArmies() {
 		return controlledArmies;
 	}
-	
-	public void addControlledCity(City city) {
-		this.controlledCities.add(city);
-	}
-	
-	public void addControlledArmy(Army army) {
-		this.controlledArmies.add(army);
-	}
 }
