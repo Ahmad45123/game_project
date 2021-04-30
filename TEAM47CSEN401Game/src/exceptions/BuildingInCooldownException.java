@@ -1,11 +1,11 @@
 package exceptions;
 
-public class BuildingInCooldownException extends BuildingException {
-	public BuildingInCooldownException() {
+public class BuildingInCoolDownException extends BuildingException {
+	public BuildingInCoolDownException() {
 		super();
 	}
 
-	public BuildingInCooldownException(String s) {
+	public BuildingInCoolDownException(String s) {
 		super(s);
 	}
 }
