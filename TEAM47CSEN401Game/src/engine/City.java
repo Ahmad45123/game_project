@@ -5,13 +5,13 @@ import buildings.EconomicBuilding;
 import buildings.MilitaryBuilding;
 import units.Army;
 
-public class City {
-	String name;
-	ArrayList<EconomicBuilding> economicalBuildings;
-	ArrayList<MilitaryBuilding> militaryBuildings;
-	Army defendingArmy;
-	int turnsUnderSiege;
-	boolean underSiege;
+public final class City {
+	private String name;
+	private ArrayList<EconomicBuilding> economicalBuildings;
+	private ArrayList<MilitaryBuilding> militaryBuildings;
+	private Army defendingArmy;
+	private int turnsUnderSiege;
+	private boolean underSiege;
 
 	public Army getDefendingArmy() {
 		return defendingArmy;

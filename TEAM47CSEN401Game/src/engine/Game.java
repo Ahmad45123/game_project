@@ -6,12 +6,12 @@ import java.io.FileReader;
 import java.util.ArrayList;
 import units.*;
 
-public class Game {
-	Player player;
-	ArrayList<City> availableCities;
-	ArrayList<Distance> distances;
-	int maxTurnCount;
-	int currentTurnCount;
+public final class Game {
+	private Player player;
+	private ArrayList<City> availableCities;
+	private ArrayList<Distance> distances;
+	private final int maxTurnCount;
+	private int currentTurnCount;
 
 	public Player getPlayer() {
 		return player;
@@ -41,14 +41,6 @@ public class Game {
 		this.currentTurnCount = currentTurnCount;
 	}
 
-	// I really hate CSV and Java
-	// Here I am looping through all the available cities to find the one that
-	// matches the argument name(because java)
-	// then I create a new army and units ArrayList and fill them with the
-	// information I extracted from the .CSV file
-	// finally I put the unit in the army, and then pass the new army I just created
-	// back to the original city I was working on
-	// I really hope this works based on references
 	public void loadArmy(String cityName, String path) throws IOException {
 		for (City c : availableCities) {
 			if (c.getName().equals(cityName)) {
@@ -104,18 +96,11 @@ public class Game {
 		}
 	}
 
-	// there are 2 distances.csv in the folder structure because eclipse wont make
-	// this function work without it... so just leave them as is
-	// CSV is not my favorite file format
 	private void loadCitiesAndDistances() throws IOException {
 		String currentLine = "";
 		FileReader fileReader = new FileReader("distances.csv");
 		BufferedReader br = new BufferedReader(fileReader);
 		while ((currentLine = br.readLine()) != null) {
-			// Splits every line in the CSV into a string array of size 3, string[0] is
-			// cityname1, string[1] is cityname2 and string[2] is the distance between them
-			// makes a distance object and adds it to the ArrayList, also adds the cities to
-			// the availableCities ArrayList if they are not found within it already
 			String lineDistanceData[] = currentLine.split(",");
 			Distance currentLineDistance = new Distance(lineDistanceData[0], lineDistanceData[1],
 					Integer.parseInt(lineDistanceData[2]));

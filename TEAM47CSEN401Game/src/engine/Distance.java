@@ -1,9 +1,9 @@
 package engine;
 
-public class Distance {
-	String from;
-	String to;
-	int distance;
+public final class Distance {
+	private String from;
+	private String to;
+	private int distance;
 
 	public Distance(String from, String to, int distance) {
 		this.from = from;

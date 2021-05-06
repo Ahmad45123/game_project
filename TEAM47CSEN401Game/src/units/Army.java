@@ -2,12 +2,12 @@ package units;
 
 import java.util.ArrayList;
 
-public class Army {
-	Status currentStatus;
-	ArrayList<Unit> units;
-	int distancetoTarget;
-	String target;
-	String currentLocation;
+public final class Army {
+	private Status currentStatus;
+	private ArrayList<Unit> units;
+	private int distancetoTarget;
+	private String target;
+	private String currentLocation;
 	private final int maxToHold;
 
 	public Army(String currentLocation) {

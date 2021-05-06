@@ -1,6 +1,6 @@
 package buildings;
 
-abstract public class Building {
+public abstract class Building {
 	private int cost;
 	private int level;
 	private int upgradeCost;
@@ -33,7 +33,7 @@ abstract public class Building {
 		this.upgradeCost = upgradeCost;
 	}
 
-	public boolean getCoolDown() {
+	public boolean isCoolDown() {
 		return this.coolDown;
 	}
 
