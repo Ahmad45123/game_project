@@ -2,22 +2,25 @@ package units;
 
 import java.util.ArrayList;
 
-public final class Army {
+/**
+ * @author mohammad.hussein
+ *
+ */
+public class Army {
 	private Status currentStatus;
 	private ArrayList<Unit> units;
 	private int distancetoTarget;
 	private String target;
 	private String currentLocation;
-	private final int maxToHold;
+	@SuppressWarnings("unused")
+	private final int maxToHold = 10;
 
 	public Army(String currentLocation) {
+		this.currentLocation = currentLocation;
 		currentStatus = Status.IDLE;
+		units = new ArrayList<Unit>();
 		distancetoTarget = -1;
 		target = "";
-		this.currentLocation = currentLocation;
-		this.units = new ArrayList<Unit>();
-		maxToHold = 10;
-
 	}
 
 	public Status getCurrentStatus() {
@@ -63,4 +66,5 @@ public final class Army {
 	public int getMaxToHold() {
 		return maxToHold;
 	}
+
 }

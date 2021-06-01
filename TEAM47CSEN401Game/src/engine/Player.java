@@ -3,7 +3,7 @@ package engine;
 import java.util.ArrayList;
 import units.Army;
 
-public final class Player {
+public class Player {
 	private String name;
 	private ArrayList<City> controlledCities;
 	private ArrayList<Army> controlledArmies;

@@ -1,6 +1,6 @@
 package engine;
 
-public final class Distance {
+public class Distance {
 	private String from;
 	private String to;
 	private int distance;

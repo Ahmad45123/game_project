@@ -1,6 +1,7 @@
 package exceptions;
 
-abstract public class EmpireException extends Exception {
+@SuppressWarnings("serial")
+public abstract class EmpireException extends Exception {
 	public EmpireException() {
 		super();
 	}
@@ -8,4 +9,5 @@ abstract public class EmpireException extends Exception {
 	public EmpireException(String s) {
 		super(s);
 	}
+
 }

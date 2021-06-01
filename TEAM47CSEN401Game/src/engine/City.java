@@ -1,17 +1,34 @@
 package engine;
 
 import java.util.ArrayList;
+
 import buildings.EconomicBuilding;
 import buildings.MilitaryBuilding;
 import units.Army;
 
-public final class City {
+public class City {
 	private String name;
 	private ArrayList<EconomicBuilding> economicalBuildings;
 	private ArrayList<MilitaryBuilding> militaryBuildings;
 	private Army defendingArmy;
 	private int turnsUnderSiege;
 	private boolean underSiege;
+
+	public City(String name) {
+		this.name = name;
+		economicalBuildings = new ArrayList<EconomicBuilding>();
+		militaryBuildings = new ArrayList<MilitaryBuilding>();
+		// defendingArmy = new Army(name);
+		turnsUnderSiege = -1;
+	}
+
+	public ArrayList<EconomicBuilding> getEconomicalBuildings() {
+		return economicalBuildings;
+	}
+
+	public ArrayList<MilitaryBuilding> getMilitaryBuildings() {
+		return militaryBuildings;
+	}
 
 	public Army getDefendingArmy() {
 		return defendingArmy;
@@ -29,6 +46,10 @@ public final class City {
 		this.turnsUnderSiege = turnsUnderSiege;
 	}
 
+	public String getName() {
+		return this.name;
+	}
+
 	public boolean isUnderSiege() {
 		return underSiege;
 	}
@@ -37,20 +58,4 @@ public final class City {
 		this.underSiege = underSiege;
 	}
 
-	public String getName() {
-		return name;
-	}
-
-	public ArrayList<EconomicBuilding> getEconomicalBuildings() {
-		return economicalBuildings;
-	}
-
-	public ArrayList<MilitaryBuilding> getMilitaryBuildings() {
-		return militaryBuildings;
-	}
-
-	public City(String name) {
-		this.name = name;
-		this.underSiege = false;
-	}
 }
