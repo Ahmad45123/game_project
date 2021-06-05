@@ -66,5 +66,4 @@ public class Army {
 	public int getMaxToHold() {
 		return maxToHold;
 	}
-
 }

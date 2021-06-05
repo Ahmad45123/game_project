@@ -5,4 +5,5 @@
 complete :)
 
 ## Milestone 2
-1 Buildings done (page 2)
+Units methods and attributes are all done
+WHERE TO CONTINUE: 3.Army on page 4

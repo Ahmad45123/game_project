@@ -69,7 +69,6 @@ public class Game {
 			int unitLevel = Integer.parseInt(content[1]);
 			Unit u = null;
 			if (unitType.equals("archer")) {
-
 				if (unitLevel == 1)
 					u = (new Archer(1, 60, 0.4, 0.5, 0.6));
 
@@ -94,6 +93,7 @@ public class Game {
 				else
 					u = (new Cavalry(3, 60, 0.7, 0.8, 0.9));
 			}
+			u.setParentArmy(resultArmy);
 			resultArmy.getUnits().add(u);
 			currentLine = br.readLine();
 		}

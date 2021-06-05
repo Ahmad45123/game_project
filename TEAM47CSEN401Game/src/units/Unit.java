@@ -1,4 +1,5 @@
 package units;
+import exceptions.*;
 
 public abstract class Unit {
 	private int level;
@@ -7,6 +8,7 @@ public abstract class Unit {
 	private double idleUpkeep;
 	private double marchingUpkeep;
 	private double siegeUpkeep;
+	private Army parentArmy;
 
 	public Unit(int level, int maxSoldierConunt, double idleUpkeep, double marchingUpkeep, double siegeUpkeep) {
 		this.level = level;
@@ -14,7 +16,7 @@ public abstract class Unit {
 		this.idleUpkeep = idleUpkeep;
 		this.marchingUpkeep = marchingUpkeep;
 		this.siegeUpkeep = siegeUpkeep;
-
+		this.currentSoldierCount = this.maxSoldierCount;
 	}
 
 	public int getCurrentSoldierCount() {
@@ -44,4 +46,15 @@ public abstract class Unit {
 	public double getSiegeUpkeep() {
 		return siegeUpkeep;
 	}
+	
+	public Army getParentArmy() {
+		return this.parentArmy;
+	}
+	
+	public void setParentArmy(Army parentArmy) {
+		this.parentArmy = parentArmy;
+	}
+	
+	public abstract void attack(Unit target) throws FriendlyFireException;
+	
 }
