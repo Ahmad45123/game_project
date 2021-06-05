@@ -6,4 +6,4 @@ complete :)
 
 ## Milestone 2
 Units methods and attributes are all done
-WHERE TO CONTINUE: 3.Army on page 4
+WHERE TO CONTINUE: 4.City page4

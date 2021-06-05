@@ -2,6 +2,8 @@ package units;
 
 import java.util.ArrayList;
 
+import exceptions.MaxCapacityException;
+
 /**
  * @author mohammad.hussein
  *
@@ -65,5 +67,35 @@ public class Army {
 
 	public int getMaxToHold() {
 		return maxToHold;
+	}
+
+	public void relocateUnit(Unit unit) throws MaxCapacityException {
+		// assert
+		unit.getParentArmy().getUnits().remove(unit);
+		units.add(unit);
+	}
+
+	public void handleAttackedUnit(Unit u) {
+		if (u.getCurrentSoldierCount() == 0) {
+			units.remove(u);
+		}
+	}
+
+	public double foodNeeded() {
+		double ret = 0;
+		for (int i = 0; i < units.size(); i++) {
+			switch (currentStatus) {
+			case IDLE:
+				ret += units.get(i).getCurrentSoldierCount() * units.get(i).getIdleUpkeep();
+				break;
+			case MARCHING:
+				ret += units.get(i).getCurrentSoldierCount() * units.get(i).getMarchingUpkeep();
+				break;
+			case BESIEGING:
+				ret += units.get(i).getCurrentSoldierCount() * units.get(i).getSiegeUpkeep();
+				break;
+			}
+		}
+		return ret;
 	}
 }

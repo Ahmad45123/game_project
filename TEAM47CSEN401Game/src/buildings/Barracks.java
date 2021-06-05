@@ -33,7 +33,6 @@ public class Barracks extends MilitaryBuilding {
 		Infantry u = null;
 		if (level == 1)
 			u = (new Infantry(1, 50, 0.5, 0.6, 0.7));
-
 		else if (level == 2)
 			u = (new Infantry(2, 50, 0.5, 0.6, 0.7));
 		else if (level == 3)
