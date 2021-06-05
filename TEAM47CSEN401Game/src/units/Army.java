@@ -73,6 +73,7 @@ public class Army {
 		// assert
 		unit.getParentArmy().getUnits().remove(unit);
 		units.add(unit);
+		unit.setParentArmy(this);
 	}
 
 	public void handleAttackedUnit(Unit u) {

@@ -6,4 +6,6 @@ complete :)
 
 ## Milestone 2
 Units methods and attributes are all done
-WHERE TO CONTINUE: 4.City page4
+WHERE TO CONTINUE: 
+not started
+5.1 player Class 3.upgradeBuilding  page5
