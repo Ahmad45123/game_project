@@ -11,9 +11,13 @@ import buildings.Market;
 import buildings.MilitaryBuilding;
 import buildings.Stable;
 import exceptions.BuildingInCoolDownException;
+import exceptions.FriendlyCityException;
+import exceptions.MaxLevelException;
 import exceptions.MaxRecruitedException;
 import exceptions.NotEnoughGoldException;
+import exceptions.TargetNotReachedException;
 import units.Army;
+import units.Status;
 import units.Unit;
 
 public class Player {
@@ -100,6 +104,7 @@ public class Player {
 
 			try {
 				Unit u = b.recruit();
+				u.setParentArmy(city.getDefendingArmy());
 				city.getDefendingArmy().getUnits().add(u);
 				treasury -= cost;
 				return;
@@ -171,5 +176,39 @@ public class Player {
 
 		// what should i do with the cooldown? or does it deactivate it or what?!??!?
 		target.setCoolDown(true);
+	}
+
+	public void upgradeBuilding(Building b)
+			throws NotEnoughGoldException, BuildingInCoolDownException, MaxLevelException {
+		int cost = b.getUpgradeCost();
+		if (cost > treasury) {
+			throw new NotEnoughGoldException();
+		}
+		b.upgrade();
+
+	}
+
+	public void initiateArmy(City city, Unit unit) {
+		Army army = new Army(city.getName());
+		army.getUnits().add(unit);
+		city.getDefendingArmy().getUnits().remove(unit);
+		unit.setParentArmy(army);
+		controlledArmies.add(army);
+	}
+
+	public void laySiege(Army army, City city) throws TargetNotReachedException, FriendlyCityException {
+//		if (!army.getTarget().equals(city.getName()))
+//			assert (false);// city not even targeted LOL
+		if (army.getDistancetoTarget() > 0) {
+			throw new TargetNotReachedException();
+		}
+		for (int i = 0; i < controlledCities.size(); i++) {
+			if (controlledCities.get(i).getName() == city.getName())// dont know where to compare names or instances{
+				throw new FriendlyCityException();
+		}
+		
+		army.setCurrentStatus(Status.BESIEGING);
+		city.setUnderSiege(true);
+		city.setTurnsUnderSiege(0);
 	}
 }
