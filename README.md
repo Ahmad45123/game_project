@@ -8,4 +8,4 @@ complete :)
 Units methods and attributes are all done
 WHERE TO CONTINUE: 
 not started
-6 Game page 5
+6.2 Game page 5
