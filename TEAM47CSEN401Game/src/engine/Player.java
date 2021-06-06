@@ -155,12 +155,12 @@ public class Player {
 		if (cost > treasury) {
 			throw new NotEnoughGoldException();
 		}
-		treasury -= cost;
+		
 		if (target instanceof EconomicBuilding) {
 			for (int i = 0; i < city.getEconomicalBuildings().size(); i++) {
 				EconomicBuilding e = city.getEconomicalBuildings().get(i);
 				if (e.getClass() == target.getClass()) {
-					throw new NotEnoughGoldException("same type already exists"); // idk what to throw
+					return; //("same type already exists"); // idk what to do or throw
 				}
 			}
 			city.getEconomicalBuildings().add((EconomicBuilding) target);
@@ -168,11 +168,13 @@ public class Player {
 			for (int i = 0; i < city.getMilitaryBuildings().size(); i++) {
 				MilitaryBuilding e = city.getMilitaryBuildings().get(i);
 				if (e.getClass() == target.getClass()) {
-					throw new NotEnoughGoldException("same type already exists"); // idk what to throw
+					return; //("same type already exists"); // idk what to do or throw
 				}
 			}
 			city.getMilitaryBuildings().add((MilitaryBuilding) target);
 		}
+		
+		treasury -= cost;
 
 		// what should i do with the cooldown? or does it deactivate it or what?!??!?
 		target.setCoolDown(true);
@@ -185,6 +187,7 @@ public class Player {
 			throw new NotEnoughGoldException();
 		}
 		b.upgrade();
+		treasury -= cost;
 
 	}
 
@@ -199,7 +202,7 @@ public class Player {
 	public void laySiege(Army army, City city) throws TargetNotReachedException, FriendlyCityException {
 //		if (!army.getTarget().equals(city.getName()))
 //			assert (false);// city not even targeted LOL
-		if (army.getDistancetoTarget() > 0) {
+		if (army.getDistancetoTarget() > 0 || army.getCurrentLocation() != city.getName()) {
 			throw new TargetNotReachedException();
 		}
 		for (int i = 0; i < controlledCities.size(); i++) {

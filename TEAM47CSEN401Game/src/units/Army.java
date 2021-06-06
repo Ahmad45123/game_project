@@ -71,6 +71,9 @@ public class Army {
 
 	public void relocateUnit(Unit unit) throws MaxCapacityException {
 		// assert
+		if (maxToHold < units.size() + 1) {
+			throw new MaxCapacityException();
+		}
 		unit.getParentArmy().getUnits().remove(unit);
 		units.add(unit);
 		unit.setParentArmy(this);
