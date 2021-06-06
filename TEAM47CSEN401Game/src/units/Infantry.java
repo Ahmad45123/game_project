@@ -12,7 +12,6 @@ public class Infantry extends Unit {
 	
 	public void attack(Unit target) throws FriendlyFireException{
 		if(target.getParentArmy().equals(this.getParentArmy())) throw new FriendlyFireException();
-		double atkpts = 0;
 		double atkfctr = 0;
 		switch(this.getLevel()) {
 		case 1:
@@ -31,27 +30,14 @@ public class Infantry extends Unit {
 			else if(target.getClass().getName().contains("Cavalry")) atkfctr = 0.25;
 			break;
 		}
-		atkpts = atkfctr*this.getCurrentSoldierCount();
-		Army enemyArmy = target.getParentArmy();
-		ArrayList<Unit> enemyUnits = enemyArmy.getUnits();
-		int intpts = (int) atkpts;
+		int intpts = (int) (this.getCurrentSoldierCount()*atkfctr);
 		if(intpts>=target.getCurrentSoldierCount()) {
-			for(Unit z : enemyUnits) {
-				if(z.equals(target)) {
-					enemyUnits.remove(z);
-					break;
-				}
-			}
+			target.setCurrentSoldierCount(0);
+			target.getParentArmy().getUnits().remove(target);
 		}
 		else {
-			Unit realTarget = null;
-			for(Unit z : enemyUnits) {
-				if(z.equals(target))
-					realTarget = z;
-					break;
-			}
-			int newSoldierCount = realTarget.getCurrentSoldierCount()-intpts;
-			realTarget.setCurrentSoldierCount(newSoldierCount);
+			int newSoldierCount = target.getCurrentSoldierCount() - (int) (this.getCurrentSoldierCount() * atkfctr);
+			target.setCurrentSoldierCount(newSoldierCount);
 		}
 	}
 }
