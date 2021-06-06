@@ -80,7 +80,10 @@ public class Player {
 		} else {
 			assert (false);
 		}
-		assert (city != null);
+//		assert (city != null);
+		if(city == null) {
+			return;
+		}
 		assert (target != null);
 
 		boolean inCoolDown = false;
@@ -177,6 +180,7 @@ public class Player {
 		treasury -= cost;
 
 		// what should i do with the cooldown? or does it deactivate it or what?!??!?
+		//  NO PUBLIC TESTS FOR THIS!!!!!!!!!!!!
 		target.setCoolDown(true);
 	}
 
@@ -206,7 +210,7 @@ public class Player {
 			throw new TargetNotReachedException();
 		}
 		for (int i = 0; i < controlledCities.size(); i++) {
-			if (controlledCities.get(i).getName() == city.getName())// dont know where to compare names or instances{
+			if (controlledCities.get(i).getName() == city.getName())// dont know whether to compare names or instances{
 				throw new FriendlyCityException();
 		}
 		
