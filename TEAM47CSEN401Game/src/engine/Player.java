@@ -179,8 +179,8 @@ public class Player {
 		
 		treasury -= cost;
 
-		// what should i do with the cooldown? or does it deactivate it or what?!??!?
-		//  NO PUBLIC TESTS FOR THIS!!!!!!!!!!!!
+		// The constructor of Building already sets isCooldown to true. But just in-case I'll set it here as well
+		// https://piazza.com/class/kndahm74mstxn?cid=397
 		target.setCoolDown(true);
 	}
 
