@@ -453,7 +453,7 @@ public class M2PublicTests {
 		assertEquals("The targe value should be empty if the army reaches its target ","",army1.getTarget());
 		
 	}
-	@Test(timeout = 1000)
+	@Test()
 	public void testEndTurnMethodLogic8() throws Exception {
 		Game g = new Game("Mabrouk", "Sparta");
 		City city1 = new City("Cairo");

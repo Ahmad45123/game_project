@@ -4,10 +4,14 @@ import java.io.BufferedReader;
 import java.io.FileReader;
 import java.io.IOException;
 import java.util.ArrayList;
+
+import buildings.Farm;
+import buildings.Market;
 import units.Archer;
 import units.Army;
 import units.Cavalry;
 import units.Infantry;
+import units.Status;
 import units.Unit;
 
 public class Game {
@@ -131,5 +135,100 @@ public class Game {
 	public void setCurrentTurnCount(int currentTurnCount) {
 		this.currentTurnCount = currentTurnCount;
 	}
-
+	
+	public void targetCity(Army army, String targetName) {
+		// Apparently I only need to check if it's blank :/
+		// https://piazza.com/class/kndahm74mstxn?cid=395
+		if(!army.getTarget().isBlank()) {
+			return; // TODO: make sure this is correct from here https://piazza.com/class/kndahm74mstxn?cid=403
+		}
+		
+		String currentLoc = army.getCurrentLocation();
+		int targetValue = -1;
+		for(Distance dist : this.distances) {
+			if((dist.getFrom().equals(currentLoc) && dist.getTo().equals(targetName)) || (dist.getTo().equals(currentLoc) && dist.getFrom().equals(targetName))) {
+				targetValue = dist.getDistance();
+			}
+		}
+		
+		assert(targetValue != -1); // TODO: Make sure there's no errors we need to raise?
+	
+		army.setTarget(targetName);
+		army.setDistancetoTarget(targetValue);
+	}
+	
+	public void endTurn() {
+		// Increment turn count.
+		this.currentTurnCount ++;
+		
+		// Collect food and treasure and reset cooldowns.
+		for(var city : player.getControlledCities()) {
+			for(var building : city.getEconomicalBuildings()) {
+				building.setCoolDown(false);
+				if(building instanceof Farm)
+					this.player.setFood(this.player.getFood() + building.harvest());
+				else if(building instanceof Market)
+					this.player.setTreasury(this.player.getTreasury() + building.harvest());
+			}
+			for(var building : city.getMilitaryBuildings()) {
+				building.setCoolDown(false);
+				building.setCurrentRecruit(0);
+			}
+		}
+		
+		// Calc needed food for all armies.
+		double neededFood = 0;
+		for(var army : this.player.getControlledArmies()) {
+			neededFood += army.foodNeeded();
+		}
+		
+		// Decrement Food.
+		player.setFood(player.getFood() - neededFood);
+		if(player.getFood() < 0) player.setFood(0);
+	
+		// If starving, remove 10%
+		if(player.getFood() == 0) {
+			for(var army : this.player.getControlledArmies()) {
+				for(var unit : army.getUnits()) {
+					int toRem = (int)(unit.getCurrentSoldierCount() * 0.1);
+					unit.setCurrentSoldierCount(unit.getCurrentSoldierCount() - toRem);
+				}
+			}
+		}
+		
+		// If army has target, increment distance.
+		for(var army : player.getControlledArmies()) {
+			if(!army.getTarget().isEmpty()) {
+				int dist = army.getDistancetoTarget();
+				if(dist-1 == 0) {
+					army.setCurrentLocation(army.getTarget());
+					army.setTarget("");
+					army.setDistancetoTarget(0);
+				} else {
+					army.setDistancetoTarget(dist-1);
+				}
+			}
+		}
+		
+		// Handle Siege
+		for(var city : getAvailableCities()) {
+			if(city.isUnderSiege()) {
+				city.setTurnsUnderSiege(city.getTurnsUnderSiege() + 1);
+				
+				if(city.getTurnsUnderSiege() >= 3) {
+					//  Not sure if turns under siege should reset hmm
+					city.setTurnsUnderSiege(0);
+					city.setUnderSiege(false);
+					continue;
+				}
+				
+				for(var unit : city.getDefendingArmy().getUnits()) {
+					int toRem = (int)(unit.getCurrentSoldierCount() * 0.1);
+					unit.setCurrentSoldierCount(unit.getCurrentSoldierCount() - toRem);
+				}
+			}
+		}
+	}
+	
+	
 }
