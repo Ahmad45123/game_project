@@ -205,6 +205,7 @@ public class Game {
 					army.setCurrentLocation(army.getTarget());
 					army.setTarget("");
 					army.setDistancetoTarget(0);
+					army.setCurrentStatus(Status.IDLE);
 				} else {
 					army.setDistancetoTarget(dist-1);
 				}
@@ -218,7 +219,7 @@ public class Game {
 				
 				if(city.getTurnsUnderSiege() >= 3) {
 					//  Not sure if turns under siege should reset hmm
-					city.setTurnsUnderSiege(0);
+					city.setTurnsUnderSiege(-1);
 					city.setUnderSiege(false);
 					continue;
 				}
@@ -246,7 +247,7 @@ public class Game {
 		
 		// Add
 		selCity.setUnderSiege(false);
-		selCity.setTurnsUnderSiege(0);
+		selCity.setTurnsUnderSiege(-1);
 		selCity.setDefendingArmy(a);
 		player.getControlledCities().add(selCity);
 	}
