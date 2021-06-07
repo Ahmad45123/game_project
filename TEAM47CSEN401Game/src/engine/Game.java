@@ -4,6 +4,7 @@ import java.io.BufferedReader;
 import java.io.FileReader;
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.Random;
 
 import buildings.Farm;
 import buildings.Market;
@@ -253,10 +254,26 @@ public class Game {
 	}
 	
 	public void autoResolve(Army attacker, Army defender) throws FriendlyFireException {
-		 
+		if(attacker.getCurrentLocation().equals(defender.getCurrentLocation())) throw new FriendlyFireException();
+		
+		Random rnd = new Random();
+		boolean turn = false;
+		while(attacker.getUnits().size() > 0 && defender.getUnits().size() > 0) {
+			var attackerIdx = rnd.nextInt(attacker.getUnits().size());
+			var defenderIdx = rnd.nextInt(defender.getUnits().size());
+			attacker.getUnits().get(attackerIdx).attack(defender.getUnits().get(defenderIdx));
+			turn = !turn;
+		}
+		
+		if(defender.getUnits().size() == 0) {
+			this.occupy(attacker, defender.getCurrentLocation());
+		}
 	}
 	 
 	public boolean isGameOver() {
-		
+		// TODO: Is this the correct way to check if all cities are conqured ?
+		if(availableCities.size() == 0 || currentTurnCount <= maxTurnCount)
+			return false;
+		return true;
 	}
 }
