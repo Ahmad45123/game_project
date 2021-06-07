@@ -7,6 +7,7 @@ import java.util.ArrayList;
 
 import buildings.Farm;
 import buildings.Market;
+import exceptions.FriendlyFireException;
 import units.Archer;
 import units.Army;
 import units.Cavalry;
@@ -230,5 +231,31 @@ public class Game {
 		}
 	}
 	
+	public void occupy(Army a,String cityName) {
+		City selCity = null;
+		for(var city : availableCities) {
+			if(city.getName().equals(cityName)) {
+				selCity = city;
+				break;
+			}
+		}
+		if(selCity == null) return;
+		
+		// Remove from avail cities.
+		availableCities.remove(selCity);
+		
+		// Add
+		selCity.setUnderSiege(false);
+		selCity.setTurnsUnderSiege(0);
+		selCity.setDefendingArmy(a);
+		player.getControlledCities().add(selCity);
+	}
 	
+	public void autoResolve(Army attacker, Army defender) throws FriendlyFireException {
+		 
+	}
+	 
+	public boolean isGameOver() {
+		
+	}
 }
