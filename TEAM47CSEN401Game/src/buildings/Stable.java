@@ -13,7 +13,6 @@ public class Stable extends MilitaryBuilding {
 		this.upgradeCosts = new int[] { 1500, 2000 };
 		this.recruitCosts = new int[] { 600, 650, 700 };
 	}
-
 	
 	public void upgrade() throws BuildingInCoolDownException, MaxLevelException { // useless method to make junit happy
 		super.upgrade();
@@ -34,7 +33,6 @@ public class Stable extends MilitaryBuilding {
 		Cavalry u = null;
 		if (level == 1)
 			u = (new Cavalry(1, 40, 0.6, 0.7, 0.75));
-
 		else if (level == 2)
 			u = (new Cavalry(2, 40, 0.6, 0.7, 0.75));
 		else if (level == 3)

@@ -33,7 +33,6 @@ public class Cavalry extends Unit {
 		int intpts = (int) (this.getCurrentSoldierCount()*atkfctr);
 		if(intpts>=target.getCurrentSoldierCount()) {
 			target.setCurrentSoldierCount(0);
-			//target.getParentArmy().getUnits().remove(target);
 		}
 		else {
 			int newSoldierCount = target.getCurrentSoldierCount() - (int) (this.getCurrentSoldierCount() * atkfctr);

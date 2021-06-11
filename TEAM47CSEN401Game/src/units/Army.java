@@ -71,17 +71,17 @@ public class Army {
 
 	public void relocateUnit(Unit unit) throws MaxCapacityException {
 		// assert
-		if (maxToHold < units.size() + 1) {
+		if (this.getMaxToHold() == this.getUnits().size()) {
 			throw new MaxCapacityException();
 		}
 		unit.getParentArmy().getUnits().remove(unit);
-		units.add(unit);
 		unit.setParentArmy(this);
+		this.getUnits().add(unit);
 	}
 
-	public void handleAttackedUnit(Unit u) {
-		if (u.getCurrentSoldierCount() == 0) {
-			units.remove(u);
+	public void handleAttackedUnit(Unit unit) {
+		if (unit.getCurrentSoldierCount() == 0) {
+			this.getUnits().remove(unit);
 		}
 	}
 
@@ -90,13 +90,13 @@ public class Army {
 		for (int i = 0; i < units.size(); i++) {
 			switch (currentStatus) {
 			case IDLE:
-				ret += units.get(i).getCurrentSoldierCount() * units.get(i).getIdleUpkeep();
+				ret += this.getUnits().get(i).getCurrentSoldierCount() * this.getUnits().get(i).getIdleUpkeep();
 				break;
 			case MARCHING:
-				ret += units.get(i).getCurrentSoldierCount() * units.get(i).getMarchingUpkeep();
+				ret += this.getUnits().get(i).getCurrentSoldierCount() * this.getUnits().get(i).getMarchingUpkeep();
 				break;
 			case BESIEGING:
-				ret += units.get(i).getCurrentSoldierCount() * units.get(i).getSiegeUpkeep();
+				ret += this.getUnits().get(i).getCurrentSoldierCount() * this.getUnits().get(i).getSiegeUpkeep();
 				break;
 			}
 		}

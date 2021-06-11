@@ -48,20 +48,21 @@ public abstract class Building {
 	}
 
 	public void upgrade() throws BuildingInCoolDownException, MaxLevelException {
-		if (coolDown) {
+		if (this.isCoolDown()) {
 			throw new BuildingInCoolDownException();
 		}
-		if (level > upgradeCosts.length) {
+		if (this.getLevel() > this.upgradeCosts.length) {
 			throw new MaxLevelException();
 		}
 
-		coolDown = true;
-		if (level < upgradeCosts.length) {
-			upgradeCost = upgradeCosts[level];
+		this.setCoolDown(true);
+		
+		if (this.getLevel() < this.upgradeCosts.length) {
+			this.setUpgradeCost(upgradeCosts[this.getLevel()]);
 		} else {
-			upgradeCost = -1;
+			this.setUpgradeCost(-1);
 		}
-		level++;
+		this.setLevel(this.getLevel()+1);
 	}
 
 }

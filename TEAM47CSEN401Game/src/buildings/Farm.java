@@ -10,7 +10,7 @@ public class Farm extends EconomicBuilding {
 	public Farm() {
 		super(1000, 500);
 		this.upgradeCosts = new int[] { 500, 700 };
-		this.harvestAmount = new int[] { 500, 700, 100 };
+		this.harvestAmount = new int[] { 500, 700, 1000 };
 	}
 
 	public int harvest() {

@@ -33,7 +33,6 @@ public class ArcheryRange extends MilitaryBuilding {
 		Archer u = null;
 		if (level == 1)
 			u = (new Archer(1, 60, 0.4, 0.5, 0.6));
-
 		else if (level == 2)
 			u = (new Archer(2, 60, 0.4, 0.5, 0.6));
 		else if (level == 3)

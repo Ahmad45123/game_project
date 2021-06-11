@@ -67,6 +67,7 @@ public class Player {
 		for (int i = 0; i < controlledCities.size(); i++) {
 			if (controlledCities.get(i).getName().equals(cityName)) {
 				city = controlledCities.get(i);
+				break;
 			}
 		}
 		@SuppressWarnings("rawtypes")
@@ -177,7 +178,7 @@ public class Player {
 			city.getMilitaryBuildings().add((MilitaryBuilding) target);
 		}
 		
-		treasury -= cost;
+		this.setTreasury(this.getTreasury()-cost);
 
 		// The constructor of Building already sets isCooldown to true. But just in-case I'll set it here as well
 		// https://piazza.com/class/kndahm74mstxn?cid=397
@@ -187,11 +188,11 @@ public class Player {
 	public void upgradeBuilding(Building b)
 			throws NotEnoughGoldException, BuildingInCoolDownException, MaxLevelException {
 		int cost = b.getUpgradeCost();
-		if (cost > treasury) {
+		if (cost > this.getTreasury()) {
 			throw new NotEnoughGoldException();
 		}
 		b.upgrade();
-		treasury -= cost;
+		this.setTreasury(this.getTreasury()-cost);
 
 	}
 
@@ -200,7 +201,7 @@ public class Player {
 		army.getUnits().add(unit);
 		city.getDefendingArmy().getUnits().remove(unit);
 		unit.setParentArmy(army);
-		controlledArmies.add(army);
+		this.getControlledArmies().add(army);
 	}
 
 	public void laySiege(Army army, City city) throws TargetNotReachedException, FriendlyCityException {
@@ -210,7 +211,7 @@ public class Player {
 			throw new TargetNotReachedException();
 		}
 		for (int i = 0; i < controlledCities.size(); i++) {
-			if (controlledCities.get(i).getName() == city.getName())// dont know whether to compare names or instances{
+			if (this.getControlledCities().get(i).getName().equals(city.getName()))// dont know whether to compare names or instances{
 				throw new FriendlyCityException();
 		}
 		
