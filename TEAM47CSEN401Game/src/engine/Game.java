@@ -188,10 +188,10 @@ public class Game {
 		
 		// Decrement Food.
 		this.getPlayer().setFood(this.getPlayer().getFood() - neededFood);
-		if(this.getPlayer().getFood() < 0) this.getPlayer().setFood(0);
 	
 		// If starving, remove 10%
-		if(this.getPlayer().getFood() == 0) {
+		if(this.getPlayer().getFood() < 0) {
+			this.getPlayer().setFood(0);
 			for(Army army : this.getPlayer().getControlledArmies()) {
 				for(Unit unit : army.getUnits()) {
 					int toRem = (int)(unit.getCurrentSoldierCount() * 0.1);
