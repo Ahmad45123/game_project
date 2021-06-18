@@ -33,6 +33,103 @@ public class Player {
 		this.controlledArmies = new ArrayList<Army>();
 	}
 
+	public void recruitUnit(String type, String cityName)
+			throws BuildingInCoolDownException, MaxRecruitedException, NotEnoughGoldException {
+		for (City c : controlledCities) {
+			if (c.getName().equals(cityName)) {
+				for (MilitaryBuilding b : c.getMilitaryBuildings()) {
+					if ((type.toLowerCase().equals("archer") && b instanceof ArcheryRange)
+							|| (type.toLowerCase().equals("cavalry") && b instanceof Stable)
+							|| (type.toLowerCase().equals("infantry") && b instanceof Barracks)) {
+
+						Unit u = b.recruit();
+						if (treasury < b.getRecruitmentCost())
+							throw new NotEnoughGoldException("Not enough gold");
+						treasury -= b.getRecruitmentCost();
+						u.setParentArmy(c.getDefendingArmy());
+						c.getDefendingArmy().getUnits().add(u);
+					}
+				}
+			}
+		}
+
+	}
+
+	public void build(String type, String cityName) throws NotEnoughGoldException {
+		for (City c : controlledCities) {
+			if (c.getName().equals(cityName)) {
+				Building b = null;
+				switch (type.toLowerCase()) {
+				case "archeryrange":
+					b = new ArcheryRange();
+					break;
+				case "barracks":
+					b = new Barracks();
+					break;
+				case "stable":
+					b = new Stable();
+					break;
+				case "farm":
+					b = new Farm();
+					break;
+				case "market":
+					b = new Market();
+				}
+				if (type.equals("Farm") || type.equals("Market")) {
+					for (EconomicBuilding e : c.getEconomicalBuildings()) {
+						if (e instanceof Farm && type.equals("Farm") || e instanceof Market && type.equals("Market"))
+							return;
+					}
+				} else {
+					{
+						for (MilitaryBuilding e : c.getMilitaryBuildings()) {
+							if (e instanceof ArcheryRange && type.equals("ArcheryRange")
+									|| e instanceof Barracks && type.equals("Barracks")
+									|| e instanceof Stable && type.equals("Stable"))
+								return;
+						}
+					}
+				}
+				if (treasury < b.getCost())
+					throw new NotEnoughGoldException("not enough gold");
+				treasury -= b.getCost();
+				if (type.toLowerCase().equals("farm") || type.toLowerCase().equals("market"))
+					c.getEconomicalBuildings().add((EconomicBuilding) b);
+				else {
+					c.getMilitaryBuildings().add((MilitaryBuilding) b);
+				}
+
+			}
+		}
+	}
+
+	public void upgradeBuilding(Building b)
+			throws NotEnoughGoldException, BuildingInCoolDownException, MaxLevelException {
+		if (treasury < b.getUpgradeCost())
+			throw new NotEnoughGoldException("not enough gold");
+		int originalCost = b.getUpgradeCost();
+		b.upgrade();
+		treasury -= originalCost;
+	}
+
+	public void initiateArmy(City city, Unit unit) {
+		Army army = new Army(city.getName());
+		army.getUnits().add(unit);
+		city.getDefendingArmy().getUnits().remove(unit);
+		unit.setParentArmy(army);
+		controlledArmies.add(army);
+	}
+
+	public void laySiege(Army army, City city) throws TargetNotReachedException, FriendlyCityException {
+		if (controlledCities.contains(city))
+			throw new FriendlyCityException("You can't attack a friendly city");
+		if (!army.getCurrentLocation().equals(city.getName()))
+			throw new TargetNotReachedException("Target not reached");
+		army.setCurrentStatus(Status.BESIEGING);
+		city.setUnderSiege(true);
+		city.setTurnsUnderSiege(0);
+	}
+
 	public double getTreasury() {
 		return treasury;
 	}
@@ -61,162 +158,4 @@ public class Player {
 		return controlledArmies;
 	}
 
-	public void recruitUnit(String type, String cityName)
-			throws BuildingInCoolDownException, MaxRecruitedException, NotEnoughGoldException {
-		City city = null;
-		for (int i = 0; i < controlledCities.size(); i++) {
-			if (controlledCities.get(i).getName().equals(cityName)) {
-				city = controlledCities.get(i);
-				break;
-			}
-		}
-		@SuppressWarnings("rawtypes")
-		Class target = null;
-		if (type.equals("Archer")) {
-			target = ArcheryRange.class;
-		} else if (type.equals("Cavalry")) {
-			target = Stable.class;
-		} else if (type.equals("Infantry")) {
-			target = Barracks.class;
-		} else {
-			assert (false);
-		}
-//		assert (city != null);
-		if(city == null) {
-			return;
-		}
-		assert (target != null);
-
-		boolean inCoolDown = false;
-		boolean maxRec = false;
-		int cost = -1;
-
-		for (int i = 0; i < city.getMilitaryBuildings().size(); i++) {
-			MilitaryBuilding b = city.getMilitaryBuildings().get(i);
-			if (!target.isInstance(b)) {
-				continue;
-			}
-			cost = b.getRecruitmentCost();
-			if (cost > treasury) {
-				throw new NotEnoughGoldException();
-			}
-
-			if (b.isCoolDown()) {
-				inCoolDown = true;
-				continue;
-			}
-
-			try {
-				Unit u = b.recruit();
-				u.setParentArmy(city.getDefendingArmy());
-				city.getDefendingArmy().getUnits().add(u);
-				treasury -= cost;
-				return;
-			} catch (Exception e) {
-				if (e instanceof MaxRecruitedException) {
-					maxRec = true;
-					continue;
-				}
-				throw e;
-			}
-
-		}
-
-		if (inCoolDown) {
-			throw new BuildingInCoolDownException();
-		}
-		if (maxRec) {
-			throw new MaxRecruitedException();
-		}
-		assert (false); // if properly initialized should be unreachable
-	}
-
-	public void build(String type, String cityName) throws NotEnoughGoldException {
-		City city = null;
-		for (int i = 0; i < controlledCities.size(); i++) {
-			if (controlledCities.get(i).getName().equals(cityName)) {
-				city = controlledCities.get(i);
-			}
-		}
-		Building target = null;
-		if (type.equals("ArcheryRange")) {
-			target = new ArcheryRange();
-		} else if (type.equals("Stable")) {
-			target = new Stable();
-		} else if (type.equals("Barracks")) {
-			target = new Barracks();
-		} else if (type.equals("Farm")) {
-			target = new Farm();
-		} else if (type.equals("Market")) {
-			target = new Market();
-		} else {
-			assert (false);
-		}
-		assert (city != null);
-		assert (target != null);
-
-		int cost = target.getCost();
-		if (cost > treasury) {
-			throw new NotEnoughGoldException();
-		}
-		
-		if (target instanceof EconomicBuilding) {
-			for (int i = 0; i < city.getEconomicalBuildings().size(); i++) {
-				EconomicBuilding e = city.getEconomicalBuildings().get(i);
-				if (e.getClass() == target.getClass()) {
-					return; //("same type already exists"); // idk what to do or throw
-				}
-			}
-			city.getEconomicalBuildings().add((EconomicBuilding) target);
-		} else {
-			for (int i = 0; i < city.getMilitaryBuildings().size(); i++) {
-				MilitaryBuilding e = city.getMilitaryBuildings().get(i);
-				if (e.getClass() == target.getClass()) {
-					return; //("same type already exists"); // idk what to do or throw
-				}
-			}
-			city.getMilitaryBuildings().add((MilitaryBuilding) target);
-		}
-		
-		this.setTreasury(this.getTreasury()-cost);
-
-		// The constructor of Building already sets isCooldown to true. But just in-case I'll set it here as well
-		// https://piazza.com/class/kndahm74mstxn?cid=397
-		target.setCoolDown(true);
-	}
-
-	public void upgradeBuilding(Building b)
-			throws NotEnoughGoldException, BuildingInCoolDownException, MaxLevelException {
-		int cost = b.getUpgradeCost();
-		if (cost > this.getTreasury()) {
-			throw new NotEnoughGoldException();
-		}
-		b.upgrade();
-		this.setTreasury(this.getTreasury()-cost);
-
-	}
-
-	public void initiateArmy(City city, Unit unit) {
-		Army army = new Army(city.getName());
-		army.getUnits().add(unit);
-		city.getDefendingArmy().getUnits().remove(unit);
-		unit.setParentArmy(army);
-		this.getControlledArmies().add(army);
-	}
-
-	public void laySiege(Army army, City city) throws TargetNotReachedException, FriendlyCityException {
-//		if (!army.getTarget().equals(city.getName()))
-//			assert (false);// city not even targeted LOL
-		if (army.getDistancetoTarget() > 0 || army.getCurrentLocation() != city.getName()) {
-			throw new TargetNotReachedException();
-		}
-		for (int i = 0; i < controlledCities.size(); i++) {
-			if (this.getControlledCities().get(i).getName().equals(city.getName()))// dont know whether to compare names or instances{
-				throw new FriendlyCityException();
-		}
-		
-		army.setCurrentStatus(Status.BESIEGING);
-		city.setUnderSiege(true);
-		city.setTurnsUnderSiege(0);
-	}
 }

@@ -9,38 +9,43 @@ import units.Unit;
 public class ArcheryRange extends MilitaryBuilding {
 
 	public ArcheryRange() {
-		super(1500, 800, 400);
-		this.upgradeCosts = new int[] { 800, 700 };
-		this.recruitCosts = new int[] { 400, 450, 500 };
+		super(1500, 800,400);
+		
 	}
 
-	public void upgrade() throws BuildingInCoolDownException, MaxLevelException { // useless method to make junit happy
+	@Override
+	public Unit recruit() throws BuildingInCoolDownException, MaxRecruitedException {
+		if(isCoolDown())
+			throw new BuildingInCoolDownException("Building is cooling down, please wait for the next turn");
+		if(getCurrentRecruit()==getMaxRecruit())
+			throw new MaxRecruitedException("Max recruited units reached, please wait till next turn. ");
+		setCurrentRecruit(getCurrentRecruit()+1);
+		if(getLevel()==1)
+			return new Archer(1, 60, 0.4, 0.5, 0.6);
+		
+	else if(getLevel()==2)
+		return new Archer(2,60,0.4,0.5,0.6);
+	else
+		return new Archer(3,70,0.5,0.6,0.7);
+		
+	}
+
+	@Override
+	public void upgrade() throws BuildingInCoolDownException, MaxLevelException {
 		super.upgrade();
+		if(getLevel()==1)
+		{
+			setLevel(2);
+			setUpgradeCost(700);
+			setRecruitmentCost(450);
+		}
+		else if(getLevel()==2)
+		{
+		setLevel(3);
+		setRecruitmentCost(500);
+		}
+		
 	}
 
-	public Unit recruit() throws BuildingInCoolDownException, MaxRecruitedException { // Archer
-		if (this.isCoolDown()) {
-			throw new BuildingInCoolDownException();
-		}
 
-		if (this.getMaxRecruit() == this.getCurrentRecruit()) {
-			throw new MaxRecruitedException();
-		}
-
-		this.setCurrentRecruit(this.getCurrentRecruit() + 1);
-
-		int level = this.getLevel();
-		Archer u = null;
-		if (level == 1)
-			u = (new Archer(1, 60, 0.4, 0.5, 0.6));
-		else if (level == 2)
-			u = (new Archer(2, 60, 0.4, 0.5, 0.6));
-		else if (level == 3)
-			u = (new Archer(3, 70, 0.5, 0.6, 0.7));
-		else {
-			assert (false);
-		}
-
-		return u;
-	}
 }

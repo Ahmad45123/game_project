@@ -5,21 +5,31 @@ import exceptions.MaxLevelException;
 
 public class Market extends EconomicBuilding {
 
-	private int[] harvestAmount;
-
 	public Market() {
 		super(1500, 700);
-		this.upgradeCosts = new int[] { 700, 1000 };
-		this.harvestAmount = new int[] { 1000, 1500, 2000 };
 	}
 
+	@Override
 	public int harvest() {
-		return harvestAmount[this.getLevel() - 1];// logically the harvests should be implemented in Economic Building
-													// but the method is abstract??
+		if(getLevel()==1)
+			return 1000;
+		else if(getLevel()==2)
+			return 1500;
+		else
+			return 2000;
 	}
 
-	public void upgrade() throws BuildingInCoolDownException, MaxLevelException { // useless method to make junit happy
+	@Override
+	public void upgrade() throws BuildingInCoolDownException, MaxLevelException {
 		super.upgrade();
+		if(getLevel()==1)
+		{
+			setLevel(2);
+			setUpgradeCost(1000);
+		}
+		else if(getLevel()==2)
+		setLevel(3);
+		
 	}
 
 }
