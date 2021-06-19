@@ -8,6 +8,8 @@ complete :)
 complete :))
 
 ## Milestone 3
+ugliest starting screen possible implemented
+
 ### Checklist of features that have to be implemented(fml)
 #### Entering Player Name
 #### Starting the game
