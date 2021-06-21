@@ -40,14 +40,7 @@ public class StartScreen extends JPanel  {
 		this.add(startButton);
 		
 		
-		//Smooth transition between start screen and world map
-		startButton.addActionListener(new ActionListener() {
-			@Override
-			public void actionPerformed(ActionEvent e) {
-				Launcher.initialiseWorldMap();
-				
-			}
-		});
+
 		
 		JLabel startMenu = new JLabel();
 		startMenu.setText("Start Menu");
@@ -148,6 +141,18 @@ public class StartScreen extends JPanel  {
 		Dimension noureldinNameSize = new Dimension(noureldinNameWidth,noureldinNameHeight);
 		noureldinName.setBounds(noureldinNameXOffset + insets.left, noureldinNameYOffset + insets.top, noureldinNameWidthOffset + noureldinNameSize.width, noureldinNameHeightOffset + noureldinNameSize.height);
 		this.add(noureldinName);
+		
+		//Smooth transition between start screen and world map and included error functionality
+		startButton.addActionListener(new ActionListener() {
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				if(nameInput.getText().isEmpty()) JOptionPane.showMessageDialog(null,"Name field is empty");
+				else Launcher.initialiseWorldMap(); 
+				
+			}
+		});
+		
+		
 		
 		//testing a panel inside a panel, works as intended, will be useful in city view
 		
