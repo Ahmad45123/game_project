@@ -27,128 +27,52 @@ public class StartScreen extends JPanel {
 		// int textheight = (int)(font.getStringBounds(text, frc).getHeight());
 
 		JButton startButton = new JButton("Start");
-		int buttonWidth = 200;
-		int buttonHeight = 50;
-		int buttonXOffset = midRes - (buttonWidth / 2);
-		int buttonYOffset = 480;
-		int buttonWidthOffset = 0;
-		int buttonHeightOffset = 0;
-		Dimension buttonSize = new Dimension(buttonWidth, buttonHeight);
-		startButton.setBounds(buttonXOffset + insets.left, buttonYOffset + insets.top,
-				buttonWidthOffset + buttonSize.width, buttonHeightOffset + buttonSize.height);
-		Launcher.setComponent(startButton, midRes - midRes - (buttonWidth / 2) , y, 200, height);
-		
+		Launcher.setComponent(startButton, midRes , 480, 200, 50);
 		this.add(startButton);
 
 		JLabel startMenu = new JLabel();
 		startMenu.setText("Start Menu");
 		startMenu.setFont(new Font("Ariel", Font.BOLD, 28));
-		int labelWidth = 150;
-		int labelHeight = 50;
-		int labelXOffset = midRes - ((int) (startMenu.getFont().getStringBounds(startMenu.getText(), frc).getWidth())) / 2;
-		int labelYOffset = 30;
-		int labelWidthOffset = 0;
-		int labelHeightOffset = 0;
-		Dimension labelSize = new Dimension(labelWidth, labelHeight);
-		startMenu.setBounds(labelXOffset + insets.left, labelYOffset + insets.top, labelWidthOffset + labelSize.width,
-				labelHeightOffset + labelSize.height);
+		Launcher.setComponent(startMenu, midRes, 30, 150, 50);
 		this.add(startMenu);
 
 		JLabel nameEntry = new JLabel();
 		nameEntry.setText("Enter your name:");
 		nameEntry.setFont(new Font("Ariel", Font.BOLD, 20));
-		int nameEntryWidth = 200;
-		int nameEntryHeight = 230;
-		int nameEntryXOffset = midRes
-				- ((int) (nameEntry.getFont().getStringBounds(nameEntry.getText(), frc).getWidth())) / 2;
-		int nameEntryYOffset = 30;
-		int nameEntryWidthOffset = 0;
-		int nameEntryHeightOffset = 0;
-		Dimension nameEntrySize = new Dimension(nameEntryWidth, nameEntryHeight);
-		nameEntry.setBounds(nameEntryXOffset + insets.left, nameEntryYOffset + insets.top,
-				nameEntryWidthOffset + nameEntrySize.width, nameEntryHeightOffset + nameEntrySize.height);
+		Launcher.setComponent(nameEntry, midRes, 30, 200, 230);
 		this.add(nameEntry);
 
 		JLabel cityEntry = new JLabel();
 		cityEntry.setText("Choose your city:");
 		cityEntry.setFont(new Font("Ariel", Font.BOLD, 20));
-		int cityEntryWidth = 200;
-		int cityEntryHeight = 600;
-		int cityEntryXOffset = midRes
-				- ((int) (cityEntry.getFont().getStringBounds(cityEntry.getText(), frc).getWidth())) / 2;
-		;
-		int cityEntryYOffset = 30;
-		int cityEntryWidthOffset = 0;
-		int cityEntryHeightOffset = 0;
-		Dimension cityEntrySize = new Dimension(cityEntryWidth, cityEntryHeight);
-		cityEntry.setBounds(cityEntryXOffset + insets.left, cityEntryYOffset + insets.top,
-				cityEntryWidthOffset + cityEntrySize.width, cityEntryHeightOffset + cityEntrySize.height);
+		Launcher.setComponent(cityEntry, midRes, 30, 200, 600);
 		this.add(cityEntry);
 
 		JTextField nameInput = new JTextField();
-		int nameInputWidth = 200;
-		int nameInputHeight = 30;
-		int nameInputXOffset = midRes - nameInputWidth / 2;
-		int nameInputYOffset = 180;
-		int nameInputWidthOffset = 0;
-		int nameInputHeightOffset = 0;
-		Dimension nameInputSize = new Dimension(nameInputWidth, nameInputHeight);
-		nameInput.setBounds(nameInputXOffset + insets.left, nameInputYOffset + insets.top,
-				nameInputWidthOffset + nameInputSize.width, nameInputHeightOffset + nameInputSize.height);
+		Launcher.setComponent(nameInput, midRes, 180, 200, 30);
 		this.add(nameInput);
 
 		String[] cities = { "Rome", "Cairo", "Sparta" };
 		JComboBox cityInput = new JComboBox(cities);
-		int cityInputWidth = 200;
-		int cityInputHeight = 30;
-		int cityInputXOffset = midRes - cityInputWidth / 2;
-		int cityInputYOffset = 360;
-		int cityInputWidthOffset = 0;
-		int cityInputHeightOffset = 0;
-		Dimension cityInputSize = new Dimension(cityInputWidth, cityInputHeight);
-		cityInput.setBounds(cityInputXOffset + insets.left, cityInputYOffset + insets.top,
-				cityInputWidthOffset + cityInputSize.width, cityInputHeightOffset + cityInputSize.height);
+		Launcher.setComponent(cityInput, midRes, 360, 200, 30);
 		this.add(cityInput);
 
 		JLabel karimName = new JLabel();
 		karimName.setText("Karim ElMosalamy 49-4884");
 		karimName.setFont(new Font("Ariel", Font.BOLD, 17));
-		int karimNameWidth = 300;
-		int karimNameHeight = 880;
-		int karimNameXOffset = 0;
-		int karimNameYOffset = 30;
-		// karimName.setBounds(karimNameXOffset, karimNameYOffset, karimNameWidth, karimNameHeight);
-		karimName.setSize(karimNameWidth, karimNameHeight);
-		karimName.setLocation(karimNameXOffset,karimNameYOffset);
+		Launcher.setComponent(karimName, 110, 30, 300, 880);
 		this.add(karimName);
 
 		JLabel ahmedName = new JLabel();
 		ahmedName.setText("Ahmed Mamdooh 49-4934");
 		ahmedName.setFont(new Font("Ariel", Font.BOLD, 17));
-		int ahmedNameWidth = 300;
-		int ahmedNameHeight = 930;
-		int ahmedNameXOffset = 0;
-		int ahmedNameYOffset = 30;
-		int ahmedNameWidthOffset = 0;
-		int ahmedNameHeightOffset = 0;
-		Dimension ahmedNameSize = new Dimension(ahmedNameWidth, ahmedNameHeight);
-		ahmedName.setBounds(ahmedNameXOffset + insets.left, ahmedNameYOffset + insets.top,
-				ahmedNameWidthOffset + ahmedNameSize.width, ahmedNameHeightOffset + ahmedNameSize.height);
+		Launcher.setComponent(ahmedName, 110, 30, 300, 930);
 		this.add(ahmedName);
 
 		JLabel noureldinName = new JLabel();
 		noureldinName.setText("Noureldin Shaker 49-7911");
 		noureldinName.setFont(new Font("Ariel", Font.BOLD, 17));
-		int noureldinNameWidth = 300;
-		int noureldinNameHeight = 980;
-		int noureldinNameXOffset = 0;
-		int noureldinNameYOffset = 30;
-		int noureldinNameWidthOffset = 0;
-		int noureldinNameHeightOffset = 0;
-		Dimension noureldinNameSize = new Dimension(noureldinNameWidth, noureldinNameHeight);
-		noureldinName.setBounds(noureldinNameXOffset + insets.left, noureldinNameYOffset + insets.top,
-				noureldinNameWidthOffset + noureldinNameSize.width,
-				noureldinNameHeightOffset + noureldinNameSize.height);
+		Launcher.setComponent(noureldinName, 110, 30, 300, 980);
 		this.add(noureldinName);
 
 		// Smooth transition between start screen and world map and included error
