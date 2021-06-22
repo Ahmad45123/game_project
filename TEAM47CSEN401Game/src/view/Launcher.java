@@ -55,6 +55,13 @@ public class Launcher {
 		window.revalidate();
 		window.repaint();
 	}
+	
+	public static void initialiseBattleView(City city) {
+		window.getContentPane().removeAll();
+		window.add(new BattleView(city));
+		window.revalidate();
+		window.repaint();
+	}
 
 	public static Game getGame() {
 		return game;
@@ -70,6 +77,11 @@ public class Launcher {
 
 	public static void setPlayer(Player p) {
 		player = p;
+	}
+
+	public static void initialiseCityView(City c) {
+		// TODO Auto-generated method stub
+		
 	}
 
 }
