@@ -25,16 +25,16 @@ public class StartScreen extends JPanel {
 		// true);
 		// int textwidth = (int)(z.getStringBounds(s, frc).getWidth());
 		// int textheight = (int)(font.getStringBounds(text, frc).getHeight());
-
-		JButton startButton = new JButton("Start");
-		Launcher.setComponent(startButton, midRes , 480, 200, 50,true);
-		this.add(startButton);
-
+		
 		JLabel startMenu = new JLabel();
 		startMenu.setText("Start Menu");
 		startMenu.setFont(new Font("Ariel", Font.BOLD, 28));
 		Launcher.setComponent(startMenu, midRes, 30, 150, 50,true);
 		this.add(startMenu);
+		
+		JButton startButton = new JButton("Start");
+		Launcher.setComponent(startButton, midRes , 480, 200, 50,true);
+		this.add(startButton);
 
 		JLabel nameEntry = new JLabel();
 		nameEntry.setText("Enter your name:");
@@ -86,7 +86,6 @@ public class StartScreen extends JPanel {
 					try {
 						// initialize game and player instances in launcher
 						Launcher.setGame(new Game(nameInput.getText(), (String) cityInput.getSelectedItem()));
-						Launcher.setPlayer(Launcher.getGame().getPlayer());
 						Launcher.initialiseWorldMap(nameInput.getText());
 					} catch (Exception excep) {
 						JOptionPane.showMessageDialog(null, "IOException while creating Game");
@@ -96,7 +95,9 @@ public class StartScreen extends JPanel {
 				}
 			}
 		});
-
+		
+		
+		
 		// testing a panel inside a panel, works as intended, will be useful in city
 		// view
 

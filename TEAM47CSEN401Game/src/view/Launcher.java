@@ -80,8 +80,10 @@ public class Launcher {
 	}
 
 	public static void initialiseCityView(City c) {
-		// TODO Auto-generated method stub
-		
+		window.getContentPane().removeAll();
+		window.add(new BattleView(c));
+		window.revalidate();
+		window.repaint();
 	}
 
 }
