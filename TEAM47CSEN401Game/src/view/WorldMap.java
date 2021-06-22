@@ -27,34 +27,34 @@ public class WorldMap extends JPanel {
 		JLabel worldMap = new JLabel();
 		worldMap.setText("World Map");
 		worldMap.setFont(new Font("Ariel", Font.BOLD, 28));
-		int labelXOffset = midRes
-				- ((int) (worldMap.getFont().getStringBounds(worldMap.getText(), frc).getWidth())) / 2;
+		int labelXOffset = midRes;
+//				- ((int) (worldMap.getFont().getStringBounds(worldMap.getText(), frc).getWidth())) / 2;
 		int labelYOffset = 30;
-		Launcher.setComponent(worldMap, labelXOffset, labelYOffset, 150, 50);
+		Launcher.setComponent(worldMap, labelXOffset, labelYOffset, 150, 50,true);
 		this.add(worldMap);
 
 		JLabel playerNameLabel = new JLabel();
 		playerNameLabel.setText("Player Name: " + player.getName());
 		playerNameLabel.setFont(new Font("Ariel", Font.BOLD, 17));
-		Launcher.setComponent(playerNameLabel, 75, 30, 300, 850);
+		Launcher.setComponent(playerNameLabel, 5, 0, 300, 900,false);
 		this.add(playerNameLabel);
 
 		JLabel turnCountLabel = new JLabel();
 		turnCountLabel.setText("Turn Count: " + game.getCurrentTurnCount());
 		turnCountLabel.setFont(new Font("Ariel", Font.BOLD, 17));
-		Launcher.setComponent(turnCountLabel, 55, 30, 300, 900);
+		Launcher.setComponent(turnCountLabel, 5, 0, 300, 950,false);
 		this.add(turnCountLabel);
 
 		JLabel foodCountLabel = new JLabel();
 		foodCountLabel.setText("Food: " + Math.round(player.getFood() * 10) / 10.0);
 		foodCountLabel.setFont(new Font("Ariel", Font.BOLD, 17));
-		Launcher.setComponent(foodCountLabel, 40, 30, 300, 950);
+		Launcher.setComponent(foodCountLabel, 5, 0, 300, 1000,false);
 		this.add(foodCountLabel);
 
 		JLabel goldCountLabel = new JLabel();
 		goldCountLabel.setText("Gold: " + Math.round(player.getTreasury() * 10) / 10.0);
 		goldCountLabel.setFont(new Font("Ariel", Font.BOLD, 17));
-		Launcher.setComponent(goldCountLabel, 40, 30, 300, 1000);
+		Launcher.setComponent(goldCountLabel, 5, 0, 300, 1050,false);
 		this.add(goldCountLabel);
 
 	}

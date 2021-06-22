@@ -27,52 +27,52 @@ public class StartScreen extends JPanel {
 		// int textheight = (int)(font.getStringBounds(text, frc).getHeight());
 
 		JButton startButton = new JButton("Start");
-		Launcher.setComponent(startButton, midRes , 480, 200, 50);
+		Launcher.setComponent(startButton, midRes , 480, 200, 50,true);
 		this.add(startButton);
 
 		JLabel startMenu = new JLabel();
 		startMenu.setText("Start Menu");
 		startMenu.setFont(new Font("Ariel", Font.BOLD, 28));
-		Launcher.setComponent(startMenu, midRes, 30, 150, 50);
+		Launcher.setComponent(startMenu, midRes, 30, 150, 50,true);
 		this.add(startMenu);
 
 		JLabel nameEntry = new JLabel();
 		nameEntry.setText("Enter your name:");
 		nameEntry.setFont(new Font("Ariel", Font.BOLD, 20));
-		Launcher.setComponent(nameEntry, midRes, 30, 200, 230);
+		Launcher.setComponent(nameEntry, midRes, 30, 200, 230,true);
 		this.add(nameEntry);
 
 		JLabel cityEntry = new JLabel();
 		cityEntry.setText("Choose your city:");
 		cityEntry.setFont(new Font("Ariel", Font.BOLD, 20));
-		Launcher.setComponent(cityEntry, midRes, 30, 200, 600);
+		Launcher.setComponent(cityEntry, midRes, 30, 200, 600,true);
 		this.add(cityEntry);
 
 		JTextField nameInput = new JTextField();
-		Launcher.setComponent(nameInput, midRes, 180, 200, 30);
+		Launcher.setComponent(nameInput, midRes, 180, 200, 30,true);
 		this.add(nameInput);
 
 		String[] cities = { "Rome", "Cairo", "Sparta" };
 		JComboBox cityInput = new JComboBox(cities);
-		Launcher.setComponent(cityInput, midRes, 360, 200, 30);
+		Launcher.setComponent(cityInput, midRes, 360, 200, 30,true);
 		this.add(cityInput);
 
 		JLabel karimName = new JLabel();
 		karimName.setText("Karim ElMosalamy 49-4884");
 		karimName.setFont(new Font("Ariel", Font.BOLD, 17));
-		Launcher.setComponent(karimName, 110, 30, 300, 880);
+		Launcher.setComponent(karimName, 110, 30, 300, 880,true);
 		this.add(karimName);
 
 		JLabel ahmedName = new JLabel();
 		ahmedName.setText("Ahmed Mamdooh 49-4934");
 		ahmedName.setFont(new Font("Ariel", Font.BOLD, 17));
-		Launcher.setComponent(ahmedName, 110, 30, 300, 930);
+		Launcher.setComponent(ahmedName, 110, 30, 300, 930,true);
 		this.add(ahmedName);
 
 		JLabel noureldinName = new JLabel();
 		noureldinName.setText("Noureldin Shaker 49-7911");
 		noureldinName.setFont(new Font("Ariel", Font.BOLD, 17));
-		Launcher.setComponent(noureldinName, 110, 30, 300, 980);
+		Launcher.setComponent(noureldinName, 110, 30, 300, 980,true);
 		this.add(noureldinName);
 
 		// Smooth transition between start screen and world map and included error
