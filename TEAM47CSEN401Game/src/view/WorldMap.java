@@ -1,75 +1,62 @@
 package view;
+
 import javax.swing.*;
+
+import engine.Game;
+import engine.Player;
+
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.font.FontRenderContext;
 import java.awt.geom.AffineTransform;
 
-
-
 public class WorldMap extends JPanel {
 	private int xRes = 800;
 	private int yRes = 600;
-	private int midRes = xRes/2;
-	
+	private int midRes = xRes / 2;
+
 	public WorldMap(String playerName) {
+		Game game = Launcher.getGame();
+		Player player = Launcher.getPlayer();
+
 		this.setLayout(null);
 		Insets insets = this.getInsets();
 		FontRenderContext frc = new FontRenderContext(new AffineTransform(), true, true);
-		
-		
+
 		JLabel worldMap = new JLabel();
 		worldMap.setText("World Map");
 		worldMap.setFont(new Font("Ariel", Font.BOLD, 28));
-		int labelWidth = 150;
-		int labelHeight = 50;
-		int labelXOffset = midRes - ((int)(worldMap.getFont().getStringBounds(worldMap.getText(), frc).getWidth()))/2;
+		int labelXOffset = midRes
+				- ((int) (worldMap.getFont().getStringBounds(worldMap.getText(), frc).getWidth())) / 2;
 		int labelYOffset = 30;
-		Launcher.setComponent(worldMap, labelXOffset, labelYOffset, labelWidth, labelHeight);
+		Launcher.setComponent(worldMap, labelXOffset, labelYOffset, 150, 50);
 		this.add(worldMap);
 
 		JLabel playerNameLabel = new JLabel();
-		playerNameLabel.setText("Player Name: " + playerName);
+		playerNameLabel.setText("Player Name: " + player.getName());
 		playerNameLabel.setFont(new Font("Ariel", Font.BOLD, 17));
-		int playerNameLabelWidth = 300;
-		int playerNameLabelHeight = 880;
-		int playerNameLabelXOffset = 0;
-		int playerNameLabelYOffset = 30;
-		Launcher.setComponent(playerNameLabel, playerNameLabelXOffset, playerNameLabelYOffset, playerNameLabelWidth ,playerNameLabelHeight);
+		Launcher.setComponent(playerNameLabel, 75, 30, 300, 850);
 		this.add(playerNameLabel);
 
+		JLabel turnCountLabel = new JLabel();
+		turnCountLabel.setText("Turn Count: " + game.getCurrentTurnCount());
+		turnCountLabel.setFont(new Font("Ariel", Font.BOLD, 17));
+		Launcher.setComponent(turnCountLabel, 55, 30, 300, 900);
+		this.add(turnCountLabel);
 
-		// JLabel playerNameLabel = new JLabel();
-		// playerNameLabel.setText("Player Name: " + playerName);
-		// playerNameLabel.setFont(new Font("Ariel", Font.BOLD, 17));
-		// int playerNameLabelWidth = 300;
-		// int playerNameLabelHeight = 880;
-		// int playerNameLabelXOffset = 0;
-		// int playerNameLabelYOffset = 30;
-		// int playerNameLabelWidthOffset = 0;
-		// int playerNameLabelHeightOffset = 0;
-		// Dimension playerNameLabelSize = new Dimension(playerNameLabelWidth,playerNameLabelHeight);
-		// playerNameLabel.setBounds(playerNameLabelXOffset + insets.left, playerNameLabelYOffset + insets.top, playerNameLabelWidthOffset + playerNameLabelSize.width, playerNameLabelHeightOffset + playerNameLabelSize.height);
-		// this.add(playerNameLabel);
+		JLabel foodCountLabel = new JLabel();
+		foodCountLabel.setText("Food: " + Math.round(player.getFood() * 10) / 10.0);
+		foodCountLabel.setFont(new Font("Ariel", Font.BOLD, 17));
+		Launcher.setComponent(foodCountLabel, 40, 30, 300, 950);
+		this.add(foodCountLabel);
 
-		// JLabel playerNameLabel = new JLabel();
-		// playerNameLabel.setText("Player Name: " + playerName);
-		// playerNameLabel.setFont(new Font("Ariel", Font.BOLD, 17));
-		// int playerNameLabelWidth = 300;
-		// int playerNameLabelHeight = 880;
-		// int playerNameLabelXOffset = 0;
-		// int playerNameLabelYOffset = 30;
-		// int playerNameLabelWidthOffset = 0;
-		// int playerNameLabelHeightOffset = 0;
-		// Dimension playerNameLabelSize = new Dimension(playerNameLabelWidth,playerNameLabelHeight);
-		// playerNameLabel.setBounds(playerNameLabelXOffset + insets.left, playerNameLabelYOffset + insets.top, playerNameLabelWidthOffset + playerNameLabelSize.width, playerNameLabelHeightOffset + playerNameLabelSize.height);
-		// this.add(playerNameLabel);
-		
-		
-		
-		
-		
+		JLabel goldCountLabel = new JLabel();
+		goldCountLabel.setText("Gold: " + Math.round(player.getTreasury() * 10) / 10.0);
+		goldCountLabel.setFont(new Font("Ariel", Font.BOLD, 17));
+		Launcher.setComponent(goldCountLabel, 40, 30, 300, 1000);
+		this.add(goldCountLabel);
+
 	}
-	
+
 }

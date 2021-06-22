@@ -86,9 +86,9 @@ public class StartScreen extends JPanel {
 					try {
 						// initialize game and player instances in launcher
 						Launcher.setGame(new Game(nameInput.getText(), (String) cityInput.getSelectedItem()));
-						Launcher.initialiseWorldMap(nameInput.getText());
 						Launcher.setPlayer(new Player(nameInput.getText()));
 						Launcher.getGame().setPlayer(Launcher.getPlayer());
+						Launcher.initialiseWorldMap(nameInput.getText());
 					} catch (Exception excep) {
 						JOptionPane.showMessageDialog(null, "IOException while creating Game");
 						System.out.println("exeption in StartScreen initilizer " + excep.toString());
