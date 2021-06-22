@@ -25,16 +25,16 @@ public class StartScreen extends JPanel {
 		// true);
 		// int textwidth = (int)(z.getStringBounds(s, frc).getWidth());
 		// int textheight = (int)(font.getStringBounds(text, frc).getHeight());
-		
+
+		JButton startButton = new JButton("Start");
+		Launcher.setComponent(startButton, midRes , 480, 200, 50,true);
+		this.add(startButton);
+
 		JLabel startMenu = new JLabel();
 		startMenu.setText("Start Menu");
 		startMenu.setFont(new Font("Ariel", Font.BOLD, 28));
 		Launcher.setComponent(startMenu, midRes, 30, 150, 50,true);
 		this.add(startMenu);
-		
-		JButton startButton = new JButton("Start");
-		Launcher.setComponent(startButton, midRes , 480, 200, 50,true);
-		this.add(startButton);
 
 		JLabel nameEntry = new JLabel();
 		nameEntry.setText("Enter your name:");
@@ -60,19 +60,19 @@ public class StartScreen extends JPanel {
 		JLabel karimName = new JLabel();
 		karimName.setText("Karim ElMosalamy 49-4884");
 		karimName.setFont(new Font("Ariel", Font.BOLD, 17));
-		Launcher.setComponent(karimName, 110, 30, 300, 880,true);
+		Launcher.setComponent(karimName, 0, 30, 300, 880,false);
 		this.add(karimName);
 
 		JLabel ahmedName = new JLabel();
 		ahmedName.setText("Ahmed Mamdooh 49-4934");
 		ahmedName.setFont(new Font("Ariel", Font.BOLD, 17));
-		Launcher.setComponent(ahmedName, 110, 30, 300, 930,true);
+		Launcher.setComponent(ahmedName, 0, 30, 300, 930,false);
 		this.add(ahmedName);
 
 		JLabel noureldinName = new JLabel();
 		noureldinName.setText("Noureldin Shaker 49-7911");
 		noureldinName.setFont(new Font("Ariel", Font.BOLD, 17));
-		Launcher.setComponent(noureldinName, 110, 30, 300, 980,true);
+		Launcher.setComponent(noureldinName, 0, 30, 300, 980,false);
 		this.add(noureldinName);
 
 		// Smooth transition between start screen and world map and included error
@@ -86,6 +86,7 @@ public class StartScreen extends JPanel {
 					try {
 						// initialize game and player instances in launcher
 						Launcher.setGame(new Game(nameInput.getText(), (String) cityInput.getSelectedItem()));
+						Launcher.setPlayer(Launcher.getGame().getPlayer());
 						Launcher.initialiseWorldMap(nameInput.getText());
 					} catch (Exception excep) {
 						JOptionPane.showMessageDialog(null, "IOException while creating Game");
@@ -95,25 +96,6 @@ public class StartScreen extends JPanel {
 				}
 			}
 		});
-		
-		
-		
-		// testing a panel inside a panel, works as intended, will be useful in city
-		// view
-
-		// JPanel testPanel = new JPanel();
-		// testPanel.setBackground(Color.RED);
-		// int testPanelWidth = 50;
-		// int testPanelHeight = 50;
-		// int testPanelXOffset = 0;
-		// int testPanelYOffset = 30;
-		// int testPanelWidthOffset = 0;
-		// int testPanelHeightOffset = 0;
-		// Dimension testPanelSize = new Dimension(testPanelWidth,testPanelHeight);
-		// testPanel.setBounds(testPanelXOffset + insets.left, testPanelYOffset +
-		// insets.top, testPanelWidthOffset + testPanelSize.width, testPanelHeightOffset
-		// + testPanelSize.height);
-		// mainPanel.add(testPanel);
 
 	}
 
