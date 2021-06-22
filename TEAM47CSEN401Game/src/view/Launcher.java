@@ -17,14 +17,16 @@ public class Launcher {
 	private static Player player;
 	private static FontRenderContext frc = new FontRenderContext(new AffineTransform(), true, true);
 
-	public static void setComponent(Component a, int x, int y, int width, int height) {
+	public static void setComponent(Component a, int x, int y, int width, int height, Boolean centered) {
 		if (a.getClass().getName().contains("JLabel")) {
 			JLabel z = (JLabel) a;
-			a.setLocation(x - ((int) (z.getFont().getStringBounds(z.getText(), frc).getWidth())) / 2, y);
+			if(centered) a.setLocation(x - ((int) (z.getFont().getStringBounds(z.getText(), frc).getWidth())) / 2, y);
+			else a.setLocation(x, y);
 			a.setSize(width, height);
 		}
 		else{
-			a.setLocation(x - width/2, y);
+			if(centered) a.setLocation(x - width/2, y);
+			else a.setLocation(x, y);
 			a.setSize(width, height);
 		}
 	}
