@@ -21,6 +21,13 @@ public class ArmyListview extends JPanel {
 	private int yRes = 600;
 	private int midRes = xRes / 2;
 
+	private JTextArea textArea;
+
+	private String currentArmyInfo, currentUnitInfo;
+	private ArrayList<Unit> unitsArrayList;
+	private JList<String> unitsList;
+	private JScrollPane unitsListScroller;
+
 	public ArmyListview() {
 
 		Game game = Launcher.getGame();
@@ -28,7 +35,7 @@ public class ArmyListview extends JPanel {
 
 		this.setLayout(null);
 
-		JTextArea textArea = new JTextArea();
+		textArea = new JTextArea();
 		Launcher.setComponent(textArea, xRes / 2, 400 - 60, 400, 250, true);
 		this.add(textArea);
 		// controlled armies
@@ -37,114 +44,118 @@ public class ArmyListview extends JPanel {
 
 		DefaultListModel<String> l1 = new DefaultListModel<>();
 
-		controlledArmies.add(0, null);
-		l1.add(0, "controlled armies");
+		ArrayList<Army> allArmies = new ArrayList<Army>();
 
-		for (int i = 1; i < controlledArmies.size(); i++) {
+		allArmies.add(null);
+		l1.add(0, "controlled and defending armies");
+
+		for (int i = 0; i < controlledArmies.size(); i++) {
 			Army a = controlledArmies.get(i);
-			l1.add(i, a.getName());
-
+			assert (a != null);
+			int ni = allArmies.size();
+			l1.add(ni, a.getName());
+			allArmies.add(a);
 		}
-
-		JList<String> controlledArmiesList = new JList<>(l1);
-		JScrollPane controlledArmiesListScroller = new JScrollPane(controlledArmiesList);
-		controlledArmiesListScroller.setPreferredSize(new Dimension(250, 80));
-
-		controlledArmiesList.addListSelectionListener(new ListSelectionListener() {
-			public void valueChanged(ListSelectionEvent e) {
-				if (e.getValueIsAdjusting() == false) {
-					Army a = controlledArmies.get(controlledArmiesList.getSelectedIndex());
-					String armyInfo;
-
-					// add all the army info you need :)
-
-					if (a == null) {
-						armyInfo = "select something :)";
-					} else {
-						armyInfo = extractArmyInfo(a);
-					}
-
-					textArea.setText(armyInfo);
-				}
-			}
-		});
-		
-		controlledArmiesList.addMouseListener(new MouseAdapter() {
-		    public void mouseClicked(MouseEvent evt) {
-		        JList list = (JList)evt.getSource();
-		        if(list.getSelectedIndex() == -1) {
-		        	return;
-		        }
-		        
-		        String armyInfo;
-		        
-		        Army a = controlledArmies.get(list.getSelectedIndex());
-		        
-		        if (a == null) {
-					armyInfo = "select something :)";
-				} else {
-					armyInfo = extractArmyInfo(a);
-				}
-		        
-		        textArea.setText(armyInfo);
-		        
-		    }
-		});
-		
-
-		Launcher.setComponent(controlledArmiesListScroller, xRes / 2 + 20, 20, xRes / 2 - 40, 300, false);
-		this.add(controlledArmiesListScroller);
-
-		// armies in controlled cities
 
 		ArrayList<City> controlledCities = Launcher.getPlayer().getControlledCities();
-		ArrayList<Army> ownedArmiesArrayList = new ArrayList<>();
-		DefaultListModel<String> l2 = new DefaultListModel<>();
-
-		ownedArmiesArrayList.add(null);
-		l2.add(0, "owned armies");
-
 		for (int i = 0; i < controlledCities.size(); i++) {
 			Army a = controlledCities.get(i).getDefendingArmy();
-
 			assert (a != null);
-
-			System.out.println(a.getName());
-
-			ownedArmiesArrayList.add(a);
-			l2.add(i + 1, a.getName());
-
+			l1.add(allArmies.size(), a.getName());
+			allArmies.add(a);
 		}
 
-		JList<String> ownedArmiesList = new JList<>(l2);
-		JScrollPane ownedArmiesListScroller = new JScrollPane(ownedArmiesList);
-		ownedArmiesListScroller.setPreferredSize(new Dimension(250, 80));
-		ownedArmiesList.addListSelectionListener(new ListSelectionListener() {
-			public void valueChanged(ListSelectionEvent e) {
-				if (e.getValueIsAdjusting() == false) {
-					Army a = ownedArmiesArrayList.get(ownedArmiesList.getSelectedIndex());
-					String armyInfo;
+		
+		
+		updateUnitsArrayList(null);
 
-					// add all the army info you need :)
+		JList<String> allArmiesList = new JList<>(l1);
+		JScrollPane allArmiesListScroller = new JScrollPane(allArmiesList);
+		allArmiesListScroller.setPreferredSize(new Dimension(250, 80));
 
-					if (a == null) {
-						armyInfo = "select something :)";
-					} else {
-						armyInfo = extractArmyInfo(a);
-					}
-
-					textArea.setText(armyInfo);
+		allArmiesList.addMouseListener(new MouseAdapter() {
+			public void mouseClicked(MouseEvent evt) {
+				JList list = (JList) evt.getSource();
+				if (list.getSelectedIndex() == -1) {
+					return;
 				}
+
+				Army a = allArmies.get(list.getSelectedIndex());
+
+				updateCurrentArmyInfo(a);
+				if (a == null)
+					updateUnitsArrayList(null);
+				else
+					updateUnitsArrayList(a.getUnits());
+
 			}
 		});
-		Launcher.setComponent(ownedArmiesListScroller, 20, 20, xRes / 2 - 40, 300, false);
-		this.add(ownedArmiesListScroller);
+
+		Launcher.setComponent(allArmiesListScroller, xRes / 2 + 20, 20, xRes / 2 - 40, 300, false);
+		this.add(allArmiesListScroller);
 
 	}
-	
-	public static String extractArmyInfo(Army a) {
+
+	String extractArmyInfo(Army a) {
 		return "Name: " + a.getName() + "\n Target: " + a.getTarget();
 	}
-	
 
+	String extractUnitInfo(Unit a) {
+		return "level: " + a.getLevel() + "\n current soilder count: " + a.getCurrentSoldierCount();
+	}
+
+	void updateCurrentArmyInfo(Army a) {
+
+		currentUnitInfo = "";
+		if (a == null)
+			currentArmyInfo = "select something :)";
+		else
+			currentArmyInfo = extractArmyInfo(a);
+
+		updateTextArea();
+	}
+
+	void updateCurrentUnitInfo(Unit a) {
+		currentUnitInfo = extractUnitInfo(a);
+		updateTextArea();
+	}
+
+	void updateTextArea() {
+		textArea.setText("Army:\n" + currentArmyInfo + "\n\n Unit: \n\n" + currentUnitInfo);
+	}
+
+	void updateUnitsArrayList(ArrayList<Unit> a) {
+		if (a == null)
+			a = new ArrayList<Unit>();
+
+		unitsArrayList = a;
+		String[] temp = new String[a.size()];
+		for (int i = 0; i < a.size(); i++) {
+			Unit b = a.get(i);
+			temp[i] = b.getClass().getName() + " lvl " + b.getLevel();
+		}
+		unitsList = new JList<>(temp);
+		if (unitsListScroller != null)
+			this.remove(unitsListScroller);
+		unitsListScroller = new JScrollPane(unitsList);
+		unitsListScroller.setPreferredSize(new Dimension(250, 80));
+		
+		unitsList.addMouseListener(new MouseAdapter() {
+			public void mouseClicked(MouseEvent evt) {
+				JList list = (JList) evt.getSource();
+				if (list.getSelectedIndex() == -1) {
+					return;
+				}
+
+				Unit a = unitsArrayList.get(list.getSelectedIndex());
+
+				updateCurrentUnitInfo(a);
+
+			}
+		});
+		
+		Launcher.setComponent(unitsListScroller, 20, 20, xRes / 2 - 40, 300, false);
+		this.add(unitsListScroller);
+
+	}
 }

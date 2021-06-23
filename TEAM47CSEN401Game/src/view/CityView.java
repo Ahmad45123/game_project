@@ -16,6 +16,11 @@ public class CityView extends JPanel {
 	private int midRes = xRes / 2;
 
 	public CityView(City c) {
+		
+		Game game = Launcher.getGame();
+		Player player = Launcher.getPlayer();
+		
+		
 		this.setLayout(null);
 		
 		JLabel cityView = new JLabel();
@@ -25,25 +30,25 @@ public class CityView extends JPanel {
 		this.add(cityView);
 		
 		JLabel playerNameLabel = new JLabel();
-		playerNameLabel.setText("Player Name: testName");
+		playerNameLabel.setText("Player Name: " + player.getName());
 		playerNameLabel.setFont(new Font("Ariel", Font.BOLD, 17));
 		Launcher.setComponent(playerNameLabel, 575-40, 0, 300, 25, false);
 		this.add(playerNameLabel);
 
 		JLabel turnCountLabel = new JLabel();
-		turnCountLabel.setText("Turn Count: 50");
+		turnCountLabel.setText("Turn Count: " + game.getCurrentTurnCount());
 		turnCountLabel.setFont(new Font("Ariel", Font.BOLD, 17));
 		Launcher.setComponent(turnCountLabel, 575-40, 0, 300, 75, false);
 		this.add(turnCountLabel);
 
 		JLabel foodCountLabel = new JLabel();
-		foodCountLabel.setText("Food: 50000");
+		foodCountLabel.setText("Food: " + Math.round(player.getFood() * 10) / 10.0);
 		foodCountLabel.setFont(new Font("Ariel", Font.BOLD, 17));
 		Launcher.setComponent(foodCountLabel, 575-40, 0, 300, 125, false);
 		this.add(foodCountLabel);
 
 		JLabel goldCountLabel = new JLabel();
-		goldCountLabel.setText("Gold: 50000");
+		goldCountLabel.setText("Gold: " + Math.round(player.getTreasury() * 10) / 10.0);
 		goldCountLabel.setFont(new Font("Ariel", Font.BOLD, 17));
 		Launcher.setComponent(goldCountLabel, 575-40, 0, 300, 175, false);
 		this.add(goldCountLabel);
@@ -51,6 +56,10 @@ public class CityView extends JPanel {
 		JButton backButton  = new JButton();
 		backButton.setText("Back to World Map");
 		Launcher.setComponent(backButton, 20, 5, 175, 62, false);
+		backButton.addActionListener(new ActionListener() {
+			@Override
+			public void actionPerformed(ActionEvent e){Launcher.initialiseWorldMap();}});
+		
 		this.add(backButton);
 		
 		JLabel currentCity = new JLabel();

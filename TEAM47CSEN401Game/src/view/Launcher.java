@@ -49,9 +49,9 @@ public class Launcher {
 		window.repaint();
 	}
 
-	public static void initialiseWorldMap(String playerName) {
+	public static void initialiseWorldMap() {
 		window.getContentPane().removeAll();
-		window.add(new WorldMap(playerName));
+		window.add(new WorldMap());
 		window.revalidate();
 		window.repaint();
 	}

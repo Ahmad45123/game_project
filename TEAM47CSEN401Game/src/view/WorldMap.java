@@ -18,7 +18,7 @@ public class WorldMap extends JPanel {
 	private int yRes = 600;
 	private int midRes = xRes / 2;
 
-	public WorldMap(String playerName) {
+	public WorldMap() {
 		Game game = Launcher.getGame();
 		Player player = Launcher.getPlayer();
 
@@ -76,7 +76,8 @@ public class WorldMap extends JPanel {
 						// check whether to attack first or large siege or just move the army or will
 						// the attack option be in city view
 						// maybe just show error if not under siege 
-						Launcher.initialiseBattleView(c);
+//						Launcher.initialiseBattleView(c);
+						JOptionPane.showMessageDialog(null, "pre-battle view");
 					}
 				}
 			}
@@ -100,7 +101,8 @@ public class WorldMap extends JPanel {
 					if (c.getName().toLowerCase().contentEquals(name)) {
 						// check whether to attack first or large seige or just move the army or will
 						// the attack option be in city view
-						Launcher.initialiseBattleView(c);
+//						Launcher.initialiseBattleView(c);
+						JOptionPane.showMessageDialog(null, "pre-battle view");
 					}
 				}
 			}
@@ -124,7 +126,8 @@ public class WorldMap extends JPanel {
 					if (c.getName().toLowerCase().contentEquals(name)) {
 						// check whether to attack first or large seige or just move the army or will
 						// the attack option be in city view
-						Launcher.initialiseBattleView(c);
+//						Launcher.initialiseBattleView(c);
+						JOptionPane.showMessageDialog(null, "pre-battle view");
 					}
 				}
 			}
@@ -136,8 +139,21 @@ public class WorldMap extends JPanel {
 		nextTurnButton.addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent e) {
+				
+				
+				
+				
+				// JUST FOR TESTING
+				// add units
+//				try {
+//				player.build("archeryrange", "Rome");
 				game.endTurn();
-				Launcher.initialiseWorldMap(playerName);
+				Launcher.initialiseWorldMap();
+//				player.recruitUnit("archer", "Rome");
+//				System.out.println("recurited archer");
+//				}catch(Exception ev) {
+//					System.out.println(ev);
+//				}
 			}
 		});
 		this.add(nextTurnButton);
