@@ -77,7 +77,7 @@ public class Game {
 
 		BufferedReader br = new BufferedReader(new FileReader(path));
 		String currentLine = br.readLine();
-		Army resultArmy = new Army(cityName);
+		Army resultArmy = new Army(cityName,"initial army");
 		while (currentLine != null) {
 			String[] content = currentLine.split(",");
 			String unitType = content[0].toLowerCase();

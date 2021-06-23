@@ -62,6 +62,14 @@ public class Launcher {
 		window.revalidate();
 		window.repaint();
 	}
+	
+	public static void initialiseArmyListview() {
+		window.getContentPane().removeAll();
+		window.add(new ArmyListview());
+		window.revalidate();
+		window.repaint();
+	}
+	
 
 	public static Game getGame() {
 		return game;
@@ -81,7 +89,7 @@ public class Launcher {
 
 	public static void initialiseCityView(City c) {
 		window.getContentPane().removeAll();
-		window.add(new BattleView(c));
+		window.add(new CityView(c));
 		window.revalidate();
 		window.repaint();
 	}

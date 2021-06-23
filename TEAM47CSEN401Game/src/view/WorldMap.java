@@ -13,6 +13,7 @@ import java.awt.font.FontRenderContext;
 import java.awt.geom.AffineTransform;
 
 public class WorldMap extends JPanel {
+	// use global const or something
 	private int xRes = 800;
 	private int yRes = 600;
 	private int midRes = xRes / 2;
@@ -72,8 +73,9 @@ public class WorldMap extends JPanel {
 
 				for (City c : game.getAvailableCities()) {
 					if (c.getName().toLowerCase().contentEquals(name)) {
-						// check whether to attack first or large seige or just move the army or will
+						// check whether to attack first or large siege or just move the army or will
 						// the attack option be in city view
+						// maybe just show error if not under siege 
 						Launcher.initialiseBattleView(c);
 					}
 				}
@@ -139,6 +141,19 @@ public class WorldMap extends JPanel {
 			}
 		});
 		this.add(nextTurnButton);
+		
+		
+		
+		JButton ArmyListButton = new JButton("ArmyListview");
+		Launcher.setComponent(ArmyListButton, 550, 500, 100, 50, true);
+		ArmyListButton.addActionListener(new ActionListener() {
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				Launcher.initialiseArmyListview();
+			}
+		});
+		this.add(ArmyListButton);
+		
 
 	}
 

@@ -16,7 +16,7 @@ private boolean underSiege;
 		this.name=name;
 		economicalBuildings= new ArrayList<EconomicBuilding>();
 		militaryBuildings= new ArrayList<MilitaryBuilding>();
-		defendingArmy= new Army(name);
+		defendingArmy= new Army(name,name + " defending army");
 		turnsUnderSiege=-1;
 	}
 	public ArrayList<EconomicBuilding> getEconomicalBuildings() {

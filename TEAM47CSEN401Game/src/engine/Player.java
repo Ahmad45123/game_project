@@ -112,8 +112,8 @@ public class Player {
 		treasury -= originalCost;
 	}
 
-	public void initiateArmy(City city, Unit unit) {
-		Army army = new Army(city.getName());
+	public void initiateArmy(City city, Unit unit,String name) {
+		Army army = new Army(city.getName(),name);
 		army.getUnits().add(unit);
 		city.getDefendingArmy().getUnits().remove(unit);
 		unit.setParentArmy(army);

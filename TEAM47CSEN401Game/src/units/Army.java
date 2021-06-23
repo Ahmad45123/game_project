@@ -12,14 +12,22 @@ public class Army{
 	private String target;
 	private String currentLocation;
 	private final int maxToHold=10;
+	private String name;
 
-	public Army(String currentLocation) {
+	public Army(String currentLocation,String name) {
 		this.currentLocation=currentLocation;
 		currentStatus=Status.IDLE;
 		units=new ArrayList<Unit>();
 		distancetoTarget=-1;
 		target="";
+		this.name = name;
 		
+	}
+	public String getName() {
+		return name;
+	}
+	public void setName(String name) {
+		this.name = name;
 	}
 	public void relocateUnit(Unit unit) throws MaxCapacityException
 	{

@@ -25,7 +25,7 @@ public class BattleView extends JPanel {
 		FontRenderContext frc = new FontRenderContext(new AffineTransform(), true, true);
 		
 		JLabel cityName = new JLabel();
-		cityName.setText(city.getName());
+		cityName.setText(city.getName() + "battle");
 		cityName.setFont(new Font("Ariel", Font.BOLD, 28));
 		int labelXOffset = midRes;
 		int labelYOffset = 30;
