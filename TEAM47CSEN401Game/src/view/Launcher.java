@@ -7,6 +7,7 @@ import java.awt.event.ActionListener;
 import java.awt.font.FontRenderContext;
 import java.awt.geom.AffineTransform;
 import engine.*;
+import units.*;
 
 public class Launcher {
 	private static int xRes = 800;
@@ -56,9 +57,16 @@ public class Launcher {
 		window.repaint();
 	}
 	
-	public static void initialiseBattleView(City city) {
+	public static void initialiseBattleView(City city,Army attackingArmy) {
 		window.getContentPane().removeAll();
-		window.add(new BattleView(city));
+		window.add(new BattleView(city,attackingArmy));
+		window.revalidate();
+		window.repaint();
+	}
+	
+	public static void initialisePreBattleView(City city) {
+		window.getContentPane().removeAll();
+		window.add(new PreBattleView(city));
 		window.revalidate();
 		window.repaint();
 	}

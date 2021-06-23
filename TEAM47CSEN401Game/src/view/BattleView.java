@@ -7,6 +7,7 @@ import java.awt.geom.AffineTransform;
 import javax.swing.*;
 
 import engine.*;
+import units.*;
 
 
 public class BattleView extends JPanel {
@@ -16,7 +17,7 @@ public class BattleView extends JPanel {
 	private int midRes = xRes / 2;
 	
 	
-	public BattleView(City city) {
+	public BattleView(City city,Army attackingArmy) {
 		Game game = Launcher.getGame();
 		Player player = Launcher.getPlayer();
 

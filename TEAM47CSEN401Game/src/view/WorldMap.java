@@ -5,6 +5,7 @@ import javax.swing.*;
 import engine.City;
 import engine.Game;
 import engine.Player;
+import units.Archer;
 
 import java.awt.*;
 import java.awt.event.ActionEvent;
@@ -76,8 +77,8 @@ public class WorldMap extends JPanel {
 						// check whether to attack first or large siege or just move the army or will
 						// the attack option be in city view
 						// maybe just show error if not under siege 
-//						Launcher.initialiseBattleView(c);
-						JOptionPane.showMessageDialog(null, "pre-battle view");
+						Launcher.initialisePreBattleView(c);
+//						JOptionPane.showMessageDialog(null, "pre-battle view");
 					}
 				}
 			}
@@ -101,8 +102,8 @@ public class WorldMap extends JPanel {
 					if (c.getName().toLowerCase().contentEquals(name)) {
 						// check whether to attack first or large seige or just move the army or will
 						// the attack option be in city view
-//						Launcher.initialiseBattleView(c);
-						JOptionPane.showMessageDialog(null, "pre-battle view");
+						Launcher.initialisePreBattleView(c);
+//						JOptionPane.showMessageDialog(null, "pre-battle view");
 					}
 				}
 			}
@@ -126,8 +127,8 @@ public class WorldMap extends JPanel {
 					if (c.getName().toLowerCase().contentEquals(name)) {
 						// check whether to attack first or large seige or just move the army or will
 						// the attack option be in city view
-//						Launcher.initialiseBattleView(c);
-						JOptionPane.showMessageDialog(null, "pre-battle view");
+						Launcher.initialisePreBattleView(c);
+//						JOptionPane.showMessageDialog(null, "pre-battle view");
 					}
 				}
 			}
@@ -154,6 +155,13 @@ public class WorldMap extends JPanel {
 //				}catch(Exception ev) {
 //					System.out.println(ev);
 //				}
+				
+				City ci = null;
+				for (City c : game.getAvailableCities()) {
+					if (c.getName().toLowerCase().contentEquals("sparta")) {ci = c;}}
+				// just for test not real values;
+				player.initiateArmy(ci, new Archer(1, 1, 1, 1, 1), "testarmy");
+				System.out.println("added army to sparta");
 			}
 		});
 		this.add(nextTurnButton);
