@@ -14,9 +14,9 @@ import javax.swing.border.CompoundBorder;
 
 public class StationedArmyComponent extends JPanel {
 	
-	public StationedArmyComponent(int armyNo) {
+	public StationedArmyComponent(String armyName) {
 		this.setLayout(new BorderLayout());
-		this.add(new JLabel("Army Number " + armyNo));
+		this.add(new JLabel(armyName));
 		this.setBorder(BorderFactory.createLineBorder(Color.BLACK, 2, true));
 	}
 	

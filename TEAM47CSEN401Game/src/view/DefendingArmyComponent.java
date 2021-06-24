@@ -1,5 +1,6 @@
 package view;
 
+import units.*;
 import javax.swing.*;
 import javax.swing.border.BevelBorder;
 import javax.swing.border.Border;
@@ -9,16 +10,85 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.font.FontRenderContext;
 import java.awt.geom.AffineTransform;
-import engine.*;
+import exceptions.*;
 import javax.swing.border.CompoundBorder;
 
 public class DefendingArmyComponent extends JPanel {
-	public DefendingArmyComponent(String unitName, int level) {
+	public JButton send;
+	public JButton initiate;
+	public DefendingArmyComponent(String unitName, int level, Unit u, City c, JLayeredPane cv) {
 		this.setLayout(new BorderLayout());
 		this.add(new JLabel(unitName + "  Lv " + level),BorderLayout.NORTH);
-		this.add(new JButton("Send"),BorderLayout.CENTER);
-		this.add(new JButton("Initiate"),BorderLayout.SOUTH);
+		send = new JButton("Send to army");
+		initiate = new JButton("Initiate new army");
+		this.add(send,BorderLayout.CENTER);
+		this.add(initiate,BorderLayout.SOUTH);
 		this.setBorder(BorderFactory.createLineBorder(Color.GRAY, 2, true));
+		
+
+		
+		send.addActionListener(new ActionListener() {
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				if(Launcher.getPlayer().getControlledArmies().size()==0) JOptionPane.showMessageDialog(null, "No stationed armies to send unit to");
+				else {
+						JPanel zrc = new JPanel();
+						zrc.setLayout(new GridLayout(0,1,1,1));
+						JButton close = new JButton("Close");
+						zrc.add(close);
+						JScrollPane scrollableZrc = new JScrollPane(zrc);
+						Launcher.setComponent(scrollableZrc ,10, 162, 325, 180, false);
+						scrollableZrc.setBackground(Color.RED);
+						scrollableZrc.setOpaque(true);
+						scrollableZrc.setHorizontalScrollBarPolicy(JScrollPane.HORIZONTAL_SCROLLBAR_NEVER);
+						scrollableZrc.setVerticalScrollBarPolicy(JScrollPane.VERTICAL_SCROLLBAR_ALWAYS);
+						
+						
+						//functionality
+						close.addActionListener(new ActionListener() {
+							@Override
+							public void actionPerformed(ActionEvent e) {
+								cv.remove(zrc);
+								Launcher.initialiseCityView(c);
+							}
+						});
+						
+						for(Army ar : Launcher.getPlayer().getControlledArmies()) {
+							JButton armyButton = new JButton(ar.getName());
+							zrc.add(armyButton);
+							
+							armyButton.addActionListener(new ActionListener() {
+								@Override
+								public void actionPerformed(ActionEvent e) {
+									try {
+										ar.relocateUnit(u);
+									}
+									catch(MaxCapacityException urt) {
+										JOptionPane.showMessageDialog(null, ar.getName() +  " is already at max capactiy");
+									}
+									cv.remove(zrc);
+									Launcher.initialiseCityView(c);
+								}
+							});
+							
+						}
+						
+						cv.add(scrollableZrc,2,0);
+				}
+			}
+		});
+		
+		
+		initiate.addActionListener(new ActionListener() {
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				Launcher.getPlayer().initiateArmy(c, u, "Army Number " + (Launcher.getPlayer().getControlledArmies().size()+1));
+				Launcher.initialiseCityView(c);
+			}
+		});
 	}
+	
+	
+
 
 }

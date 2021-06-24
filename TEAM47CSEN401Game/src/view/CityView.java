@@ -12,7 +12,7 @@ import view.*;
 import buildings.*;
 import units.*;
 
-public class CityView extends JPanel {
+public class CityView extends JLayeredPane {
 	private int xRes = 800;
 	private int yRes = 600;
 	private int midRes = xRes / 2;
@@ -216,8 +216,16 @@ public class CityView extends JPanel {
 			militaryBuildingsPanel.add(new MilitaryBuildingComponent(mu.getClass().getSimpleName(), mu.getLevel(),mu,c));	
 		}
 		
-		for(Unit du : c.getDefendingArmy().getUnits()) {
-			defendingArmyPanel.add(new DefendingArmyComponent(du.getClass().getSimpleName(),du.getLevel()));	
+		for(Unit du : c.getDefendingArmy().getUnits()) {			
+			 defendingArmyPanel.add(new DefendingArmyComponent(du.getClass().getSimpleName(),du.getLevel(),du,c,this));	
+			
+		}
+		
+		for(Army ar : player.getControlledArmies()) {
+			stationedArmiesPanel.add(new StationedArmyComponent(ar.getName()));
+			for(Unit au : ar.getUnits()) {
+				stationedArmiesPanel.add(new StationedArmyUnitComponent(au.getClass().getSimpleName(),au.getLevel()));
+			}
 		}
 		
 		buildFarm.addActionListener(new ActionListener() {
@@ -284,9 +292,11 @@ public class CityView extends JPanel {
 				}
 			}
 		});
-		
-		
-		
+			
+	}
+	
+	public CityView getCityView() {
+		return this;
 	}
 
 }
