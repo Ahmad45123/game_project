@@ -51,6 +51,14 @@ public class Launcher {
 		window.repaint();
 	}
 
+	public static void initialiseGameOverScreen(boolean hasWon) {
+		window.getContentPane().removeAll();
+		window.add(new GameOverView(hasWon));
+		window.revalidate();
+		window.repaint();
+	}
+
+	
 	public static void initialiseWorldMap() {
 		window.getContentPane().removeAll();
 		window.add(new WorldMap());
