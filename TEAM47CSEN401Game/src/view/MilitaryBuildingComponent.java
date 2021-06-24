@@ -22,8 +22,8 @@ import javax.swing.border.CompoundBorder;
 public class MilitaryBuildingComponent extends JPanel {
 	public MilitaryBuildingComponent(String buildingName, int level, Building m, City c) {
 		this.setLayout(new BorderLayout());
-		this.add(new JLabel("Lv " + level),BorderLayout.NORTH);
-		this.add(new JLabel(buildingName),BorderLayout.CENTER);
+		this.add(new JLabel(buildingName + "     Lv " + level),BorderLayout.NORTH);
+		this.add(new JLabel((m.getLevel()==3?"Upgrade Cost: ---":"Upgrade Cost: " + Integer.toString(m.getUpgradeCost()))),BorderLayout.CENTER);
 		JButton upgrade = new JButton("Upgrade");
 		JButton recruit = new JButton("Recruit");
 		this.add(recruit,BorderLayout.EAST);
@@ -37,15 +37,16 @@ public class MilitaryBuildingComponent extends JPanel {
 					Launcher.getPlayer().upgradeBuilding(m);
 					Launcher.initialiseCityView(c);
 				}
+				catch(MaxLevelException c) {
+					JOptionPane.showMessageDialog(null, "Building is already at max level");
+				}
 				catch(NotEnoughGoldException a) {
 					JOptionPane.showMessageDialog(null, "Not enough gold to upgrade");
 				}
 				catch(BuildingInCoolDownException b) {
 					JOptionPane.showMessageDialog(null, "Building is currently in cooldown");
 				}
-				catch(MaxLevelException c) {
-					JOptionPane.showMessageDialog(null, "Building is already at max level");
-				}
+
 			}
 			
 		});

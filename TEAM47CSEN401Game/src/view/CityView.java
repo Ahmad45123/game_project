@@ -74,32 +74,57 @@ public class CityView extends JLayeredPane {
 		JButton buildFarm = new JButton();
 		buildFarm.setText("Build Farm");
 		buildFarm.setMargin(new Insets(0, 0, 0, 0));
-		Launcher.setComponent(buildFarm, 675, 120+10, 105, 80, false);
+		Launcher.setComponent(buildFarm, 675, 120+10, 105, 55, false);
 		this.add(buildFarm);
+		
+		JLabel farmCost = new JLabel("Cost: 1000");
+		farmCost.setFont(new Font("Ariel", Font.BOLD, 14));
+		Launcher.setComponent(farmCost, 725, 160, 80, 80, true);
+		this.add(farmCost);
 		
 		JButton buildMarket = new JButton();
 		buildMarket.setText("Build Market");
 		buildMarket.setMargin(new Insets(0, 0, 0, 0));
-		Launcher.setComponent(buildMarket, 675, 205+10, 105, 80, false);
+		Launcher.setComponent(buildMarket, 675, 205+10, 105, 55, false);
 		this.add(buildMarket);
+		
+		JLabel marketCost = new JLabel("Cost: 1500");
+		marketCost.setFont(new Font("Ariel", Font.BOLD, 14));
+		Launcher.setComponent(marketCost, 725, 245, 80, 80, true);
+		this.add(marketCost);
 		
 		JButton buildArcheryRange  = new JButton();
 		buildArcheryRange.setText("Build Arch-Range");
 		buildArcheryRange.setMargin(new Insets(0, 0, 0, 0));
-		Launcher.setComponent(buildArcheryRange, 675, 290+10, 105, 80, false);
+		Launcher.setComponent(buildArcheryRange, 675, 290+10, 105, 55, false);
 		this.add(buildArcheryRange);
+		
+		JLabel archeryRangeCost = new JLabel("Cost: 1500");
+		archeryRangeCost.setFont(new Font("Ariel", Font.BOLD, 14));
+		Launcher.setComponent(archeryRangeCost, 725, 330, 80, 80, true);
+		this.add(archeryRangeCost);
 		
 		JButton buildBarracks = new JButton();
 		buildBarracks.setText("Build Barracks");
 		buildBarracks.setMargin(new Insets(0, 0, 0, 0));
-		Launcher.setComponent(buildBarracks, 675, 375+10, 105, 80, false);
+		Launcher.setComponent(buildBarracks, 675, 375+10, 105, 55, false);
 		this.add(buildBarracks);
+		
+		JLabel barracksCost = new JLabel("Cost: 2000");
+		barracksCost.setFont(new Font("Ariel", Font.BOLD, 14));
+		Launcher.setComponent(barracksCost, 725, 415, 80, 80, true);
+		this.add(barracksCost);
 		
 		JButton buildStable = new JButton();
 		buildStable.setText("Build Stable");
 		buildStable.setMargin(new Insets(0, 0, 0, 0));
-		Launcher.setComponent(buildStable, 675, 460+10, 105, 80, false);
+		Launcher.setComponent(buildStable, 675, 460+10, 105, 55, false);
 		this.add(buildStable);
+		
+		JLabel stableCost = new JLabel("Cost: 2500");
+		stableCost.setFont(new Font("Ariel", Font.BOLD, 14));
+		Launcher.setComponent(stableCost, 725, 500, 80, 80, true);
+		this.add(stableCost);
 		
 		JLabel defendingArmyLabel = new JLabel();
 		defendingArmyLabel.setText("Defending Army");
