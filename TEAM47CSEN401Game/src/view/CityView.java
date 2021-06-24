@@ -249,7 +249,7 @@ public class CityView extends JLayeredPane {
 		for(Army ar : player.getControlledArmies()) {
 			stationedArmiesPanel.add(new StationedArmyComponent(ar.getName()));
 			for(Unit au : ar.getUnits()) {
-				stationedArmiesPanel.add(new StationedArmyUnitComponent(au.getClass().getSimpleName(),au.getLevel()));
+				stationedArmiesPanel.add(new StationedArmyUnitComponent(au.getClass().getSimpleName(),au.getLevel(), au, c));
 			}
 		}
 		
