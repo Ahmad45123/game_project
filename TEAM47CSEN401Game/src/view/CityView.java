@@ -9,6 +9,8 @@ import java.awt.font.FontRenderContext;
 import java.awt.geom.AffineTransform;
 import engine.*;
 import view.*;
+import buildings.*;
+import units.*;
 
 public class CityView extends JPanel {
 	private int xRes = 800;
@@ -55,11 +57,7 @@ public class CityView extends JPanel {
 		
 		JButton backButton  = new JButton();
 		backButton.setText("Back to World Map");
-		Launcher.setComponent(backButton, 20, 5, 175, 62, false);
-		backButton.addActionListener(new ActionListener() {
-			@Override
-			public void actionPerformed(ActionEvent e){Launcher.initialiseWorldMap();}});
-		
+		Launcher.setComponent(backButton, 20, 5, 175, 62, false);		
 		this.add(backButton);
 		
 		JLabel currentCity = new JLabel();
@@ -67,6 +65,11 @@ public class CityView extends JPanel {
 		currentCity.setFont(new Font("Ariel", Font.BOLD, 20));
 		Launcher.setComponent(currentCity, 50, 35, 200, 100, false);
 		this.add(currentCity);
+		
+		JButton nextTurn = new JButton();
+		nextTurn.setText("Next Turn");
+		Launcher.setComponent(nextTurn, 280, 75, 130, 35, false);
+		this.add(nextTurn);
 		
 		JButton buildFarm = new JButton();
 		buildFarm.setText("Build Farm");
@@ -108,19 +111,19 @@ public class CityView extends JPanel {
 		JScrollPane scrollableDefendingArmyPanel = new JScrollPane(defendingArmyPanel);
 		scrollableDefendingArmyPanel.setBackground(Color.RED);
 		defendingArmyPanel.setLayout(new GridLayout(3,3,10,10));
-		defendingArmyPanel.add(new DefendingArmyComponent("Archer",1));
-		defendingArmyPanel.add(new DefendingArmyComponent("Archer",1));
-		defendingArmyPanel.add(new DefendingArmyComponent("Archer",1));
-		defendingArmyPanel.add(new DefendingArmyComponent("Archer",1));
-		defendingArmyPanel.add(new DefendingArmyComponent("Archer",1));
-		defendingArmyPanel.add(new DefendingArmyComponent("Archer",1));	
+//		defendingArmyPanel.add(new DefendingArmyComponent("Archer",1));
+//		defendingArmyPanel.add(new DefendingArmyComponent("Archer",1));
+//		defendingArmyPanel.add(new DefendingArmyComponent("Archer",1));
+//		defendingArmyPanel.add(new DefendingArmyComponent("Archer",1));
+//		defendingArmyPanel.add(new DefendingArmyComponent("Archer",1));
+//		defendingArmyPanel.add(new DefendingArmyComponent("Archer",1));	
 		scrollableDefendingArmyPanel.setHorizontalScrollBarPolicy(JScrollPane.HORIZONTAL_SCROLLBAR_ALWAYS);
 		scrollableDefendingArmyPanel.setVerticalScrollBarPolicy(JScrollPane.VERTICAL_SCROLLBAR_ALWAYS);
 		Launcher.setComponent(scrollableDefendingArmyPanel, 10, 162, 325, 180, false);
 		this.add(scrollableDefendingArmyPanel);
 		
 		JLabel buildingsLabel = new JLabel();
-		buildingsLabel.setText("Buildings");
+		buildingsLabel.setText("Economic Buildings");
 		buildingsLabel.setFont(new Font("Ariel", Font.BOLD, 20));
 		Launcher.setComponent(buildingsLabel, 500, 100, 200, 80, true);
 		this.add(buildingsLabel);
@@ -129,14 +132,14 @@ public class CityView extends JPanel {
 		JScrollPane scrollableBuildingsPanel = new JScrollPane(buildingsPanel);
 		scrollableBuildingsPanel.setBackground(Color.BLUE);
 		buildingsPanel.setLayout(new GridLayout(3,3,5,5));
-		buildingsPanel.add(new EconomicalBuildingComponent("Farm",1));
-		buildingsPanel.add(new EconomicalBuildingComponent("Farm",1));
-		buildingsPanel.add(new EconomicalBuildingComponent("Farm",1));
-		buildingsPanel.add(new EconomicalBuildingComponent("Farm",1));
-		buildingsPanel.add(new EconomicalBuildingComponent("Farm",1));
-		buildingsPanel.add(new EconomicalBuildingComponent("Farm",1));
-		buildingsPanel.add(new EconomicalBuildingComponent("Farm",1));
-		buildingsPanel.add(new EconomicalBuildingComponent("Farm",1));
+//		buildingsPanel.add(new EconomicalBuildingComponent("Farm",1));
+//		buildingsPanel.add(new EconomicalBuildingComponent("Farm",1));
+//		buildingsPanel.add(new EconomicalBuildingComponent("Farm",1));
+//		buildingsPanel.add(new EconomicalBuildingComponent("Farm",1));
+//		buildingsPanel.add(new EconomicalBuildingComponent("Farm",1));
+//		buildingsPanel.add(new EconomicalBuildingComponent("Farm",1));
+//		buildingsPanel.add(new EconomicalBuildingComponent("Farm",1));
+//		buildingsPanel.add(new EconomicalBuildingComponent("Farm",1));
 		scrollableBuildingsPanel.setHorizontalScrollBarPolicy(JScrollPane.HORIZONTAL_SCROLLBAR_ALWAYS);
 		scrollableBuildingsPanel.setVerticalScrollBarPolicy(JScrollPane.VERTICAL_SCROLLBAR_ALWAYS);
 		Launcher.setComponent(scrollableBuildingsPanel, 345, 162, 325, 180, false);
@@ -152,16 +155,16 @@ public class CityView extends JPanel {
 		JScrollPane scrollableStationedArmiesPanel = new JScrollPane(stationedArmiesPanel);
 		scrollableStationedArmiesPanel.setBackground(Color.YELLOW);
 		stationedArmiesPanel.setLayout(new GridLayout(0,1,5,5));
-		stationedArmiesPanel.add(new StationedArmyComponent(1));
-		stationedArmiesPanel.add(new StationedArmyUnitComponent("Archer",1));
-		stationedArmiesPanel.add(new StationedArmyUnitComponent("Archer",1));
-		stationedArmiesPanel.add(new StationedArmyUnitComponent("Archer",1));
-		stationedArmiesPanel.add(new StationedArmyUnitComponent("Archer",1));
-		stationedArmiesPanel.add(new StationedArmyComponent(2));
-		stationedArmiesPanel.add(new StationedArmyUnitComponent("Archer",1));
-		stationedArmiesPanel.add(new StationedArmyUnitComponent("Archer",1));
-		stationedArmiesPanel.add(new StationedArmyUnitComponent("Archer",1));
-		stationedArmiesPanel.add(new StationedArmyUnitComponent("Archer",1));
+//		stationedArmiesPanel.add(new StationedArmyComponent(1));
+//		stationedArmiesPanel.add(new StationedArmyUnitComponent("Archer",1));
+//		stationedArmiesPanel.add(new StationedArmyUnitComponent("Archer",1));
+//		stationedArmiesPanel.add(new StationedArmyUnitComponent("Archer",1));
+//		stationedArmiesPanel.add(new StationedArmyUnitComponent("Archer",1));
+//		stationedArmiesPanel.add(new StationedArmyComponent(2));
+//		stationedArmiesPanel.add(new StationedArmyUnitComponent("Archer",1));
+//		stationedArmiesPanel.add(new StationedArmyUnitComponent("Archer",1));
+//		stationedArmiesPanel.add(new StationedArmyUnitComponent("Archer",1));
+//		stationedArmiesPanel.add(new StationedArmyUnitComponent("Archer",1));
 		scrollableStationedArmiesPanel.setHorizontalScrollBarPolicy(JScrollPane.HORIZONTAL_SCROLLBAR_ALWAYS);
 		scrollableStationedArmiesPanel.setVerticalScrollBarPolicy(JScrollPane.VERTICAL_SCROLLBAR_ALWAYS);
 		Launcher.setComponent(scrollableStationedArmiesPanel, 10, 375, 325, 180, false);
@@ -176,15 +179,111 @@ public class CityView extends JPanel {
 		JPanel militaryBuildingsPanel = new JPanel();
 		JScrollPane scrollableMilitaryBuildingsPanel = new JScrollPane(militaryBuildingsPanel);
 		militaryBuildingsPanel.setLayout(new GridLayout(3,3,5,5));
-		militaryBuildingsPanel.add(new MilitaryBuildingComponent("Stable", 2));
-		militaryBuildingsPanel.add(new MilitaryBuildingComponent("Stable", 2));
-		militaryBuildingsPanel.add(new MilitaryBuildingComponent("Stable", 2));
-		militaryBuildingsPanel.add(new MilitaryBuildingComponent("Stable", 2));
+//		militaryBuildingsPanel.add(new MilitaryBuildingComponent("Stable", 2));
+//		militaryBuildingsPanel.add(new MilitaryBuildingComponent("Stable", 2));
+//		militaryBuildingsPanel.add(new MilitaryBuildingComponent("Stable", 2));
+//		militaryBuildingsPanel.add(new MilitaryBuildingComponent("Stable", 2));
 		scrollableMilitaryBuildingsPanel.setBackground(Color.GREEN);
 		scrollableMilitaryBuildingsPanel.setHorizontalScrollBarPolicy(JScrollPane.HORIZONTAL_SCROLLBAR_ALWAYS);
 		scrollableMilitaryBuildingsPanel.setVerticalScrollBarPolicy(JScrollPane.VERTICAL_SCROLLBAR_ALWAYS);
 		Launcher.setComponent(scrollableMilitaryBuildingsPanel, 345, 375, 325, 180, false);
 		this.add(scrollableMilitaryBuildingsPanel);
+		
+		
+		//functionality 
+		
+		backButton.addActionListener(new ActionListener() {
+			@Override
+			public void actionPerformed(ActionEvent e){
+				Launcher.initialiseWorldMap();
+			}
+		});
+		
+		nextTurn.addActionListener(new ActionListener(){
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				game.endTurn();
+				Launcher.initialiseCityView(c);
+			}
+		});
+		
+		
+		for(EconomicBuilding bu : c.getEconomicalBuildings()) {
+			buildingsPanel.add(new EconomicalBuildingComponent(bu.getClass().getSimpleName(),bu.getLevel(),bu,c));
+		}
+		
+		for(MilitaryBuilding mu : c.getMilitaryBuildings()) {
+			militaryBuildingsPanel.add(new MilitaryBuildingComponent(mu.getClass().getSimpleName(), mu.getLevel(),mu,c));	
+		}
+		
+		for(Unit du : c.getDefendingArmy().getUnits()) {
+			defendingArmyPanel.add(new DefendingArmyComponent(du.getClass().getSimpleName(),du.getLevel()));	
+		}
+		
+		buildFarm.addActionListener(new ActionListener() {
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				try {
+					player.build("Farm", c.getName());
+					Launcher.initialiseCityView(c);
+				}
+				catch (Exception excep) {
+					JOptionPane.showMessageDialog(null, "Not enough gold to build");
+				}
+			}
+		});
+		
+		buildMarket.addActionListener(new ActionListener() {
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				try {
+					player.build("Market", c.getName());
+					Launcher.initialiseCityView(c);
+				}
+				catch (Exception excep) {
+					JOptionPane.showMessageDialog(null, "Not enough gold to build");
+				}
+			}
+		});
+		
+		buildArcheryRange.addActionListener(new ActionListener() {
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				try {
+					player.build("ArcheryRange", c.getName());
+					Launcher.initialiseCityView(c);
+				}
+				catch (Exception excep) {
+					JOptionPane.showMessageDialog(null, "Not enough gold to build");
+				}
+			}
+		});
+		
+		buildBarracks.addActionListener(new ActionListener() {
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				try {
+					player.build("Barracks", c.getName());
+					Launcher.initialiseCityView(c);
+				}
+				catch (Exception excep) {
+					JOptionPane.showMessageDialog(null, "Not enough gold to build");
+				}
+			}
+		});
+		
+		buildStable.addActionListener(new ActionListener() {
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				try {
+					player.build("Stable", c.getName());
+					Launcher.initialiseCityView(c);
+				}
+				catch (Exception excep) {
+					JOptionPane.showMessageDialog(null, "Not enough gold to build");
+				}
+			}
+		});
 		
 		
 		
