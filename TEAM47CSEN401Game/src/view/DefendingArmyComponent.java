@@ -18,7 +18,7 @@ public class DefendingArmyComponent extends JPanel {
 	public JButton initiate;
 	public DefendingArmyComponent(String unitName, int level, Unit u, City c, JLayeredPane cv) {
 		this.setLayout(new BorderLayout());
-		this.add(new JLabel(unitName + "  Lv " + level),BorderLayout.NORTH);
+		this.add(new JLabel(unitName + "  Lv " + level + " Soldier Count: " + u.getCurrentSoldierCount() + "/" + u.getMaxSoldierCount()),BorderLayout.NORTH);
 		send = new JButton("Send to army");
 		initiate = new JButton("Initiate new army");
 		this.add(send,BorderLayout.CENTER);
@@ -33,7 +33,7 @@ public class DefendingArmyComponent extends JPanel {
 				if(Launcher.getPlayer().getControlledArmies().size()==0) JOptionPane.showMessageDialog(null, "No stationed armies to send unit to");
 				else {
 						JPanel zrc = new JPanel();
-						zrc.setLayout(new GridLayout(0,1,1,1));
+						zrc.setLayout(new GridLayout(0,1,10,10));
 						JButton close = new JButton("Close");
 						zrc.add(close);
 						JScrollPane scrollableZrc = new JScrollPane(zrc);

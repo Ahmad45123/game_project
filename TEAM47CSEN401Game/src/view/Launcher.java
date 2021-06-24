@@ -41,6 +41,7 @@ public class Launcher {
 		window.setSize(xRes + insets.left + insets.right, yRes + insets.top + insets.bottom);
 		initialiseStartScreen();
 		window.setVisible(true);
+		
 	}
 
 	public static void initialiseStartScreen() {
