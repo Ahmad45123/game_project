@@ -13,9 +13,9 @@ import buildings.*;
 import units.*;
 
 public class CityView extends JLayeredPane {
-	private int xRes = 1280;
-	private int yRes = 720;
-	private int midRes = xRes / 2;
+	private int xRes = Launcher.getxRes();
+	private int yRes = Launcher.getyRes();
+	private int midRes = Launcher.getMidRes();
 
 	public CityView(City c) {
 		

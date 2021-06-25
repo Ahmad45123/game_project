@@ -14,9 +14,9 @@ import units.*;
 
 public class PreBattleView extends JPanel {
 	// todo universal const for res
-	private int xRes = 800;
-	private int yRes = 600;
-	private int midRes = xRes / 2;
+	private int xRes = Launcher.getxRes();
+	private int yRes = Launcher.getyRes();
+	private int midRes = Launcher.getMidRes();
 	private JPanel armiesPanel;
 	private JScrollPane scrollableArmiesPanel;
 	City city;

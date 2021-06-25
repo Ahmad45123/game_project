@@ -12,7 +12,7 @@ import units.*;
 public class Launcher {
 	private static int xRes = 1280;
 	private static int yRes = 720;
-	private static int midRes = xRes / 2;
+	private static int midRes = getxRes() / 2;
 	private static JFrame window;
 	private static Game game;
 	private static Player player;
@@ -37,7 +37,7 @@ public class Launcher {
 		window.setTitle("Team 47 Game");
 		window.setResizable(false);
 		window.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
-		window.setSize(xRes, yRes );
+		window.setSize(getxRes(), getyRes() );
 		initialiseStartScreen();
 		window.setVisible(true);
 		
@@ -108,6 +108,18 @@ public class Launcher {
 
 	public static void setPlayer(Player p) {
 		player = p;
+	}
+
+	public static int getxRes() {
+		return xRes;
+	}
+
+	public static int getyRes() {
+		return yRes;
+	}
+
+	public static int getMidRes() {
+		return midRes;
 	}
 
 }

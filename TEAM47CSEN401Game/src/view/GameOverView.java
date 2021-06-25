@@ -9,9 +9,9 @@ import java.awt.geom.AffineTransform;
 import engine.*;
 
 public class GameOverView extends JPanel {
-	private int xRes = 800;
-	private int yRes = 600;
-	private int midRes = xRes / 2;
+	private int xRes = Launcher.getxRes();
+	private int yRes = Launcher.getyRes();
+	private int midRes = Launcher.getMidRes();
 
 	
 	public GameOverView(boolean hasWon) {
