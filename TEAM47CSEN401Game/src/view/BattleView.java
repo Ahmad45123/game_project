@@ -18,6 +18,8 @@ public class BattleView extends JPanel {
 	
 	
 	public BattleView(City city,Army attackingArmy) {
+		assert(city.getDefendingArmy() != attackingArmy);// should never happen
+		
 		Game game = Launcher.getGame();
 		Player player = Launcher.getPlayer();
 

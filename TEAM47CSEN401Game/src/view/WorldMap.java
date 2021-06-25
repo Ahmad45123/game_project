@@ -59,91 +59,114 @@ public class WorldMap extends JPanel {
 		Launcher.setComponent(goldCountLabel, 5, 0, 300, 1050, false);
 		this.add(goldCountLabel);
 
-		JButton romeButton = new JButton("Rome");
-		Launcher.setComponent(romeButton, 200, 100, 100, 50, true);
-		romeButton.addActionListener(new ActionListener() {
-			@Override
-			public void actionPerformed(ActionEvent e) {
-				String name = romeButton.getText().toLowerCase();
-				for (City c : player.getControlledCities()) {
-					if (c.getName().toLowerCase().equals(name)) {
-						Launcher.initialiseCityView(c);
-						return;
-					}
-				}
+//		JButton romeButton = new JButton("Rome");
+//		Launcher.setComponent(romeButton, 200, 100, 100, 50, true);
+//		romeButton.addActionListener(new ActionListener() {
+//			@Override
+//			public void actionPerformed(ActionEvent e) {
+//				String name = romeButton.getText().toLowerCase();
+//				for (City c : player.getControlledCities()) {
+//					if (c.getName().toLowerCase().equals(name)) {
+//						Launcher.initialiseCityView(c);
+//						return;
+//					}
+//				}
+//
+//				for (City c : game.getAvailableCities()) {
+//					if (c.getName().toLowerCase().contentEquals(name)) {
+//						// check whether to attack first or large siege or just move the army or will
+//						// the attack option be in city view
+//						// maybe just show error if not under siege 
+//						Launcher.initialisePreBattleView(c);
+////						JOptionPane.showMessageDialog(null, "pre-battle view");
+//					}
+//				}
+//			}
+//		});
+//		this.add(romeButton);
+		City cairoCity = null , romeCity = null , spartaCity =null;
+		for (City c : game.getAvailableCities()) {
+			if (c.getName().toLowerCase().contentEquals("cairo"))
+				cairoCity = c;
+			else if (c.getName().toLowerCase().contentEquals("rome"))
+				romeCity = c;
+			else if (c.getName().toLowerCase().contentEquals("sparta"))
+				spartaCity = c;
 
-				for (City c : game.getAvailableCities()) {
-					if (c.getName().toLowerCase().contentEquals(name)) {
-						// check whether to attack first or large siege or just move the army or will
-						// the attack option be in city view
-						// maybe just show error if not under siege 
-						Launcher.initialisePreBattleView(c);
-//						JOptionPane.showMessageDialog(null, "pre-battle view");
-					}
-				}
-			}
-		});
-		this.add(romeButton);
-
-		JButton spartaButton = new JButton("Sparta");
-		Launcher.setComponent(spartaButton, 400, 200, 100, 50, true);
-		spartaButton.addActionListener(new ActionListener() {
-			@Override
-			public void actionPerformed(ActionEvent e) {
-				String name = spartaButton.getText().toLowerCase();
-				for (City c : player.getControlledCities()) {
-					if (c.getName().toLowerCase().equals(name)) {
-						Launcher.initialiseCityView(c);
-						return;
-					}
-				}
-
-				for (City c : game.getAvailableCities()) {
-					if (c.getName().toLowerCase().contentEquals(name)) {
-						// check whether to attack first or large seige or just move the army or will
-						// the attack option be in city view
-						Launcher.initialisePreBattleView(c);
-//						JOptionPane.showMessageDialog(null, "pre-battle view");
-					}
-				}
-			}
-		});
-		this.add(spartaButton);
-
-		JButton cairoButton = new JButton("Cairo");
-		Launcher.setComponent(cairoButton, 600, 340, 100, 50, true);
-		cairoButton.addActionListener(new ActionListener() {
-			@Override
-			public void actionPerformed(ActionEvent e) {
-				String name = cairoButton.getText().toLowerCase();
-				for (City c : player.getControlledCities()) {
-					if (c.getName().toLowerCase().equals(name)) {
-						Launcher.initialiseCityView(c);
-						return;
-					}
-				}
-
-				for (City c : game.getAvailableCities()) {
-					if (c.getName().toLowerCase().contentEquals(name)) {
-						// check whether to attack first or large seige or just move the army or will
-						// the attack option be in city view
-						Launcher.initialisePreBattleView(c);
-//						JOptionPane.showMessageDialog(null, "pre-battle view");
-					}
-				}
-			}
-		});
-		this.add(cairoButton);
+		}
+		assert(cairoCity != null && romeCity != null && spartaCity != null);
+		
+		
+		
+		WorldMapCitySubComponent romePanel = new WorldMapCitySubComponent(romeCity, this);
+		Launcher.setComponent(romePanel, xRes/6, 100, 210, 50, true);
+		this.add(romePanel);
+		
+		WorldMapCitySubComponent spartaPanel = new WorldMapCitySubComponent(spartaCity, this);
+		Launcher.setComponent(spartaPanel, xRes/2, 100, 210, 50, true);
+		this.add(spartaPanel);
+		
+		WorldMapCitySubComponent cairoPanel = new WorldMapCitySubComponent(cairoCity, this);
+		Launcher.setComponent(cairoPanel, 5*xRes/6, 100, 210, 50, true);
+		this.add(cairoPanel);
+//		
+//		
+//		JButton spartaButton = new JButton("Sparta");
+//		Launcher.setComponent(spartaButton, 400, 200, 100, 50, true);
+//		spartaButton.addActionListener(new ActionListener() {
+//			@Override
+//			public void actionPerformed(ActionEvent e) {
+//				String name = spartaButton.getText().toLowerCase();
+//				for (City c : player.getControlledCities()) {
+//					if (c.getName().toLowerCase().equals(name)) {
+//						Launcher.initialiseCityView(c);
+//						return;
+//					}
+//				}
+//
+//				for (City c : game.getAvailableCities()) {
+//					if (c.getName().toLowerCase().contentEquals(name)) {
+//						// check whether to attack first or large seige or just move the army or will
+//						// the attack option be in city view
+//						Launcher.initialisePreBattleView(c);
+////						JOptionPane.showMessageDialog(null, "pre-battle view");
+//					}
+//				}
+//			}
+//		});
+//		this.add(spartaButton);
+//
+//		JButton cairoButton = new JButton("Cairo");
+//		Launcher.setComponent(cairoButton, 600, 340, 100, 50, true);
+//		cairoButton.addActionListener(new ActionListener() {
+//			@Override
+//			public void actionPerformed(ActionEvent e) {
+//				String name = cairoButton.getText().toLowerCase();
+//				for (City c : player.getControlledCities()) {
+//					if (c.getName().toLowerCase().equals(name)) {
+//						Launcher.initialiseCityView(c);
+//						return;
+//					}
+//				}
+//
+//				for (City c : game.getAvailableCities()) {
+//					if (c.getName().toLowerCase().contentEquals(name)) {
+//						// check whether to attack first or large seige or just move the army or will
+//						// the attack option be in city view
+//						Launcher.initialisePreBattleView(c);
+////						JOptionPane.showMessageDialog(null, "pre-battle view");
+//					}
+//				}
+//			}
+//		});
+//		this.add(cairoButton);
 
 		JButton nextTurnButton = new JButton("Next Turn");
 		Launcher.setComponent(nextTurnButton, 680, 500, 100, 50, true);
 		nextTurnButton.addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				
-				
-				
-				
+
 				// JUST FOR TESTING
 				// add units
 //				try {
@@ -155,19 +178,17 @@ public class WorldMap extends JPanel {
 //				}catch(Exception ev) {
 //					System.out.println(ev);
 //				}
-				
-				City ci = null;
-				for (City c : game.getAvailableCities()) {
-					if (c.getName().toLowerCase().contentEquals("sparta")) {ci = c;}}
-				// just for test not real values;
-				player.initiateArmy(ci, new Archer(1, 1, 1, 1, 1), "testarmy");
-				System.out.println("added army to sparta");
+
+//				City ci = null;
+//				for (City c : game.getAvailableCities()) {
+//					if (c.getName().toLowerCase().contentEquals("sparta")) {ci = c;}}
+//				// just for test not real values;
+//				player.initiateArmy(ci, new Archer(1, 1, 1, 1, 1), "testarmy");
+//				System.out.println("added army to sparta");
 			}
 		});
 		this.add(nextTurnButton);
-		
-		
-		
+
 		JButton ArmyListButton = new JButton("ArmyListview");
 		Launcher.setComponent(ArmyListButton, 550, 500, 100, 50, true);
 		ArmyListButton.addActionListener(new ActionListener() {
@@ -177,7 +198,12 @@ public class WorldMap extends JPanel {
 			}
 		});
 		this.add(ArmyListButton);
-		
+
+	}
+
+	public void chooseCity(City city) {
+		// TODO Auto-generated method stub
+		System.out.println("chose: " + city.getName());
 
 	}
 
