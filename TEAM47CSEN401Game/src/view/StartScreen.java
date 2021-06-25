@@ -9,8 +9,8 @@ import java.awt.geom.AffineTransform;
 import engine.*;
 
 public class StartScreen extends JPanel {
-	private int xRes = 800;
-	private int yRes = 600;
+	private int xRes = 1280;
+	private int yRes = 720;
 	private int midRes = xRes / 2;
 
 	public StartScreen() {
@@ -27,7 +27,7 @@ public class StartScreen extends JPanel {
 		// int textheight = (int)(font.getStringBounds(text, frc).getHeight());
 
 		JButton startButton = new JButton("Start");
-		Launcher.setComponent(startButton, midRes , 480, 200, 50,true);
+		Launcher.setComponent(startButton, midRes , 480+50, 200, 50,true);
 		this.add(startButton);
 
 		JLabel startMenu = new JLabel();
@@ -60,19 +60,19 @@ public class StartScreen extends JPanel {
 		JLabel karimName = new JLabel();
 		karimName.setText("Karim ElMosalamy 49-4884");
 		karimName.setFont(new Font("Ariel", Font.BOLD, 17));
-		Launcher.setComponent(karimName, 0, 30, 300, 880,false);
+		Launcher.setComponent(karimName, 0, 30, 300, 880+270,false);
 		this.add(karimName);
 
 		JLabel ahmedName = new JLabel();
 		ahmedName.setText("Ahmed Mamdooh 49-4934");
 		ahmedName.setFont(new Font("Ariel", Font.BOLD, 17));
-		Launcher.setComponent(ahmedName, 0, 30, 300, 930,false);
+		Launcher.setComponent(ahmedName, 0, 30, 300, 930+270,false);
 		this.add(ahmedName);
 
 		JLabel noureldinName = new JLabel();
 		noureldinName.setText("Noureldin Shaker 49-7911");
 		noureldinName.setFont(new Font("Ariel", Font.BOLD, 17));
-		Launcher.setComponent(noureldinName, 0, 30, 300, 980,false);
+		Launcher.setComponent(noureldinName, 0, 30, 300, 980+270,false);
 		this.add(noureldinName);
 
 		// Smooth transition between start screen and world map and included error

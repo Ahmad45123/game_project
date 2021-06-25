@@ -10,8 +10,8 @@ import engine.*;
 import units.*;
 
 public class Launcher {
-	private static int xRes = 800;
-	private static int yRes = 600;
+	private static int xRes = 1280;
+	private static int yRes = 720;
 	private static int midRes = xRes / 2;
 	private static JFrame window;
 	private static Game game;
@@ -37,8 +37,7 @@ public class Launcher {
 		window.setTitle("Team 47 Game");
 		window.setResizable(false);
 		window.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
-		Insets insets = window.getInsets();
-		window.setSize(xRes + insets.left + insets.right, yRes + insets.top + insets.bottom);
+		window.setSize(xRes, yRes );
 		initialiseStartScreen();
 		window.setVisible(true);
 		

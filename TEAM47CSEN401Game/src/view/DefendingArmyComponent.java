@@ -37,7 +37,7 @@ public class DefendingArmyComponent extends JPanel {
 						JButton close = new JButton("Close");
 						zrc.add(close);
 						JScrollPane scrollableZrc = new JScrollPane(zrc);
-						Launcher.setComponent(scrollableZrc ,10, 162, 325, 180, false);
+						Launcher.setComponent(scrollableZrc , 0, 162, 550, 230, false);
 						scrollableZrc.setBackground(Color.RED);
 						scrollableZrc.setOpaque(true);
 						scrollableZrc.setHorizontalScrollBarPolicy(JScrollPane.HORIZONTAL_SCROLLBAR_NEVER);
