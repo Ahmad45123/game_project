@@ -29,6 +29,7 @@ public class WorldMapCitySubComponent extends JPanel {
 		player = Launcher.getPlayer();
 
 		this.setLayout(null);
+//		this.setBorder(BorderFactory.createLineBorder(Color.black));
 //		this.add(new JLabel("Name: " + c.getName()), BorderLayout.CENTER);
 
 		JButton cityButton = new JButton(c.getName());
