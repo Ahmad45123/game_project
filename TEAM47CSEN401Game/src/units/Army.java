@@ -13,7 +13,17 @@ public class Army{
 	private String currentLocation;
 	private final int maxToHold=10;
 	private String name;
-
+	
+	public Army(String currentLocation) {
+		this.currentLocation=currentLocation;
+		currentStatus=Status.IDLE;
+		units=new ArrayList<Unit>();
+		distancetoTarget=-1;
+		target="";
+		
+	}
+	
+	
 	public Army(String currentLocation,String name) {
 		this.currentLocation=currentLocation;
 		currentStatus=Status.IDLE;

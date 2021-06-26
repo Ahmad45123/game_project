@@ -320,8 +320,6 @@ public class CityView extends JLayeredPane {
 			
 	}
 	
-	public CityView getCityView() {
-		return this;
-	}
+	
 
 }

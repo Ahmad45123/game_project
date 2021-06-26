@@ -17,6 +17,7 @@ public class BattleView extends JPanel {
 	private int yRes = Launcher.getyRes();
 	private int midRes = Launcher.getMidRes();
 	private int state = 0;
+	private JTextArea battleLog;
 
 	//TODO: bring back proper logic after testing
 	
@@ -90,7 +91,7 @@ public class BattleView extends JPanel {
 		Launcher.setComponent(autoResolve, 680, 10, 120, 70, false);
 		this.add(autoResolve);
 		
-		JTextArea battleLog = new JTextArea();
+		battleLog = new JTextArea();
 		battleLog.setEditable(false);		
 		battleLog.setFont(new Font("Ariel",Font.ITALIC,16));
 		battleLog.append("Battle Log: " + "\n\n");
@@ -105,15 +106,23 @@ public class BattleView extends JPanel {
 		
 		//functionality
 		for(Unit au : attackingArmy.getUnits()) {
-			attackingArmyPanel.add(new AttackingUnitComponent(au));
+			attackingArmyPanel.add(new AttackingUnitComponent(au, this));
 		}
 		
 		for(Unit du : defendingArmy.getUnits()) {
-			defendingArmyPanel.add(new DefendingUnitComponent(du));
+			defendingArmyPanel.add(new DefendingUnitComponent(du, this));
 		}
 		
 		//(int) (Math.random()*attackingArmy.getUnits().size())
 		//(int) (Math.random()*defendingArmy.getUnits().size())
 		
+	}
+	
+	public int getState() {
+		return this.state;
+	}
+	
+	public JTextArea getBattleLog() {
+		return this.battleLog;
 	}
 }

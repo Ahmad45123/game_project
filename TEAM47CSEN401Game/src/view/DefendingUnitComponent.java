@@ -12,7 +12,7 @@ import units.*;
 
 public class DefendingUnitComponent extends JPanel {
 	
-	public DefendingUnitComponent(Unit z) {
+	public DefendingUnitComponent(Unit z,BattleView bv) {
 		this.setLayout(new BorderLayout());
 		this.add(new JLabel(z.getClass().getSimpleName()),BorderLayout.NORTH);
 		this.add(new JLabel("Lv " + z.getLevel() + " Soldier Count: " + z.getCurrentSoldierCount() + "/" + z.getMaxSoldierCount()),BorderLayout.CENTER);

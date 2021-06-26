@@ -47,9 +47,9 @@ public class Launcher {
 		spartas.getUnits().add(new Archer(1,50,3,4,5));
 		spartas.getUnits().add(new Infantry(1,50,3,4,5));
 		spartas.getUnits().add(new Cavalry(1,50,3,4,5));
-		//initialiseBattleView(cairos, spartas);
-		//window.setVisible(true);
-		System.out.println((int) (Math.random()*10));
+		initialiseBattleView(cairos, spartas);
+		window.setVisible(true);
+		System.out.println();
 		
 		
 	}

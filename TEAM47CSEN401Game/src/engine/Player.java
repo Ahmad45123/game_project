@@ -119,6 +119,14 @@ public class Player {
 		unit.setParentArmy(army);
 		controlledArmies.add(army);
 	}
+	
+	public void initiateArmy(City city, Unit unit) {
+		Army army = new Army(city.getName());
+		army.getUnits().add(unit);
+		city.getDefendingArmy().getUnits().remove(unit);
+		unit.setParentArmy(army);
+		controlledArmies.add(army);
+	}
 
 	public void laySiege(Army army, City city) throws TargetNotReachedException, FriendlyCityException {
 		if (controlledCities.contains(city))
