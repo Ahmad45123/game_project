@@ -31,8 +31,6 @@ public class WorldMap extends JPanel {
 		Player player = Launcher.getPlayer();
 
 		this.setLayout(null);
-		Insets insets = this.getInsets();
-		FontRenderContext frc = new FontRenderContext(new AffineTransform(), true, true);
 
 		JLabel worldMap = new JLabel();
 		worldMap.setText("World Map");
@@ -89,64 +87,38 @@ public class WorldMap extends JPanel {
 		WorldMapCitySubComponent cairoPanel = new WorldMapCitySubComponent(cairoCity, this);
 		Launcher.setComponent(cairoPanel, 5 * xRes / 6, 100, 210, 50, true);
 		this.add(cairoPanel);
-
-		JLabel cityLabel = new JLabel();
-		cityLabel.setText("City");
-		cityLabel.setFont(new Font("Ariel", Font.BOLD, 17));
-		Launcher.setComponent(cityLabel, 4 * xRes / 6 + 180, 7 * yRes / 12 + 45, 140, 70, true);
-		this.add(cityLabel);
-
+		
 		JLabel armyLabel = new JLabel();
 		armyLabel.setText("Army");
 		armyLabel.setFont(new Font("Ariel", Font.BOLD, 17));
 		Launcher.setComponent(armyLabel, 4 * xRes / 6, 7 * yRes / 12 + 45, 140, 70, true);
 		this.add(armyLabel);
-
-		cityChoice = new WorldMapCityChoiceSubComponent(null, this);
-		Launcher.setComponent(cityChoice, 4 * xRes / 6 + 180, 7 * yRes / 12 + 100, 140, 70, true);
-		this.add(cityChoice);
-
+		
+		JLabel cityLabel = new JLabel();
+		cityLabel.setText("City");
+		cityLabel.setFont(new Font("Ariel", Font.BOLD, 17));
+		Launcher.setComponent(cityLabel, 4 * xRes / 6 + 180, 7 * yRes / 12 + 45, 140, 70, true);
+		this.add(cityLabel);
+		
 		armyChoice = new WorldMapArmyChoiceSubComponent(null, this);
 		Launcher.setComponent(armyChoice, 4 * xRes / 6, 7 * yRes / 12 + 100, 140, 70, true);
 		this.add(armyChoice);
+		
+		cityChoice = new WorldMapCityChoiceSubComponent(null, this);
+		Launcher.setComponent(cityChoice, 4 * xRes / 6 + 180, 7 * yRes / 12 + 100, 140, 70, true);
+		this.add(cityChoice);
 
 		JButton nextTurnButton = new JButton("Next Turn");
 		Launcher.setComponent(nextTurnButton, 940, 610, 100, 50, true);
 		nextTurnButton.addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent e) {
-
-				// JUST FOR TESTING
-				// add units
-//				try {
-//				player.build("archeryrange", "Rome");
 				game.endTurn();
 				Launcher.initialiseWorldMap();
-//				player.recruitUnit("archer", "Rome");
-//				System.out.println("recurited archer");
-//				}catch(Exception ev) {
-//					System.out.println(ev);
-//				}
 
-//				City ci = null;
-//				for (City c : game.getAvailableCities()) {
-//					if (c.getName().toLowerCase().contentEquals("sparta")) {ci = c;}}
-//				// just for test not real values;
-//				player.initiateArmy(ci, new Archer(1, 1, 1, 1, 1), "testarmy");
-//				System.out.println("added army to sparta");
 			}
 		});
 		this.add(nextTurnButton);
-
-//		JButton ArmyListButton = new JButton("ArmyListview");
-//		Launcher.setComponent(ArmyListButton, 550, 500, 100, 50, true);
-//		ArmyListButton.addActionListener(new ActionListener() {
-//			@Override
-//			public void actionPerformed(ActionEvent e) {
-//				Launcher.initialiseArmyListview();
-//			}
-//		});
-//		this.add(ArmyListButton);
 
 		JButton siegeButton = new JButton("Siege");
 		Launcher.setComponent(siegeButton, xRes - 125, 480 + 100, 100, 50, false);
@@ -230,19 +202,19 @@ public class WorldMap extends JPanel {
 		WorldMapArmyList romeArmyList = new WorldMapArmyList(romeArmies, this);
 		JScrollPane romeArmyPanel = new JScrollPane(romeArmyList);
 		romeArmyPanel.setVerticalScrollBarPolicy(JScrollPane.VERTICAL_SCROLLBAR_ALWAYS);
-		Launcher.setComponent(romeArmyPanel, 30, 175, 360, 250, false);
+		Launcher.setComponent(romeArmyPanel, 10, 175, 410, 250, false);
 		this.add(romeArmyPanel);
 
 		WorldMapArmyList spartaArmyList = new WorldMapArmyList(spartaArmies, this);
 		JScrollPane spartaArmyPanel = new JScrollPane(spartaArmyList);
 		spartaArmyPanel.setVerticalScrollBarPolicy(JScrollPane.VERTICAL_SCROLLBAR_ALWAYS);
-		Launcher.setComponent(spartaArmyPanel, 400, 175, 360, 250, false);
+		Launcher.setComponent(spartaArmyPanel, 430, 175, 410, 250, false);
 		this.add(spartaArmyPanel);
 
 		WorldMapArmyList cairoArmyList = new WorldMapArmyList(cairoArmies, this);
 		JScrollPane cairoArmyPanel = new JScrollPane(cairoArmyList);
 		cairoArmyPanel.setVerticalScrollBarPolicy(JScrollPane.VERTICAL_SCROLLBAR_ALWAYS);
-		Launcher.setComponent(cairoArmyPanel, 800, 175, 360, 250, false);
+		Launcher.setComponent(cairoArmyPanel, 850, 175, 410, 250, false);
 		this.add(cairoArmyPanel);
 
 		if (otherArmies.size() > 0) {
@@ -254,7 +226,7 @@ public class WorldMap extends JPanel {
 		WorldMapArmyList otherArmyList = new WorldMapArmyList(otherArmies, this);
 		JScrollPane otherArmyPanel = new JScrollPane(otherArmyList);
 		otherArmyPanel.setVerticalScrollBarPolicy(JScrollPane.VERTICAL_SCROLLBAR_ALWAYS);
-		Launcher.setComponent(otherArmyPanel, 300, 430, 360, 250, false);
+		Launcher.setComponent(otherArmyPanel, 270, 430, 500, 250, false);
 		this.add(otherArmyPanel);
 
 	}

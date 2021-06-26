@@ -50,12 +50,16 @@ public class WorldMapCitySubComponent extends JPanel {
 		this.add(cityButton);
 
 		JTextArea info = new JTextArea(
-				"under siege for " + c.getTurnsUnderSiege() + " turn" + (c.getTurnsUnderSiege() > 1 ? "s" : ""));
+				"Under siege for " + c.getTurnsUnderSiege() + " turn" + (c.getTurnsUnderSiege() > 1 ? "s" : ""));
+		
+
 
 		if (c.getTurnsUnderSiege() == -1) {
-			info = new JTextArea("not under siege");
+			info = new JTextArea("Not under siege");
 		}
 		Launcher.setComponent(info, 0, 30, 140, 20, false);
+		info.setEditable(false);
+		info.setHighlighter(null);
 		this.add(info);
 
 		JButton chooseButton = new JButton("choose");
