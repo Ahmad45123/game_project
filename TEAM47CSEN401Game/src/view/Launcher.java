@@ -38,8 +38,19 @@ public class Launcher {
 		window.setResizable(false);
 		window.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
 		window.setSize(getxRes(), getyRes() );
-		initialiseStartScreen();
-		window.setVisible(true);
+//		initialiseStartScreen();
+		Army cairos = new Army("spartacrib","cairogang");
+		Army spartas = new Army("spartacrib","spartagang");
+		cairos.getUnits().add(new Archer(3,50,3,4,5));
+		cairos.getUnits().add(new Infantry(3,50,3,4,5));
+		cairos.getUnits().add(new Cavalry(3,50,3,4,5));
+		spartas.getUnits().add(new Archer(1,50,3,4,5));
+		spartas.getUnits().add(new Infantry(1,50,3,4,5));
+		spartas.getUnits().add(new Cavalry(1,50,3,4,5));
+		//initialiseBattleView(cairos, spartas);
+		//window.setVisible(true);
+		System.out.println((int) (Math.random()*10));
+		
 		
 	}
 
@@ -72,9 +83,9 @@ public class Launcher {
 		window.repaint();
 	}
 	
-	public static void initialiseBattleView(City city,Army attackingArmy) {
+	public static void initialiseBattleView(Army attackingArmy ,Army defendingArmy) {
 		window.getContentPane().removeAll();
-		window.add(new BattleView(city,attackingArmy));
+		window.add(new BattleView(attackingArmy,defendingArmy));
 		window.revalidate();
 		window.repaint();
 	}

@@ -86,7 +86,7 @@ public class PreBattleView extends JPanel {
 	public void attack(Army a) {
 		// move to battle view
 		System.out.println("attack army called");
-		Launcher.initialiseBattleView(city,a);
+//		Launcher.initialiseBattleView(city,a);
 	}
 
 	public void siege(Army a) {

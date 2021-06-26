@@ -182,7 +182,7 @@ public class WorldMap extends JPanel {
 					JOptionPane.showMessageDialog(null, "army is on its way to the city");
 					return;
 				}
-				Launcher.initialiseBattleView(city, army);
+//				Launcher.initialiseBattleView(city, army);
 			}
 		});
 		this.add(attackButton);
