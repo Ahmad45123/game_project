@@ -17,7 +17,6 @@ import javax.swing.border.CompoundBorder;
 public class WorldMapArmyChoiceSubComponent extends JPanel {
 
 	Army army;
-	
 
 	WorldMap worldmap;
 	Game game;
@@ -60,8 +59,7 @@ public class WorldMapArmyChoiceSubComponent extends JPanel {
 		Launcher.setComponent(infoLabel, 140 / 2, 30, 140, 30, true);
 		this.add(infoLabel);
 	}
-	
-	
+
 	public Army getArmy() {
 		return army;
 	}

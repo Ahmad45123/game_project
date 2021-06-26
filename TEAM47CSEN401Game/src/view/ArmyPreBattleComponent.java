@@ -20,13 +20,13 @@ public class ArmyPreBattleComponent extends JPanel {
 	PreBattleView pbv;
 	boolean active;
 	boolean siegeActive;
-	
-	public ArmyPreBattleComponent(Army a, PreBattleView pbv, boolean attackActive,boolean siegeActive) {
+
+	public ArmyPreBattleComponent(Army a, PreBattleView pbv, boolean attackActive, boolean siegeActive) {
 		army = a;
-		this.pbv =pbv;
+		this.pbv = pbv;
 		this.active = attackActive;
 		this.siegeActive = siegeActive;
-		
+
 		this.setLayout(new BorderLayout());
 		this.add(new JLabel("Name: " + a.getName()), BorderLayout.NORTH);
 //		this.add(new JLabel("Target: " + a.getTarget()),BorderLayout.CENTER);
@@ -41,9 +41,8 @@ public class ArmyPreBattleComponent extends JPanel {
 			});
 			this.add(button, BorderLayout.SOUTH);
 		}
-		
-		
-		if(siegeActive) {
+
+		if (siegeActive) {
 			JButton button = new JButton("siege");
 			button.addActionListener(new ActionListener() {
 				@Override

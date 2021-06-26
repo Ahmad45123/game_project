@@ -21,13 +21,16 @@ public class Launcher {
 	public static void setComponent(Component a, int x, int y, int width, int height, Boolean centered) {
 		if (a.getClass().getName().contains("JLabel")) {
 			JLabel z = (JLabel) a;
-			if(centered) a.setLocation(x - ((int) (z.getFont().getStringBounds(z.getText(), frc).getWidth())) / 2, y);
-			else a.setLocation(x, y);
+			if (centered)
+				a.setLocation(x - ((int) (z.getFont().getStringBounds(z.getText(), frc).getWidth())) / 2, y);
+			else
+				a.setLocation(x, y);
 			a.setSize(width, height);
-		}
-		else{
-			if(centered) a.setLocation(x - width/2, y);
-			else a.setLocation(x, y);
+		} else {
+			if (centered)
+				a.setLocation(x - width / 2, y);
+			else
+				a.setLocation(x, y);
 			a.setSize(width, height);
 		}
 	}
@@ -37,7 +40,7 @@ public class Launcher {
 		window.setTitle("Team 47 Game");
 		window.setResizable(false);
 		window.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
-		window.setSize(getxRes(), getyRes() );
+		window.setSize(getxRes(), getyRes());
 		initialiseStartScreen();
 //		Army cairos = new Army("spartacrib","cairogang");
 //		Army spartas = new Army("spartacrib","spartagang");
@@ -61,8 +64,7 @@ public class Launcher {
 //		spartas.getUnits().add(f);
 //		initialiseBattleView(cairos, spartas);
 		window.setVisible(true);
-		
-		
+
 	}
 
 	public static void initialiseStartScreen() {
@@ -79,42 +81,40 @@ public class Launcher {
 		window.repaint();
 	}
 
-	
 	public static void initialiseWorldMap() {
 		window.getContentPane().removeAll();
 		window.add(new WorldMap());
 		window.revalidate();
 		window.repaint();
 	}
-	
+
 	public static void initialiseCityView(City c) {
 		window.getContentPane().removeAll();
 		window.add(new CityView(c));
 		window.revalidate();
 		window.repaint();
 	}
-	
-	public static void initialiseBattleView(Army attackingArmy ,Army defendingArmy) {
+
+	public static void initialiseBattleView(Army attackingArmy, Army defendingArmy) {
 		window.getContentPane().removeAll();
-		window.add(new BattleView(attackingArmy,defendingArmy));
+		window.add(new BattleView(attackingArmy, defendingArmy));
 		window.revalidate();
 		window.repaint();
 	}
-	
+
 	public static void initialisePreBattleView(City city) {
 		window.getContentPane().removeAll();
 		window.add(new PreBattleView(city));
 		window.revalidate();
 		window.repaint();
 	}
-	
+
 	public static void initialiseArmyListview() {
 		window.getContentPane().removeAll();
 		window.add(new ArmyListview());
 		window.revalidate();
 		window.repaint();
 	}
-	
 
 	public static Game getGame() {
 		return game;
@@ -143,9 +143,9 @@ public class Launcher {
 	public static int getMidRes() {
 		return midRes;
 	}
-	
+
 	public static JFrame getWindow() {
 		return window;
 	}
-	
+
 }

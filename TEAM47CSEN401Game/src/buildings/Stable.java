@@ -15,9 +15,9 @@ public class Stable extends MilitaryBuilding {
 
 	@Override
 	public Unit recruit() throws BuildingInCoolDownException, MaxRecruitedException {
-		if(isCoolDown())
+		if (isCoolDown())
 			throw new BuildingInCoolDownException("Building is cooling down, please wait for the next turn");
-		if(getCurrentRecruit()==getMaxRecruit())
+		if (getCurrentRecruit() == getMaxRecruit())
 			throw new MaxRecruitedException("Max recruited units reached, please wait till next turn. ");
 		setCurrentRecruit(getCurrentRecruit() + 1);
 		if (getLevel() == 1)

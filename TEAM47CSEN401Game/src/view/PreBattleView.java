@@ -25,7 +25,7 @@ public class PreBattleView extends JPanel {
 		Game game = Launcher.getGame();
 		Player player = Launcher.getPlayer();
 		this.city = city;
-		
+
 		this.setLayout(null);
 		Insets insets = this.getInsets();
 		FontRenderContext frc = new FontRenderContext(new AffineTransform(), true, true);
@@ -70,15 +70,17 @@ public class PreBattleView extends JPanel {
 //		scrollableArmiesPanel.setVerticalScrollBarPolicy(JScrollPane.VERTICAL_SCROLLBAR_ALWAYS);
 		Launcher.setComponent(scrollableArmiesPanel, 125, 150, 550, 400, false);
 		this.add(scrollableArmiesPanel);
-		
-		
-		JButton backButton  = new JButton();
+
+		JButton backButton = new JButton();
 		backButton.setText("Back to World Map");
 		Launcher.setComponent(backButton, 20, 5, 175, 62, false);
 		backButton.addActionListener(new ActionListener() {
 			@Override
-			public void actionPerformed(ActionEvent e){Launcher.initialiseWorldMap();}});
-		
+			public void actionPerformed(ActionEvent e) {
+				Launcher.initialiseWorldMap();
+			}
+		});
+
 		this.add(backButton);
 
 	}
@@ -91,9 +93,9 @@ public class PreBattleView extends JPanel {
 
 	public void siege(Army a) {
 		try {
-		Launcher.getPlayer().laySiege(a, city);}
-		catch(Exception excep) {
-			assert(false);
+			Launcher.getPlayer().laySiege(a, city);
+		} catch (Exception excep) {
+			assert (false);
 			// should never happen
 			// only enemy city and friendly armies should appear in this view
 		}

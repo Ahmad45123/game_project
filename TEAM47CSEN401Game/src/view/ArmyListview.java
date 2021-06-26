@@ -65,8 +65,6 @@ public class ArmyListview extends JPanel {
 			allArmies.add(a);
 		}
 
-		
-		
 		updateUnitsArrayList(null);
 
 		JList<String> allArmiesList = new JList<>(l1);
@@ -139,7 +137,7 @@ public class ArmyListview extends JPanel {
 			this.remove(unitsListScroller);
 		unitsListScroller = new JScrollPane(unitsList);
 		unitsListScroller.setPreferredSize(new Dimension(250, 80));
-		
+
 		unitsList.addMouseListener(new MouseAdapter() {
 			public void mouseClicked(MouseEvent evt) {
 				JList list = (JList) evt.getSource();
@@ -153,7 +151,7 @@ public class ArmyListview extends JPanel {
 
 			}
 		});
-		
+
 		Launcher.setComponent(unitsListScroller, 20, 20, xRes / 2 - 40, 300, false);
 		this.add(unitsListScroller);
 

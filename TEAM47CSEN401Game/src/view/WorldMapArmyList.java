@@ -29,14 +29,13 @@ public class WorldMapArmyList extends JPanel {
 
 //		this.setLayout(new BoxLayout(this,BoxLayout.LINE_AXIS));
 		this.setBorder(BorderFactory.createLineBorder(Color.black));
-		this.setLayout(new GridLayout(2,2));
+		this.setLayout(new GridLayout(2, 2));
 //		this.add(new JLabel("Name: " + c.getName()), BorderLayout.CENTER);
 
 //		this.setBorder(BorderFactory.createEtchedBorder(BevelBorder.RAISED));
 
-		
-		for(int i = 0 ; i< ala.size();i++) {
-			WorldMapArmySubComponent wsc = new WorldMapArmySubComponent(ala.get(i),wm);
+		for (int i = 0; i < ala.size(); i++) {
+			WorldMapArmySubComponent wsc = new WorldMapArmySubComponent(ala.get(i), wm);
 //			Launcher.setComponent(wsc, 0, y, width, height, centered);
 //			System.out.println("added componenet");
 			this.add(wsc);

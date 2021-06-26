@@ -14,11 +14,7 @@ import engine.*;
 public class ArmySubview extends JPanel {
 
 	public ArmySubview(Army a) {
-		
-		
-		
-		
-		
+
 	}
 
 }

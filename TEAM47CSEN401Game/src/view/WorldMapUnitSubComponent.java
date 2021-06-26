@@ -19,14 +19,13 @@ import javax.swing.border.CompoundBorder;
 public class WorldMapUnitSubComponent extends JPanel {
 
 	ArrayList<Unit> alu;
-	
 
 	WorldMap worldmap;
 	Game game;
 	Player player;
 
 	public WorldMapUnitSubComponent(ArrayList<Unit> alu, WorldMap wm) {
-	this.alu = alu;
+		this.alu = alu;
 		worldmap = wm;
 
 		game = Launcher.getGame();
@@ -37,12 +36,13 @@ public class WorldMapUnitSubComponent extends JPanel {
 //		this.add(new JLabel("Name: " + c.getName()), BorderLayout.CENTER);
 
 //		this.setBorder(BorderFactory.createEtchedBorder(BevelBorder.RAISED));
-		
-		for(int i = 0; i < alu.size();i++) {
+
+		for (int i = 0; i < alu.size(); i++) {
 			Unit u = alu.get(i);
-			this.add(new JLabel("type: " + u.getClass().getName().substring(6) + "\ncnt: " + u.getCurrentSoldierCount() + "."));
+			this.add(new JLabel(
+					"type: " + u.getClass().getName().substring(6) + "\ncnt: " + u.getCurrentSoldierCount() + "."));
 		}
-		
+
 	}
 
 }

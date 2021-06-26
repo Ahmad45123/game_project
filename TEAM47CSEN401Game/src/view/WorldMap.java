@@ -157,7 +157,7 @@ public class WorldMap extends JPanel {
 					return;
 				Army army = armyChoice.getArmy();
 				City city = cityChoice.getCity();
-				if(city.isUnderSiege()) {
+				if (city.isUnderSiege()) {
 					JOptionPane.showMessageDialog(null, "city is already under siege");
 					return;
 				}
@@ -232,28 +232,25 @@ public class WorldMap extends JPanel {
 		romeArmyPanel.setVerticalScrollBarPolicy(JScrollPane.VERTICAL_SCROLLBAR_ALWAYS);
 		Launcher.setComponent(romeArmyPanel, 30, 175, 360, 250, false);
 		this.add(romeArmyPanel);
-		
-		
+
 		WorldMapArmyList spartaArmyList = new WorldMapArmyList(spartaArmies, this);
 		JScrollPane spartaArmyPanel = new JScrollPane(spartaArmyList);
 		spartaArmyPanel.setVerticalScrollBarPolicy(JScrollPane.VERTICAL_SCROLLBAR_ALWAYS);
 		Launcher.setComponent(spartaArmyPanel, 400, 175, 360, 250, false);
 		this.add(spartaArmyPanel);
-		
+
 		WorldMapArmyList cairoArmyList = new WorldMapArmyList(cairoArmies, this);
 		JScrollPane cairoArmyPanel = new JScrollPane(cairoArmyList);
 		cairoArmyPanel.setVerticalScrollBarPolicy(JScrollPane.VERTICAL_SCROLLBAR_ALWAYS);
 		Launcher.setComponent(cairoArmyPanel, 800, 175, 360, 250, false);
 		this.add(cairoArmyPanel);
-		
-		
-		
-		if(otherArmies.size() > 0) {
+
+		if (otherArmies.size() > 0) {
 			System.out.println("army");
 			System.out.println(otherArmies.get(0).getCurrentLocation());
 			System.out.println(otherArmies.get(0).getDistancetoTarget());
 		}
-		
+
 		WorldMapArmyList otherArmyList = new WorldMapArmyList(otherArmies, this);
 		JScrollPane otherArmyPanel = new JScrollPane(otherArmyList);
 		otherArmyPanel.setVerticalScrollBarPolicy(JScrollPane.VERTICAL_SCROLLBAR_ALWAYS);
