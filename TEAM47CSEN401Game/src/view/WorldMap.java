@@ -93,21 +93,21 @@ public class WorldMap extends JPanel {
 		JLabel cityLabel = new JLabel();
 		cityLabel.setText("City");
 		cityLabel.setFont(new Font("Ariel", Font.BOLD, 17));
-		Launcher.setComponent(cityLabel, 4 * xRes / 6, 7 * yRes / 12 + 45, 140, 70, true);
+		Launcher.setComponent(cityLabel, 4 * xRes / 6 + 180, 7 * yRes / 12 + 45, 140, 70, true);
 		this.add(cityLabel);
 
 		JLabel armyLabel = new JLabel();
 		armyLabel.setText("Army");
 		armyLabel.setFont(new Font("Ariel", Font.BOLD, 17));
-		Launcher.setComponent(armyLabel, 4 * xRes / 6 + 180, 7 * yRes / 12 + 45, 140, 70, true);
+		Launcher.setComponent(armyLabel, 4 * xRes / 6, 7 * yRes / 12 + 45, 140, 70, true);
 		this.add(armyLabel);
 
 		cityChoice = new WorldMapCityChoiceSubComponent(null, this);
-		Launcher.setComponent(cityChoice, 4 * xRes / 6, 7 * yRes / 12 + 100, 140, 70, true);
+		Launcher.setComponent(cityChoice, 4 * xRes / 6 + 180, 7 * yRes / 12 + 100, 140, 70, true);
 		this.add(cityChoice);
 
 		armyChoice = new WorldMapArmyChoiceSubComponent(null, this);
-		Launcher.setComponent(armyChoice, 4 * xRes / 6 + 180, 7 * yRes / 12 + 100, 140, 70, true);
+		Launcher.setComponent(armyChoice, 4 * xRes / 6, 7 * yRes / 12 + 100, 140, 70, true);
 		this.add(armyChoice);
 
 		JButton nextTurnButton = new JButton("Next Turn");
