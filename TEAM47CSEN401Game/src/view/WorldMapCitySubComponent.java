@@ -42,14 +42,17 @@ public class WorldMapCitySubComponent extends JPanel {
 					Launcher.initialiseCityView(city);
 
 				else
-					Launcher.initialisePreBattleView(city);
+					JOptionPane.showMessageDialog(null, "sry u don't ctrl this city");
 
 			}
 		});
-		Launcher.setComponent(cityButton, 0, 0, 140, 50, false);
+		Launcher.setComponent(cityButton, 0, 0, 140, 30, false);
 		this.add(cityButton);
 
-		
+		JTextArea info = new JTextArea("siege: " + (c.getTurnsUnderSiege() == -1 ? "no" : c.getTurnsUnderSiege()));
+		Launcher.setComponent(info, 0, 30, 140, 20, false);
+		this.add(info);
+
 		JButton chooseButton = new JButton("choose");
 		chooseButton.setFont(new Font("Arial", Font.PLAIN, 11));
 		chooseButton.addActionListener(new ActionListener() {

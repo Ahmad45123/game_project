@@ -38,16 +38,16 @@ public class Launcher {
 		window.setResizable(false);
 		window.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
 		window.setSize(getxRes(), getyRes() );
-//		initialiseStartScreen();
-		Army cairos = new Army("spartacrib","cairogang");
-		Army spartas = new Army("spartacrib","spartagang");
-		cairos.getUnits().add(new Archer(3,50,3,4,5));
-		cairos.getUnits().add(new Infantry(3,50,3,4,5));
-		cairos.getUnits().add(new Cavalry(3,50,3,4,5));
-		spartas.getUnits().add(new Archer(1,50,3,4,5));
-		spartas.getUnits().add(new Infantry(1,50,3,4,5));
-		spartas.getUnits().add(new Cavalry(1,50,3,4,5));
-		initialiseBattleView(cairos, spartas);
+		initialiseStartScreen();
+//		Army cairos = new Army("spartacrib","cairogang");
+//		Army spartas = new Army("spartacrib","spartagang");
+//		cairos.getUnits().add(new Archer(3,50,3,4,5));
+//		cairos.getUnits().add(new Infantry(3,50,3,4,5));
+//		cairos.getUnits().add(new Cavalry(3,50,3,4,5));
+//		spartas.getUnits().add(new Archer(1,50,3,4,5));
+//		spartas.getUnits().add(new Infantry(1,50,3,4,5));
+//		spartas.getUnits().add(new Cavalry(1,50,3,4,5));
+//		initialiseBattleView(cairos, spartas);
 		window.setVisible(true);
 		System.out.println();
 		

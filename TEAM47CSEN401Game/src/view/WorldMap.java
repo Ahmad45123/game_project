@@ -13,6 +13,7 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.font.FontRenderContext;
 import java.awt.geom.AffineTransform;
+import java.util.ArrayList;
 
 // purposely dumb design in order to use some exceptions
 
@@ -35,10 +36,10 @@ public class WorldMap extends JPanel {
 
 		JLabel worldMap = new JLabel();
 		worldMap.setText("World Map");
-		worldMap.setFont(new Font("Ariel", Font.BOLD, 28));
+		worldMap.setFont(new Font("Ariel", Font.BOLD, 40));
 		int labelXOffset = midRes;
 		int labelYOffset = 30;
-		Launcher.setComponent(worldMap, labelXOffset, labelYOffset, 150, 50, true);
+		Launcher.setComponent(worldMap, labelXOffset, labelYOffset, 250, 50, true);
 		this.add(worldMap);
 
 		JLabel playerNameLabel = new JLabel();
@@ -156,6 +157,10 @@ public class WorldMap extends JPanel {
 					return;
 				Army army = armyChoice.getArmy();
 				City city = cityChoice.getCity();
+				if(city.isUnderSiege()) {
+					JOptionPane.showMessageDialog(null, "city is already under siege");
+					return;
+				}
 				try {
 					player.laySiege(army, city);
 				} catch (Exception e1) {
@@ -182,7 +187,7 @@ public class WorldMap extends JPanel {
 					JOptionPane.showMessageDialog(null, "army is on its way to the city");
 					return;
 				}
-//				Launcher.initialiseBattleView(city, army);
+				Launcher.initialiseBattleView(city.getDefendingArmy(), army);
 			}
 		});
 		this.add(attackButton);
@@ -203,6 +208,57 @@ public class WorldMap extends JPanel {
 			}
 		});
 		this.add(moveButton);
+
+		// TODO find way to set defending army
+
+		ArrayList<Army> romeArmies = new ArrayList<Army>(), spartaArmies = new ArrayList<Army>(),
+				cairoArmies = new ArrayList<Army>(), otherArmies = new ArrayList<Army>();
+
+		for (int i = 0; i < player.getControlledArmies().size(); i++) {
+			Army a = player.getControlledArmies().get(i);
+			assert (a != null);
+			if (a.getCurrentLocation().contentEquals("Rome"))
+				romeArmies.add(a);
+			else if (a.getCurrentLocation().contentEquals("Sparta"))
+				spartaArmies.add(a);
+			else if (a.getCurrentLocation().contentEquals("Cairo"))
+				cairoArmies.add(a);
+			else
+				otherArmies.add(a);
+		}
+
+		WorldMapArmyList romeArmyList = new WorldMapArmyList(romeArmies, this);
+		JScrollPane romeArmyPanel = new JScrollPane(romeArmyList);
+		romeArmyPanel.setVerticalScrollBarPolicy(JScrollPane.VERTICAL_SCROLLBAR_ALWAYS);
+		Launcher.setComponent(romeArmyPanel, 30, 175, 360, 250, false);
+		this.add(romeArmyPanel);
+		
+		
+		WorldMapArmyList spartaArmyList = new WorldMapArmyList(spartaArmies, this);
+		JScrollPane spartaArmyPanel = new JScrollPane(spartaArmyList);
+		spartaArmyPanel.setVerticalScrollBarPolicy(JScrollPane.VERTICAL_SCROLLBAR_ALWAYS);
+		Launcher.setComponent(spartaArmyPanel, 400, 175, 360, 250, false);
+		this.add(spartaArmyPanel);
+		
+		WorldMapArmyList cairoArmyList = new WorldMapArmyList(cairoArmies, this);
+		JScrollPane cairoArmyPanel = new JScrollPane(cairoArmyList);
+		cairoArmyPanel.setVerticalScrollBarPolicy(JScrollPane.VERTICAL_SCROLLBAR_ALWAYS);
+		Launcher.setComponent(cairoArmyPanel, 800, 175, 360, 250, false);
+		this.add(cairoArmyPanel);
+		
+		
+		
+		if(otherArmies.size() > 0) {
+			System.out.println("army");
+			System.out.println(otherArmies.get(0).getCurrentLocation());
+			System.out.println(otherArmies.get(0).getDistancetoTarget());
+		}
+		
+		WorldMapArmyList otherArmyList = new WorldMapArmyList(otherArmies, this);
+		JScrollPane otherArmyPanel = new JScrollPane(otherArmyList);
+		otherArmyPanel.setVerticalScrollBarPolicy(JScrollPane.VERTICAL_SCROLLBAR_ALWAYS);
+		Launcher.setComponent(otherArmyPanel, 300, 430, 360, 250, false);
+		this.add(otherArmyPanel);
 
 	}
 
