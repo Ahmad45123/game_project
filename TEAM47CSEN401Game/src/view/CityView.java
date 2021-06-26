@@ -135,7 +135,7 @@ public class CityView extends JLayeredPane {
 		JPanel defendingArmyPanel = new JPanel();
 		JScrollPane scrollableDefendingArmyPanel = new JScrollPane(defendingArmyPanel);
 		scrollableDefendingArmyPanel.setBackground(Color.RED);
-		defendingArmyPanel.setLayout(new GridLayout(0,3,10,10));
+		defendingArmyPanel.setLayout(new GridLayout(3,3,10,10));
 //		defendingArmyPanel.add(new DefendingArmyComponent("Archer",1));
 //		defendingArmyPanel.add(new DefendingArmyComponent("Archer",1));
 //		defendingArmyPanel.add(new DefendingArmyComponent("Archer",1));
@@ -156,7 +156,7 @@ public class CityView extends JLayeredPane {
 		JPanel buildingsPanel = new JPanel();
 		JScrollPane scrollableBuildingsPanel = new JScrollPane(buildingsPanel);
 		scrollableBuildingsPanel.setBackground(Color.BLUE);
-		buildingsPanel.setLayout(new GridLayout(0,3,5,5));
+		buildingsPanel.setLayout(new GridLayout(3,3,5,5));
 //		buildingsPanel.add(new EconomicalBuildingComponent("Farm",1));
 //		buildingsPanel.add(new EconomicalBuildingComponent("Farm",1));
 //		buildingsPanel.add(new EconomicalBuildingComponent("Farm",1));
@@ -203,7 +203,7 @@ public class CityView extends JLayeredPane {
 		
 		JPanel militaryBuildingsPanel = new JPanel();
 		JScrollPane scrollableMilitaryBuildingsPanel = new JScrollPane(militaryBuildingsPanel);
-		militaryBuildingsPanel.setLayout(new GridLayout(0,3,5,5));
+		militaryBuildingsPanel.setLayout(new GridLayout(3,3,5,5));
 //		militaryBuildingsPanel.add(new MilitaryBuildingComponent("Stable", 2));
 //		militaryBuildingsPanel.add(new MilitaryBuildingComponent("Stable", 2));
 //		militaryBuildingsPanel.add(new MilitaryBuildingComponent("Stable", 2));
@@ -247,10 +247,13 @@ public class CityView extends JLayeredPane {
 		}
 		
 		for(Army ar : player.getControlledArmies()) {
-			stationedArmiesPanel.add(new StationedArmyComponent(ar.getName()));
-			for(Unit au : ar.getUnits()) {
-				stationedArmiesPanel.add(new StationedArmyUnitComponent(au.getClass().getSimpleName(),au.getLevel(), au, c));
+			if(ar.getCurrentLocation().equals(c.getName())) {
+				stationedArmiesPanel.add(new StationedArmyComponent(ar));
+				for(Unit au : ar.getUnits()) {
+					stationedArmiesPanel.add(new StationedArmyUnitComponent(au.getClass().getSimpleName(),au.getLevel(), au, c));
+				}
 			}
+
 		}
 		
 		buildFarm.addActionListener(new ActionListener() {

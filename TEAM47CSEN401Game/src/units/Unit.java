@@ -20,7 +20,7 @@ public abstract class Unit {
 		this.siegeUpkeep=siegeUpkeep;
 		
 	}
-public  void attack(Unit target) throws FriendlyFireException {
+public void attack(Unit target) throws FriendlyFireException {
 	if(getParentArmy()==target.getParentArmy())
 		throw new FriendlyFireException("Cannot attack a friendly unit");
 }

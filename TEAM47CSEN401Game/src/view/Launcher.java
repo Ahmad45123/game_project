@@ -41,12 +41,24 @@ public class Launcher {
 		initialiseStartScreen();
 //		Army cairos = new Army("spartacrib","cairogang");
 //		Army spartas = new Army("spartacrib","spartagang");
-//		cairos.getUnits().add(new Archer(3,50,3,4,5));
-//		cairos.getUnits().add(new Infantry(3,50,3,4,5));
-//		cairos.getUnits().add(new Cavalry(3,50,3,4,5));
-//		spartas.getUnits().add(new Archer(1,50,3,4,5));
-//		spartas.getUnits().add(new Infantry(1,50,3,4,5));
-//		spartas.getUnits().add(new Cavalry(1,50,3,4,5));
+//		Archer a = new Archer(3,50,3,4,5);
+//		a.setParentArmy(cairos);
+//		Infantry b = new Infantry(3,50,3,4,5);
+//		b.setParentArmy(cairos);
+//		Cavalry c = new Cavalry(3,50,3,4,5);
+//		c.setParentArmy(cairos);
+//		Archer d = new Archer(1,50,3,4,5);
+//		d.setParentArmy(spartas);
+//		Infantry e = new Infantry(1,50,3,4,5);
+//		e.setParentArmy(spartas);
+//		Cavalry f = new Cavalry(1,50,3,4,5);
+//		f.setParentArmy(spartas);
+//		cairos.getUnits().add(a);
+//		cairos.getUnits().add(b);
+//		cairos.getUnits().add(c);
+//		spartas.getUnits().add(d);
+//		spartas.getUnits().add(e);
+//		spartas.getUnits().add(f);
 //		initialiseBattleView(cairos, spartas);
 		window.setVisible(true);
 		System.out.println();
@@ -132,5 +144,9 @@ public class Launcher {
 	public static int getMidRes() {
 		return midRes;
 	}
-
+	
+	public static JFrame getWindow() {
+		return window;
+	}
+	
 }

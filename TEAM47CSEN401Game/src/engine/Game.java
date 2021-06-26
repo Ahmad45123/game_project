@@ -223,7 +223,7 @@ public class Game {
 
 	public void occupy(Army a, String cityName) {
 		for (City c : availableCities) {
-			if (c.getName().equals(cityName)) {
+			if (c.getName().toLowerCase().equals(cityName.toLowerCase())) {
 				player.getControlledCities().add(c);
 				player.getControlledArmies().remove(a);
 				c.setDefendingArmy(a);

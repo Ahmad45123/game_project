@@ -28,7 +28,7 @@ public class AttackingUnitComponent extends JPanel {
 			@Override
 			public void actionPerformed(ActionEvent e) {
 				if(bv.getState()==0) {
-					JOptionPane.showMessageDialog(null,"Please choose ");
+					JOptionPane.showMessageDialog(null,"Please choose between Manual Attack and Auto Resolve");
 					
 				}
 				else if(bv.getState()==1) {
@@ -36,7 +36,7 @@ public class AttackingUnitComponent extends JPanel {
 					
 				}
 				else {
-					
+					JOptionPane.showMessageDialog(null,"You have not chosen Manual Attack so you cannot select units manually");
 				}
 			}
 			
