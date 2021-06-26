@@ -49,7 +49,7 @@ public class WorldMapArmyChoiceSubComponent extends JPanel {
 
 		JLabel armyName = new JLabel(army.getName());
 
-		armyName.setFont(new Font("Arial", Font.PLAIN, 24));
+		armyName.setFont(new Font("Arial", Font.PLAIN, 14));
 
 		Launcher.setComponent(armyName, 140 / 2, 0, 140, 40, true);
 		this.add(armyName);

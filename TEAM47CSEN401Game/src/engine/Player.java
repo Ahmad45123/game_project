@@ -134,7 +134,7 @@ public class Player {
 		if (!army.getCurrentLocation().equals(city.getName()))
 			throw new TargetNotReachedException("Target not reached");
 		army.setCurrentStatus(Status.BESIEGING);
-		city.setUnderSiege(true);
+		city.addSiege();
 		city.setTurnsUnderSiege(0);
 	}
 

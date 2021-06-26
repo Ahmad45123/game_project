@@ -16,6 +16,7 @@ import units.Cavalry;
 import units.Infantry;
 import units.Status;
 import units.Unit;
+import view.Launcher;
 
 public class Game {
 	private Player player;
@@ -77,7 +78,7 @@ public class Game {
 
 		BufferedReader br = new BufferedReader(new FileReader(path));
 		String currentLine = br.readLine();
-		Army resultArmy = new Army(cityName,cityName + "'s initial army");
+		Army resultArmy = new Army(cityName, cityName + "'s initial army");
 		while (currentLine != null) {
 			String[] content = currentLine.split(",");
 			String unitType = content[0].toLowerCase();
@@ -136,6 +137,19 @@ public class Game {
 			}
 		}
 
+		City c = null;
+		for (City city : Launcher.getGame().getAvailableCities()) {
+			if (city.getName() == army.getCurrentLocation()) {
+				c = city;
+			}
+		}
+		if (army.getCurrentStatus() == Status.BESIEGING && c != null) {
+			c.remSiege();
+		}
+
+		army.setCurrentLocation("onRoad");
+		army.setCurrentStatus(Status.MARCHING);
+
 	}
 
 	public void endTurn() {
@@ -156,21 +170,22 @@ public class Game {
 				else if (b instanceof Farm)
 					player.setFood(player.getFood() + b.harvest());
 			}
-			totalUpkeep+=c.getDefendingArmy().foodNeeded();
+			totalUpkeep += c.getDefendingArmy().foodNeeded();
 		}
 		for (Army a : player.getControlledArmies()) {
-			if (!a.getTarget() .equals("") && a.getCurrentStatus() == Status.IDLE) {
+			if (!a.getTarget().equals("") && a.getCurrentStatus() == Status.IDLE) {
 				a.setCurrentStatus(Status.MARCHING);
 				a.setCurrentLocation("onRoad");
 			}
-			if(a.getDistancetoTarget()>0 &&!a.getTarget().equals(""))
-			a.setDistancetoTarget(a.getDistancetoTarget() - 1);
-			if (a.getDistancetoTarget() == 0 && !a.getTarget().contentEquals("")) { // need to add check for logic to work
+			if (a.getDistancetoTarget() > 0 && !a.getTarget().equals(""))
+				a.setDistancetoTarget(a.getDistancetoTarget() - 1);
+			if (a.getDistancetoTarget() == 0 && !a.getTarget().contentEquals("")) { // need to add check for logic to
+																					// work
 				a.setCurrentLocation(a.getTarget());
 				a.setTarget("");
 				a.setCurrentStatus(Status.IDLE);
 			}
-			totalUpkeep +=  a.foodNeeded();
+			totalUpkeep += a.foodNeeded();
 
 		}
 		if (totalUpkeep <= player.getFood())
@@ -187,11 +202,10 @@ public class Game {
 
 		for (City c : availableCities) {
 			if (c.isUnderSiege()) {
-				if(c.getTurnsUnderSiege() < 3){
-				c.setTurnsUnderSiege(c.getTurnsUnderSiege() + 1);
-				
-				}
-				else{
+				if (c.getTurnsUnderSiege() < 3) {
+					c.setTurnsUnderSiege(c.getTurnsUnderSiege() + 1);
+
+				} else {
 					// player should choose to attack
 					c.setUnderSiege(false);
 					return;
@@ -200,6 +214,16 @@ public class Game {
 					u.setCurrentSoldierCount(u.getCurrentSoldierCount() - (int) (u.getCurrentSoldierCount() * 0.1));
 				}
 			}
+		}
+
+		for (Army a : player.getControlledArmies()) {
+			City c = null;
+			for (City ct : getAvailableCities()) {
+				if (ct.getName() == a.getCurrentLocation())
+					c = ct;
+			}
+			if (c != null && a.getCurrentStatus() == Status.BESIEGING && !c.isUnderSiege())
+				a.setCurrentStatus(Status.IDLE);
 		}
 
 	}
