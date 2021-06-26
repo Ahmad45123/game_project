@@ -130,7 +130,7 @@ public class WorldMap extends JPanel {
 				Army army = armyChoice.getArmy();
 				City city = cityChoice.getCity();
 				if (city.isUnderSiege()) {
-					JOptionPane.showMessageDialog(null, "city is already under siege");
+					JOptionPane.showMessageDialog(null, "City is already under siege");
 					return;
 				}
 				try {
@@ -152,11 +152,11 @@ public class WorldMap extends JPanel {
 				Army army = armyChoice.getArmy();
 				City city = cityChoice.getCity();
 				if (army.getCurrentLocation() != city.getName()) {
-					JOptionPane.showMessageDialog(null, "army is not at the city");
+					JOptionPane.showMessageDialog(null, "Army is not at the city");
 					return;
 				}
 				if (army.getDistancetoTarget() > 0) {
-					JOptionPane.showMessageDialog(null, "army is on its way to the city");
+					JOptionPane.showMessageDialog(null, "Army is on its way to the city");
 					return;
 				}
 				Launcher.initialiseBattleView(army, city.getDefendingArmy());
@@ -174,9 +174,9 @@ public class WorldMap extends JPanel {
 				Army army = armyChoice.getArmy();
 				City city = cityChoice.getCity();
 				if (army.getCurrentLocation() == city.getName())
-					JOptionPane.showMessageDialog(null, "army is already at the city");
+					JOptionPane.showMessageDialog(null, "Army is already at the city");
 				game.targetCity(army, city.getName());
-
+				Launcher.initialiseWorldMap();
 			}
 		});
 		this.add(moveButton);
@@ -198,6 +198,8 @@ public class WorldMap extends JPanel {
 			else
 				otherArmies.add(a);
 		}
+		
+		//fix these
 
 		WorldMapArmyList romeArmyList = new WorldMapArmyList(romeArmies, this);
 		JScrollPane romeArmyPanel = new JScrollPane(romeArmyList);
@@ -218,7 +220,7 @@ public class WorldMap extends JPanel {
 		this.add(cairoArmyPanel);
 
 		if (otherArmies.size() > 0) {
-			System.out.println("army");
+			System.out.println("Army");
 			System.out.println(otherArmies.get(0).getCurrentLocation());
 			System.out.println(otherArmies.get(0).getDistancetoTarget());
 		}
@@ -232,9 +234,7 @@ public class WorldMap extends JPanel {
 	}
 
 	public void chooseCity(City city) {
-		// TODO Auto-generated method stub
 		cityChoice.setChoice(city);
-
 	}
 
 	public void chooseArmy(Army army) {

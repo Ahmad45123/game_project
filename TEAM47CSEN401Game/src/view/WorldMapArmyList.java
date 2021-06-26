@@ -26,18 +26,11 @@ public class WorldMapArmyList extends JPanel {
 		this.wm = wm;
 		game = Launcher.getGame();
 		player = Launcher.getPlayer();
-
-//		this.setLayout(new BoxLayout(this,BoxLayout.LINE_AXIS));
 		this.setBorder(BorderFactory.createLineBorder(Color.black));
-		this.setLayout(new GridLayout(2, 2));
-//		this.add(new JLabel("Name: " + c.getName()), BorderLayout.CENTER);
-
-//		this.setBorder(BorderFactory.createEtchedBorder(BevelBorder.RAISED));
+		this.setLayout(new GridLayout(0, 1));;
 
 		for (int i = 0; i < ala.size(); i++) {
 			WorldMapArmySubComponent wsc = new WorldMapArmySubComponent(ala.get(i), wm);
-//			Launcher.setComponent(wsc, 0, y, width, height, centered);
-//			System.out.println("added componenet");
 			this.add(wsc);
 		}
 	}

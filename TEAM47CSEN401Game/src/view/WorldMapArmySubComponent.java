@@ -27,24 +27,23 @@ public class WorldMapArmySubComponent extends JPanel {
 
 		game = Launcher.getGame();
 		player = Launcher.getPlayer();
-
+		JPanel topPanel = new JPanel(new BorderLayout());
 		this.setLayout(new BorderLayout());
 
-		JLabel label = new JLabel(a.getName() + ", status: " + (a.getCurrentStatus() == Status.IDLE ? "Idle"
-				: a.getCurrentStatus() == Status.MARCHING ? "Marching" : "Besieging"));
+		JLabel label = new JLabel(a.getName() + ", Status: " + (a.getCurrentStatus() == Status.IDLE ? "Idle"
+				: a.getCurrentStatus() == Status.MARCHING ? "Marching" : "Besieging") + "Unit no.:  " + a.getUnits().size());
 		if (!a.getTarget().isEmpty())
-			label = new JLabel(a.getName() + ": " + a.getCurrentLocation() + ", dist: " + a.getDistancetoTarget()
-					+ ", status: " + (a.getCurrentStatus() == Status.IDLE ? "Idle"
-							: a.getCurrentStatus() == Status.MARCHING ? "Marching" : "Besieging"));
-//		Launcher.setComponent(label, 0, 0, 200, 100, false);
-		this.add(label, BorderLayout.NORTH);
+			label = new JLabel(a.getName() + ": " + a.getCurrentLocation() + ", Dist: " + a.getDistancetoTarget()
+					+ ", Status: " + (a.getCurrentStatus() == Status.IDLE ? "Idle"
+							: a.getCurrentStatus() == Status.MARCHING ? " Marching" : " Besieging") + " No. of units:  " + a.getUnits().size());
+		topPanel.add(label, BorderLayout.WEST);
 
 		WorldMapUnitSubComponent units = new WorldMapUnitSubComponent(army.getUnits(), wm);
 		this.add(units, BorderLayout.CENTER);
 
 		this.setBorder(BorderFactory.createEtchedBorder());
 
-		JButton button = new JButton("choose");
+		JButton button = new JButton("Choose");
 		button.addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent e) {
@@ -52,10 +51,10 @@ public class WorldMapArmySubComponent extends JPanel {
 
 			}
 		});
-		this.add(button, BorderLayout.SOUTH);
-
-//		this.add(new JLabel(buildingName + "     Lv " + level),BorderLayout.NORTH);
-//		this.add(new JLabel((b.getLevel()==3?"Upgrade Cost: ---":"Upgrade Cost: " + Integer.toString(b.getUpgradeCost()))),BorderLayout.CENTER);
+		topPanel.add(button, BorderLayout.EAST);
+		
+		
+		this.add(topPanel,BorderLayout.NORTH);
 
 	}
 
