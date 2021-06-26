@@ -82,8 +82,28 @@ public class DefendingArmyComponent extends JPanel {
 		initiate.addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				Launcher.getPlayer().initiateArmy(c, u, "Army Number " + (Launcher.getPlayer().getControlledArmies().size()+1));
-				Launcher.initialiseCityView(c);
+				JPanel zrc = new JPanel();
+				zrc.setLayout(new GridLayout(0,1,10,10));
+				JTextField name = new JTextField("Army Number " + (Launcher.getPlayer().getControlledArmies().size()+1));
+				JButton send = new JButton("Initiate");
+				zrc.add(name);
+				zrc.add(send);
+				JScrollPane scrollableZrc = new JScrollPane(zrc);
+				Launcher.setComponent(scrollableZrc , 0, 162, 550, 230, false);
+				scrollableZrc.setBackground(Color.RED);
+				scrollableZrc.setOpaque(true);
+				scrollableZrc.setHorizontalScrollBarPolicy(JScrollPane.HORIZONTAL_SCROLLBAR_NEVER);
+				scrollableZrc.setVerticalScrollBarPolicy(JScrollPane.VERTICAL_SCROLLBAR_ALWAYS);
+				send.addActionListener(new ActionListener() {
+					
+					@Override
+					public void actionPerformed(ActionEvent e) {
+						Launcher.getPlayer().initiateArmy(c, u, name.getText());
+						Launcher.initialiseCityView(c);
+					}
+				});
+				
+				cv.add(scrollableZrc,2,0);
 			}
 		});
 	}

@@ -9,6 +9,7 @@ import javax.swing.JButton;
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
+import javax.swing.JScrollBar;
 import javax.swing.border.BevelBorder;
 
 import units.*;
@@ -32,8 +33,8 @@ public class AttackingUnitComponent extends JPanel {
 					
 				}
 				else if(bv.getState()==1) {
-					
-					
+					bv.setAttackingUnit(z);
+					bv.getBattleLog().append("\nYou have selected: " + z.getClass().getSimpleName() + " Lv. " + z.getLevel() );
 				}
 				else {
 					JOptionPane.showMessageDialog(null,"You have not chosen Manual Attack so you cannot select units manually");

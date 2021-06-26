@@ -18,14 +18,24 @@ public class BattleView extends JPanel {
 	private int yRes = Launcher.getyRes();
 	private int midRes = Launcher.getMidRes();
 	private int state = 0;
+	private Army atArmy;
+	private Army dfArmy;
+	private Unit attackingUnit;
+	private Unit defendingUnit;
+	private JPanel attackingArmyPanel;
+	private JPanel defendingArmyPanel;
 	private JTextArea battleLog;
+	private boolean lock = false;
 
 	//TODO: bring back proper logic after testing
 	
 	public BattleView(Army attackingArmy, Army defendingArmy) {
+		this.atArmy = attackingArmy;
+		this.dfArmy = defendingArmy;
 		Game game = Launcher.getGame();
 		Player player = Launcher.getPlayer();
 		this.setLayout(null);
+		
 		
 		JLabel battleView = new JLabel();
 		battleView.setText("Battle View");
@@ -62,7 +72,7 @@ public class BattleView extends JPanel {
 		Launcher.setComponent(attackingArmyName, 80, 70, 400, 50, false);
 		this.add(attackingArmyName);
 		
-		JPanel attackingArmyPanel = new JPanel();
+		attackingArmyPanel = new JPanel();
 		JScrollPane scrollableAttackingArmyPanel = new JScrollPane(attackingArmyPanel);
 		attackingArmyPanel.setLayout(new GridLayout(0,1,3,3));
 		scrollableAttackingArmyPanel.setHorizontalScrollBarPolicy(JScrollPane.HORIZONTAL_SCROLLBAR_AS_NEEDED);
@@ -75,7 +85,7 @@ public class BattleView extends JPanel {
 		Launcher.setComponent(defendingArmyName, 550, 70, 400, 50, false);
 		this.add(defendingArmyName);
 		
-		JPanel defendingArmyPanel = new JPanel();
+		defendingArmyPanel = new JPanel();
 		JScrollPane scrollableDefendingArmyPanel = new JScrollPane(defendingArmyPanel);
 		defendingArmyPanel.setLayout(new GridLayout(0,1,3,3));
 		scrollableDefendingArmyPanel.setHorizontalScrollBarPolicy(JScrollPane.HORIZONTAL_SCROLLBAR_AS_NEEDED);
@@ -103,8 +113,32 @@ public class BattleView extends JPanel {
 		Launcher.setComponent(scrollableBattleLog, 910, 130, 350, 540, false);
 		this.add(scrollableBattleLog);
 		
+		JButton scrollToBottom = new JButton("Toggle Battlelog Update Lock");
+		Launcher.setComponent(scrollToBottom, 40, 10, 230, 60, false);
+		this.add(scrollToBottom);
+		
 		
 		//functionality
+		
+		scrollToBottom.addActionListener(new ActionListener() {
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				lock = !lock;
+				battleLog.append("\nLock set to " + lock + "\n");
+				if(lock) scrollableBattleLog.getVerticalScrollBar().setValue(scrollableBattleLog.getVerticalScrollBar().getMaximum());
+			}
+		});
+		
+		scrollableBattleLog.getVerticalScrollBar().addAdjustmentListener(new AdjustmentListener() {  
+	        public void adjustmentValueChanged(AdjustmentEvent e) {  
+	            if(lock) {
+	            	e.getAdjustable().setValue(e.getAdjustable().getMaximum());
+	            }  
+	        }
+	    });
+		
+		
+		
 		for(Unit au : attackingArmy.getUnits()) {
 			attackingArmyPanel.add(new AttackingUnitComponent(au, this));
 		}
@@ -127,7 +161,7 @@ public class BattleView extends JPanel {
 				state=1;
 				temp.remove(manualAttack);
 				temp.remove(autoResolve);
-				battleLog.append("\n\nYou have chosen Manual Attack\n");
+				battleLog.append("\n\nYou have chosen Manual Attack\nYour Turn:\n");
 				temp.revalidate();
 				temp.repaint();
 			}
@@ -148,12 +182,12 @@ public class BattleView extends JPanel {
 					Unit unit2 = defendingArmy.getUnits().get((int) (Math.random() * defendingArmy.getUnits().size()));
 					if (turn == 1) {
 						try {unit1.attack(unit2);}
-						catch(FriendlyFireException ffe) {System.out.println("bruh");}	
+						catch(FriendlyFireException ffe) {System.out.println("");}	
 					}
 						
 					else {
 						try {unit2.attack(unit1);}
-						catch(FriendlyFireException ffe) {System.out.println("bruh");}
+						catch(FriendlyFireException ffe) {System.out.println("");}
 					}
 					turn = turn == 1 ? 0 : 1;
 				}
@@ -188,7 +222,43 @@ public class BattleView extends JPanel {
 		return this.state;
 	}
 	
+	public void resetUnits() {
+		this.attackingArmyPanel.removeAll();
+		for(Unit au : this.atArmy.getUnits()) {
+			this.attackingArmyPanel.add(new AttackingUnitComponent(au, this));
+		}
+		this.defendingArmyPanel.removeAll();
+		for(Unit du : this.dfArmy.getUnits()) {
+			this.defendingArmyPanel.add(new DefendingUnitComponent(du, this));
+		}
+	}
+	
 	public JTextArea getBattleLog() {
 		return this.battleLog;
 	}
+	
+	public Unit getAttackingUnit() {
+		return this.attackingUnit;
+	}
+	
+	public Army getAttackingArmy() {
+		return this.atArmy;
+	}
+	
+	public Army getDefendingArmy() {
+		return this.dfArmy;
+	}
+	
+	public void setAttackingUnit(Unit z) {
+		this.attackingUnit = z;
+	}
+	
+	public Unit getDefendingUnit() {
+		return this.defendingUnit;
+	}
+	
+	public void setDefendingUnit(Unit z) {
+		this.defendingUnit = z;
+	}
+	
 }

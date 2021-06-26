@@ -61,7 +61,6 @@ public class Launcher {
 //		spartas.getUnits().add(f);
 //		initialiseBattleView(cairos, spartas);
 		window.setVisible(true);
-		System.out.println();
 		
 		
 	}

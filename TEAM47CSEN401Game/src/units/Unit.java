@@ -24,6 +24,9 @@ public void attack(Unit target) throws FriendlyFireException {
 	if(getParentArmy()==target.getParentArmy())
 		throw new FriendlyFireException("Cannot attack a friendly unit");
 }
+
+public abstract int calculateAttack(Unit target);
+
 public int getCurrentSoldierCount() {
 	return currentSoldierCount;
 }
