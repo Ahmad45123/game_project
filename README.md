@@ -9,8 +9,7 @@ complete :))
 
 ## Milestone 3
 TODO:
-final polish for worldmapview
-check for gameover(end of turns/all cities controlled)
+make sure everything works 10000% and clean up code(remove comments, improve error handling)
 
 ### Checklist of features that have to be implemented
 https://docs.google.com/spreadsheets/d/1si8S63luILy166Y-4x5IBGo5lzymkgWi8xtv4k_KbRY/edit?usp=sharing
