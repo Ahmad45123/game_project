@@ -43,25 +43,25 @@ public class BattleView extends JPanel {
 		this.add(battleView);
 
 		JLabel playerNameLabel = new JLabel();
-		playerNameLabel.setText("Player Name: ");
+		playerNameLabel.setText("Player Name: " + player.getName());
 		playerNameLabel.setFont(new Font("Ariel", Font.BOLD, 17));
 		Launcher.setComponent(playerNameLabel, 575 - 40 + 400, 0, 300, 25, false);
 		this.add(playerNameLabel);
 
 		JLabel turnCountLabel = new JLabel();
-		turnCountLabel.setText("Turn Count: ");
+		turnCountLabel.setText("Turn Count: " + game.getCurrentTurnCount());
 		turnCountLabel.setFont(new Font("Ariel", Font.BOLD, 17));
 		Launcher.setComponent(turnCountLabel, 575 - 40 + 400, 0, 300, 75, false);
 		this.add(turnCountLabel);
 
 		JLabel foodCountLabel = new JLabel();
-		foodCountLabel.setText("Food: ");
+		foodCountLabel.setText("Food: " + Math.round(player.getFood() * 10) / 10.0);
 		foodCountLabel.setFont(new Font("Ariel", Font.BOLD, 17));
 		Launcher.setComponent(foodCountLabel, 575 - 40 + 400, 0, 300, 125, false);
 		this.add(foodCountLabel);
 
 		JLabel goldCountLabel = new JLabel();
-		goldCountLabel.setText("Gold: ");
+		goldCountLabel.setText("Gold: " + Math.round(player.getTreasury() * 10) / 10.0);
 		goldCountLabel.setFont(new Font("Ariel", Font.BOLD, 17));
 		Launcher.setComponent(goldCountLabel, 575 - 40 + 400, 0, 300, 175, false);
 		this.add(goldCountLabel);
