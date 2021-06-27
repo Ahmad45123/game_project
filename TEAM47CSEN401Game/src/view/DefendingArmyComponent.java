@@ -54,22 +54,23 @@ public class DefendingArmyComponent extends JPanel {
 					});
 
 					for (Army ar : Launcher.getPlayer().getControlledArmies()) {
-						JButton armyButton = new JButton(ar.getName());
-						zrc.add(armyButton);
+						if(ar.getCurrentLocation().toLowerCase().equals(c.getName().toLowerCase())) {
+							JButton armyButton = new JButton(ar.getName());
+							zrc.add(armyButton);
 
-						armyButton.addActionListener(new ActionListener() {
-							@Override
-							public void actionPerformed(ActionEvent e) {
-								try {
-									ar.relocateUnit(u);
-								} catch (MaxCapacityException urt) {
-									JOptionPane.showMessageDialog(null, ar.getName() + " is already at max capactiy");
+							armyButton.addActionListener(new ActionListener() {
+								@Override
+								public void actionPerformed(ActionEvent e) {
+									try {
+										ar.relocateUnit(u);
+									} catch (MaxCapacityException urt) {
+										JOptionPane.showMessageDialog(null, ar.getName() + " is already at max capactiy");
+									}
+									cv.remove(zrc);
+									Launcher.initialiseCityView(c);
 								}
-								cv.remove(zrc);
-								Launcher.initialiseCityView(c);
-							}
-						});
-
+							});
+						}
 					}
 
 					cv.add(scrollableZrc, 2, 0);
