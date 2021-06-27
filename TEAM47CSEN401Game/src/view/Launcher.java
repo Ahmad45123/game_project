@@ -42,27 +42,6 @@ public class Launcher {
 		window.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
 		window.setSize(getxRes(), getyRes());
 		initialiseStartScreen();
-//		Army cairos = new Army("spartacrib","cairogang");
-//		Army spartas = new Army("spartacrib","spartagang");
-//		Archer a = new Archer(3,50,3,4,5);
-//		a.setParentArmy(cairos);
-//		Infantry b = new Infantry(3,50,3,4,5);
-//		b.setParentArmy(cairos);
-//		Cavalry c = new Cavalry(3,50,3,4,5);
-//		c.setParentArmy(cairos);
-//		Archer d = new Archer(1,50,3,4,5);
-//		d.setParentArmy(spartas);
-//		Infantry e = new Infantry(1,50,3,4,5);
-//		e.setParentArmy(spartas);
-//		Cavalry f = new Cavalry(1,50,3,4,5);
-//		f.setParentArmy(spartas);
-//		cairos.getUnits().add(a);
-//		cairos.getUnits().add(b);
-//		cairos.getUnits().add(c);
-//		spartas.getUnits().add(d);
-//		spartas.getUnits().add(e);
-//		spartas.getUnits().add(f);
-//		initialiseBattleView(cairos, spartas);
 		window.setVisible(true);
 
 	}
@@ -74,25 +53,102 @@ public class Launcher {
 		window.repaint();
 	}
 
-	public static void initialiseGameOverScreen(boolean hasWon) {
+	public static void initialiseGameOverScreen() {
 		window.getContentPane().removeAll();
-		window.add(new GameOverView(hasWon));
+		window.add(new GameOverView());
 		window.revalidate();
 		window.repaint();
 	}
 
 	public static void initialiseWorldMap() {
-		window.getContentPane().removeAll();
-		window.add(new WorldMap());
-		window.revalidate();
-		window.repaint();
+		boolean battleTime = false;
+		boolean endTime = false;
+		endTime = Launcher.getGame().isGameOver();
+		for(City q : Launcher.getGame().getAvailableCities()) {
+			boolean there = false;;
+			for(Army a : Launcher.getPlayer().getControlledArmies()) {
+				if(a.getCurrentLocation().toLowerCase().equals(q.getName().toLowerCase())) {
+					there = true;
+				}
+			}
+			if(there==false) {
+				q.setTurnsUnderSiege(-1);
+				q.setUnderSiege(false);
+			}
+			
+		}
+		
+		for(City q : Launcher.getGame().getAvailableCities()) {
+			if(q.isUnderSiege()==false&&q.getTurnsUnderSiege()==3) {
+				battleTime = true;
+			}
+		}
+		
+		if(endTime) Launcher.initialiseGameOverScreen();
+		else if(battleTime) {
+			City defCity = new City("");
+			for(City c : Launcher.getGame().getAvailableCities()) {
+				if(c.isUnderSiege()==false&&c.getTurnsUnderSiege()==3) {
+					defCity = c;
+					break;
+				}
+			}
+			Army attackArmy = new Army("");
+			for(Army a : Launcher.getPlayer().getControlledArmies()) {
+				if(a.getCurrentLocation().toLowerCase().equals(defCity.getName().toLowerCase())) {
+					attackArmy = a;
+					break;
+				}
+			}
+			Army defArmy = defCity.getDefendingArmy();
+			defCity.setTurnsUnderSiege(-1);
+			Launcher.initialiseBattleView(attackArmy, defArmy);
+		}
+		else {
+			window.getContentPane().removeAll();
+			window.add(new WorldMap());
+			window.revalidate();
+			window.repaint();
+			
+		}
+		
 	}
 
 	public static void initialiseCityView(City c) {
-		window.getContentPane().removeAll();
-		window.add(new CityView(c));
-		window.revalidate();
-		window.repaint();
+		boolean battleTime = false;
+		boolean endTime = false;
+		endTime = Launcher.getGame().isGameOver();
+		for(City q : Launcher.getGame().getAvailableCities()) {
+			if(q.isUnderSiege()==false&&q.getTurnsUnderSiege()==3) {
+				battleTime = true;
+			}
+		}
+		if(endTime) Launcher.initialiseGameOverScreen();
+		else if(battleTime) {
+			City defCity = new City("");
+			for(City q : Launcher.getGame().getAvailableCities()) {
+				if(q.isUnderSiege()==false&&q.getTurnsUnderSiege()==3) {
+					defCity = q;
+					break;
+				}
+			}
+			Army attackArmy = new Army("");
+			for(Army a : Launcher.getPlayer().getControlledArmies()) {
+				if(a.getCurrentLocation().toLowerCase().equals(defCity.getName().toLowerCase())) {
+					attackArmy = a;
+					break;
+				}
+			}
+			Army defArmy = defCity.getDefendingArmy();
+			defCity.setTurnsUnderSiege(-1);
+			Launcher.initialiseBattleView(attackArmy, defArmy);
+		}
+		else{
+			window.getContentPane().removeAll();
+			window.add(new CityView(c));
+			window.revalidate();
+			window.repaint();
+		}
 	}
 
 	public static void initialiseBattleView(Army attackingArmy, Army defendingArmy) {

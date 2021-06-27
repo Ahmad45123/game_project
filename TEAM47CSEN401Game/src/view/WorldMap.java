@@ -125,18 +125,29 @@ public class WorldMap extends JPanel {
 		siegeButton.addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				if (checkBoxes())
-					return;
-				Army army = armyChoice.getArmy();
-				City city = cityChoice.getCity();
-				if (city.isUnderSiege()) {
-					JOptionPane.showMessageDialog(null, "City is already under siege");
-					return;
+				if(Launcher.getPlayer().getControlledCities().contains(cityChoice.getCity())) {
+					JOptionPane.showMessageDialog(null, "Friendly Fire, cannot lay siege on a city that belongs to you.");
 				}
-				try {
-					player.laySiege(army, city);
-				} catch (Exception e1) {
-					JOptionPane.showMessageDialog(null, e1.toString());
+				else {
+					if (checkBoxes())
+						return;
+					Army army = armyChoice.getArmy();
+					City city = cityChoice.getCity();
+					if(army.getUnits().size()==0) {
+						JOptionPane.showMessageDialog(null, "Army has no units to lay siege");
+						return;
+					}
+					
+					if (city.isUnderSiege()) {
+						JOptionPane.showMessageDialog(null, "City is already under siege");
+						return;
+					}
+					try {
+						player.laySiege(army, city);
+					} catch (Exception e1) {
+						JOptionPane.showMessageDialog(null, e1.toString());
+					}
+					Launcher.initialiseWorldMap();;
 				}
 			}
 		});
@@ -147,19 +158,30 @@ public class WorldMap extends JPanel {
 		attackButton.addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				if (checkBoxes())
-					return;
-				Army army = armyChoice.getArmy();
-				City city = cityChoice.getCity();
-				if (army.getCurrentLocation() != city.getName()) {
-					JOptionPane.showMessageDialog(null, "Army is not at the city");
-					return;
+				if(Launcher.getPlayer().getControlledCities().contains(cityChoice.getCity())) {
+					JOptionPane.showMessageDialog(null, "Friendly Fire, cannot attack a city that belongs to you.");
 				}
-				if (army.getDistancetoTarget() > 0) {
-					JOptionPane.showMessageDialog(null, "Army is on its way to the city");
-					return;
+				else {
+					if (checkBoxes())
+						return;
+					Army army = armyChoice.getArmy();
+					City city = cityChoice.getCity();
+					
+					if(army.getUnits().size()==0) {
+						JOptionPane.showMessageDialog(null, "Army has no units to lay siege");
+						return;
+					}
+					
+					if (army.getCurrentLocation() != city.getName()) {
+						JOptionPane.showMessageDialog(null, "Army is not at the city");
+						return;
+					}
+					if (army.getDistancetoTarget() > 0) {
+						JOptionPane.showMessageDialog(null, "Army is on its way to the city");
+						return;
+					}
+					Launcher.initialiseBattleView(army, city.getDefendingArmy());
 				}
-				Launcher.initialiseBattleView(army, city.getDefendingArmy());
 			}
 		});
 		this.add(attackButton);

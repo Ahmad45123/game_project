@@ -13,9 +13,12 @@ public class GameOverView extends JPanel {
 	private int yRes = Launcher.getyRes();
 	private int midRes = Launcher.getMidRes();
 
-	public GameOverView(boolean hasWon) {
+	public GameOverView() {
 		// JScrollPane scrollableMainPanel = new JScrollPane(mainPanel);
+		boolean hasWon = false;
+		if(Launcher.getPlayer().getControlledCities().size()==Launcher.getGame().getAvailableCities().size()) hasWon = true;
 		this.setLayout(null);
+		this.setBackground(Color.black);
 
 		JLabel lbl = new JLabel();
 		lbl.setFont(new Font("Comic Sans", Font.BOLD, 60));

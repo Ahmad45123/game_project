@@ -162,6 +162,20 @@ public class BattleView extends JPanel {
 				battleLog.append("\n\nYou have chosen Manual Attack\nYour Turn:\n");
 				temp.revalidate();
 				temp.repaint();
+				if(defendingArmy.getUnits().size()==0) {
+					int result = JOptionPane.showConfirmDialog(null, "Your army has won the battle",
+							"Manual-Attack Outcome", JOptionPane.PLAIN_MESSAGE);
+					Launcher.getGame().occupy(attackingArmy, defendingArmy.getCurrentLocation());
+					if (result == JOptionPane.OK_OPTION)
+						Launcher.initialiseWorldMap();
+				}
+				if(attackingArmy.getUnits().size()==0) {
+					int result = JOptionPane.showConfirmDialog(null, "Your army has lost the battle",
+							"Auto-Resolve Outcome", JOptionPane.PLAIN_MESSAGE);
+					attackingArmy.setCurrentStatus(Status.IDLE);
+					if (result == JOptionPane.OK_OPTION)
+						Launcher.initialiseWorldMap();
+				}
 			}
 		});
 
@@ -207,6 +221,7 @@ public class BattleView extends JPanel {
 				if (defendingArmy.getUnits().size() > 0) {
 					int result = JOptionPane.showConfirmDialog(null, "Your army has lost the battle",
 							"Auto-Resolve Outcome", JOptionPane.PLAIN_MESSAGE);
+					attackingArmy.setCurrentStatus(Status.IDLE);
 					if (result == JOptionPane.OK_OPTION)
 						Launcher.initialiseWorldMap();
 

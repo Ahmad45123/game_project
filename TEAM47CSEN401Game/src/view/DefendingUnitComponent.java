@@ -80,6 +80,7 @@ public class DefendingUnitComponent extends JPanel {
 							if (bv.getAttackingArmy().getUnits().size() == 0) {
 								int result = JOptionPane.showConfirmDialog(null, "Your army has lost the battle",
 										"Manual Attack Outcome", JOptionPane.PLAIN_MESSAGE);
+								bv.getAttackingArmy().setCurrentStatus(Status.IDLE);
 								if (result == JOptionPane.OK_OPTION)
 									Launcher.initialiseWorldMap();
 							}
