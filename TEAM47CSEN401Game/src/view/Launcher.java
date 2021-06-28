@@ -64,77 +64,81 @@ public class Launcher {
 		boolean battleTime = false;
 		boolean endTime = false;
 		endTime = Launcher.getGame().isGameOver();
-		for(City q : Launcher.getGame().getAvailableCities()) {
-			boolean there = false;;
-			for(Army a : Launcher.getPlayer().getControlledArmies()) {
-				if(a.getCurrentLocation().toLowerCase().equals(q.getName().toLowerCase())) {
+		for (City q : Launcher.getGame().getAvailableCities()) {
+			boolean there = false;
+			;
+			for (Army a : Launcher.getPlayer().getControlledArmies()) {
+				if (a.getCurrentLocation().toLowerCase().equals(q.getName().toLowerCase())) {
 					there = true;
 				}
 			}
-			if(there==false) {
+			if (there == false) {
 				q.setTurnsUnderSiege(-1);
 				q.setUnderSiege(false);
 			}
-			
+
 		}
-		
-		for(City q : Launcher.getGame().getAvailableCities()) {
-			if(q.isUnderSiege()==false&&q.getTurnsUnderSiege()==3) {
+
+		for (City q : Launcher.getGame().getAvailableCities()) {
+			if (q.isUnderSiege() == false && q.getTurnsUnderSiege() == 3) {
 				battleTime = true;
 			}
 		}
-		
-		if(endTime) Launcher.initialiseGameOverScreen();
-		else if(battleTime) {
+
+		if (endTime)
+			Launcher.initialiseGameOverScreen();
+		else if (battleTime) {
 			City defCity = new City("");
-			for(City c : Launcher.getGame().getAvailableCities()) {
-				if(c.isUnderSiege()==false&&c.getTurnsUnderSiege()==3) {
+			for (City c : Launcher.getGame().getAvailableCities()) {
+				if (c.isUnderSiege() == false && c.getTurnsUnderSiege() == 3) {
 					defCity = c;
 					break;
 				}
 			}
-			Army attackArmy = new Army("");
-			for(Army a : Launcher.getPlayer().getControlledArmies()) {
-				if(a.getCurrentLocation().toLowerCase().equals(defCity.getName().toLowerCase())) {
+			Army attackArmy = null;
+			for (Army a : Launcher.getPlayer().getControlledArmies()) {
+				if (a.getCurrentLocation().toLowerCase().equals(defCity.getName().toLowerCase())
+						&& a.getCurrentStatus() == Status.BESIEGING) {
 					attackArmy = a;
 					break;
 				}
 			}
+			assert (attackArmy != null);
 			Army defArmy = defCity.getDefendingArmy();
 			defCity.setTurnsUnderSiege(-1);
 			Launcher.initialiseBattleView(attackArmy, defArmy);
-		}
-		else {
+		} else {
 			window.getContentPane().removeAll();
 			window.add(new WorldMap());
 			window.revalidate();
 			window.repaint();
-			
+
 		}
-		
+
 	}
 
 	public static void initialiseCityView(City c) {
 		boolean battleTime = false;
 		boolean endTime = false;
 		endTime = Launcher.getGame().isGameOver();
-		for(City q : Launcher.getGame().getAvailableCities()) {
-			if(q.isUnderSiege()==false&&q.getTurnsUnderSiege()==3) {
+		for (City q : Launcher.getGame().getAvailableCities()) {
+			if (q.isUnderSiege() == false && q.getTurnsUnderSiege() == 3) {
 				battleTime = true;
 			}
 		}
-		if(endTime) Launcher.initialiseGameOverScreen();
-		else if(battleTime) {
+		if (endTime)
+			Launcher.initialiseGameOverScreen();
+		else if (battleTime) {
 			City defCity = new City("");
-			for(City q : Launcher.getGame().getAvailableCities()) {
-				if(q.isUnderSiege()==false&&q.getTurnsUnderSiege()==3) {
+			for (City q : Launcher.getGame().getAvailableCities()) {
+				if (q.isUnderSiege() == false && q.getTurnsUnderSiege() == 3) {
 					defCity = q;
 					break;
 				}
 			}
 			Army attackArmy = new Army("");
-			for(Army a : Launcher.getPlayer().getControlledArmies()) {
-				if(a.getCurrentLocation().toLowerCase().equals(defCity.getName().toLowerCase())) {
+			for (Army a : Launcher.getPlayer().getControlledArmies()) {
+				if (a.getCurrentLocation().toLowerCase().equals(defCity.getName().toLowerCase())) {
 					attackArmy = a;
 					break;
 				}
@@ -142,8 +146,7 @@ public class Launcher {
 			Army defArmy = defCity.getDefendingArmy();
 			defCity.setTurnsUnderSiege(-1);
 			Launcher.initialiseBattleView(attackArmy, defArmy);
-		}
-		else{
+		} else {
 			window.getContentPane().removeAll();
 			window.add(new CityView(c));
 			window.revalidate();
@@ -157,7 +160,6 @@ public class Launcher {
 		window.revalidate();
 		window.repaint();
 	}
-
 
 	public static Game getGame() {
 		return game;
