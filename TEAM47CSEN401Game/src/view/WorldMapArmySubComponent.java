@@ -31,11 +31,11 @@ public class WorldMapArmySubComponent extends JPanel {
 		this.setLayout(new BorderLayout());
 
 		JLabel label = new JLabel(a.getName() + ", Status: " + (a.getCurrentStatus() == Status.IDLE ? "Idle"
-				: a.getCurrentStatus() == Status.MARCHING ? "Marching" : "Besieging") + " No. of Units:  " + a.getUnits().size());
+				: a.getCurrentStatus() == Status.MARCHING ? "Marching" : "Besieging") + " No. of Units:  " + a.getUnits().size() + " Target: " + a.getTarget());
 		if (!a.getTarget().isEmpty())
 			label = new JLabel(a.getName() + ": " + a.getCurrentLocation() + ", Dist: " + a.getDistancetoTarget()
 					+ ", Status: " + (a.getCurrentStatus() == Status.IDLE ? "Idle"
-							: a.getCurrentStatus() == Status.MARCHING ? "Marching" : "Besieging") + " No. of Units:  " + a.getUnits().size());
+							: a.getCurrentStatus() == Status.MARCHING ? "Marching" : "Besieging") + " No. of Units:  " + a.getUnits().size() + " Target: " + a.getTarget());
 		topPanel.add(label, BorderLayout.WEST);
 
 		WorldMapUnitSubComponent units = new WorldMapUnitSubComponent(army.getUnits(), wm);
